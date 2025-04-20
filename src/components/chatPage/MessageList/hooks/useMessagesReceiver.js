@@ -14,8 +14,6 @@ const useMessagesReceiver = ({
       chatHub.connection.on(chatMethod.sendMessageRes, (data) => {
         const { channelId } = data
 
-        chatHub.connection.invoke(chatMethod.channel, { channelId })
-
         if (channelId === chatId) {
           setMessages((messageList) => [data, ...messageList])
 
