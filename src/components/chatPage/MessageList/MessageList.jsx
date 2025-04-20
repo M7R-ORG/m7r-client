@@ -158,8 +158,6 @@ function MessageList({ className = '', chatId = null, searchMessage = '' }) {
           searchField: search,
           skip: skipRef.current
         })
-      } catch {
-        // temp
       } finally {
         setIsListLoading(false)
       }
@@ -185,8 +183,6 @@ function MessageList({ className = '', chatId = null, searchMessage = '' }) {
           searchField: debouncedSearchMessage,
           skip: skipRef.current
         })
-      } catch {
-        // temp
       } finally {
         setIsScrollLoading(false)
       }
