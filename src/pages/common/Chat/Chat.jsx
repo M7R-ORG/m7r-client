@@ -1,10 +1,13 @@
 import { useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import api from '../../../api/api'
 import ChatHeader from '../../../components/chatPage/ChatHeader/ChatHeader'
 import ChannelList from '../../../components/chatPage/ChannelList/ChannelList'
 import MessageList from '../../../components/chatPage/MessageList/MessageList'
 import NewMessage from '../../../components/chatPage/NewMessage/NewMessage'
+import { Logo } from '../../../components/_exports'
+import useMessagesReceiverForCounter from '../../../components/chatPage/MessageList/hooks/useMessagesReceiverForCounter'
 import './Chat.scss'
 
 function Chat() {
@@ -13,6 +16,7 @@ function Chat() {
   const [selectedChannel, setSelectedChannel] = useState(null)
   const [isLoadingChatHeader, setIsLoadingChatHeader] = useState(false)
   const [searchMessage, setSearchMessage] = useState('')
+  const chatHub = useSelector((state) => state.signalR.chatHub)
 
   const loadChannel = async (channelId) => {
     try {
@@ -38,6 +42,8 @@ function Chat() {
     setSelectedChannelId(id)
   }, [id])
 
+  useMessagesReceiverForCounter({ chatId: +selectedChannelId, chatHub })
+
   return (
     <div className="p-chat">
       <ChannelList
@@ -47,7 +53,7 @@ function Chat() {
       />
 
       <div className="chat-wrapper">
-        {!!selectedChannelId && (
+        {selectedChannelId ? (
           <div className="chat">
             <div className="chat-header-container">
               <ChatHeader
@@ -66,6 +72,11 @@ function Chat() {
                 <NewMessage channelId={+selectedChannelId} />
               </div>
             </div>
+          </div>
+        ) : (
+          <div className="chat not-selected">
+            <Logo className="logo" />
+            <p>Chat not selected</p>
           </div>
         )}
       </div>
