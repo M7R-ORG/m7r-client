@@ -20,5 +20,5 @@ ssh -i ~/.ssh/ssh-key.pem $CONNECTION_STR <<EOF
   cd ${PATH_TO_COMPOSE_FILE}
   docker-compose pull
   docker-compose up -d
-  docker system prune -f
+  docker system prune -f || true
 EOF
