@@ -7,6 +7,7 @@
   border-radius: 20px;
   border: solid 1px var(--border-color);
   background: var(--background-color);
+  color: inherit;
   cursor: pointer;
 
   .search-icon-container {
@@ -48,6 +49,7 @@
       padding: 6px 10px;
       border-radius: 8px;
       background: var(--background-color);
+      color: var(--font-color-primary-1);
 
       &::placeholder {
         font-size: 15px;

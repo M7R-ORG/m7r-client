@@ -1,168 +1,205 @@
 @use 'colors' as *;
 
+// ============================================
+// Base (shared across themes)
+// ============================================
 .app {
-  --font-color-primary-0: #{$c-purple-0};
-  --font-color-primary-1: #{$c-black-0};
-  --font-color-primary-2: #{$c-white-0};
+  --font-color-primary-0: #{$brand};        // accent text
+  --font-color-primary-1: #{$black};        // primary text
+  --font-color-primary-2: #{$white};        // inverse text
 
   .c-brand {
-    --font-color-1: #{$c-purple-0};
+    --font-color-1: #{$brand};
   }
 
   .c-form-btn {
-    --font-color: #{$c-white-0};
-    --background-color: #{$c-purple-0};
+    --font-color: #{$white};
+    --background-color: #{$brand};
   }
 }
 
-.app[data-theme='dark'] {
-  --common-color-0: #{$c-dark-primary-4};
-  --common-color-1: #{$c-dark-neutral-4};
-  --background-color: #{$c-dark-neutral-0};
-  --background-color-1: #{$c-dark-neutral-2};
-  --background-color-2: #{$c-purple-0};
-  --background-color-3: #{$c-black-0};
-  --shadow-color: #{$c-dark-secondary-1};
-  --placeholder-color: #{$c-dark-secondary-0};
-  --border-color: #{$c-dark-secondary-4};
-  --border-color-1: #{$c-purple-0};
-  --icon-background-color: #{$c-dark-neutral-2};
-  --error-color: #{$c-dark-primary-2};
-
-  .p-login{
-    --reset-password-link-color: #{$c-dark-primary-5};
-  }
-
-  .c-nav-link {
-    --font-color: #{$c-white-0};
-  }
-
-  .c-brand {
-    --font-color: #{$c-white-0};
-  }
-
-  .c-form-input,
-  .c-date-input {
-    --background-color: #{$c-white-0};
-    --border-color: #{$c-dark-secondary-0};
-    --text-fill-color: #{$c-black-0};
-    --toggle-background-color: #{$c-dark-secondary-2};
-    --toggle-stroke-color: #{$c-dark-secondary-3};
-  }
-
-  .c-sidebar {
-    --background-color: #{$c-white-0};
-    --background-item-color: #{$c-white-0};
-    --border-color: #{$c-dark-secondary-5};
-    --search-icon-background-color: #{$c-dark-neutral-2};
-    --default-background-color: #{$c-dark-neutral-2};
-    --default-item-color: #{$c-dark-primary-3};
-  }
-
-  .c-dropdown {
-    --menu-icon-background-color: #{$c-dark-neutral-2};
-  }
-
-  .c-pagination {
-    --current-index-color: #{$c-purple-0};
-  }
-
-  .c-channel {
-    --hover-background-color: #{$c-dark-neutral-2};
-    --font-color: #{$c-black-0};
-    --selected-font-color: #{$c-white-0};
-    --last-message-font-color: #{$c-black-0};
-  }
-
-  .c-base-modal {
-    --modal-background-color: #{$c-dark-neutral-0};
-    --modal-background-color-1: #{$c-dark-neutral-3};
-    --border-color: #{$c-dark-secondary-4};
-  }
-
-  .c-round-checkbox {
-    --border-color: #{$c-dark-secondary-4};
-    --checked-background-color: #{$c-purple-0};
-  }
-
-  .c-message-list {
-    --message-background-color: #{$c-light-neutral-2};
-    --my-message-background-color: #{$c-purple-0};
-  }
-}
-
+// ============================================
+// Light Theme
+// ============================================
 .app[data-theme='light'] {
-  --common-color-0: #{$c-light-primary-4};
-  --common-color-1: #{$c-light-neutral-4};
-  --background-color: #{$c-light-neutral-0};
-  --background-color-1: #{$c-light-neutral-2};
-  --background-color-2: #{$c-purple-0};
-  --background-color-3: #{$c-black-0};
-  --shadow-color: #{$c-light-secondary-1};
-  --placeholder-color: #{$c-light-secondary-0};
-  --border-color: #{$c-light-secondary-4};
-  --border-color-1: #{$c-purple-0};
-  --icon-background-color: #{$c-light-neutral-2};
-  --error-color: #{$c-dark-primary-2};
+  color: #{$light-text};
 
-  .p-login{
-    --reset-password-link-color: #{$c-light-primary-5};
+  // Global
+  --background-color:      #{$light-bg};
+  --background-color-1:    #{$light-bg-surface};
+  --background-color-2:    #{$brand};
+  --background-color-3:    #{$black};
+  --common-color-0:        #{$brand-vivid};
+  --common-color-1:        #{$light-text-muted};
+  --shadow-color:          #{$light-shadow};
+  --placeholder-color:     #{$light-text-placeholder};
+  --border-color:          #{$light-border};
+  --border-color-1:        #{$brand};
+  --icon-background-color: #{$light-bg-surface};
+  --error-color:           #{$error};
+
+  // Login
+  .p-login {
+    --reset-password-link-color: #{$brand-deep};
   }
 
+  // Navigation
   .c-nav-link {
-    --font-color: #{$c-black-0};
+    --font-color: #{$light-text};
   }
 
   .c-brand {
-    --font-color: #{$c-black-0};
+    --font-color: #{$light-text};
   }
 
+  // Inputs
   .c-form-input,
   .c-date-input {
-    --background-color: #{$c-white-0};
-    --border-color: #{$c-light-secondary-0};
-    --text-fill-color: #{$c-black-0};
-    --toggle-background-color: #{$c-light-secondary-2};
-    --toggle-stroke-color: #{$c-light-secondary-3};
+    --background-color:       #{$white};
+    --border-color:           #{$light-text-placeholder};
+    --text-fill-color:        #{$light-text};
+    --toggle-background-color:#{$light-toggle-bg};
+    --toggle-stroke-color:    #{$light-toggle-stroke};
   }
 
+  // Sidebar
   .c-sidebar {
-    --background-color: #{$c-white-0};
-    --background-item-color: #{$c-white-0};
-    --border-color: #{$c-light-secondary-5};
-    --search-icon-background-color: #{$c-light-neutral-2};
-    --default-background-color: #{$c-light-neutral-2};
-    --default-item-color: #{$c-light-primary-3};
+    --background-color:             #{$white};
+    --background-item-color:        #{$white};
+    --border-color:                 #{$light-border-subtle};
+    --search-icon-background-color: #{$light-bg-surface};
+    --default-background-color:     #{$light-bg-surface};
+    --default-item-color:           #{$light-text};
   }
 
+  // Dropdown
   .c-dropdown {
-    --menu-icon-background-color: #{$c-light-neutral-2};
+    --menu-icon-background-color: #{$light-bg-surface};
   }
 
+  // Pagination
   .c-pagination {
-    --current-index-color: #{$c-purple-0};
+    --current-index-color: #{$brand};
   }
 
+  // Channel list
   .c-channel {
-    --hover-background-color: #{$c-light-neutral-2};
-    --font-color: #{$c-black-0};
-    --selected-font-color: #{$c-white-0};
-    --last-message-font-color: #{$c-black-0};
+    --hover-background-color: #{$light-bg-surface};
+    --font-color:             #{$light-text};
+    --selected-font-color:    #{$white};
+    --last-message-font-color:#{$light-text-secondary};
   }
 
+  // Modals
   .c-base-modal {
-    --modal-background-color: #{$c-light-neutral-0};
-    --modal-background-color-1: #{$c-light-neutral-3};
-    --border-color: #{$c-light-secondary-4};
+    --modal-background-color:   #{$light-bg};
+    --modal-background-color-1: #{$light-bg-overlay};
+    --border-color:             #{$light-border};
   }
 
+  // Checkbox
   .c-round-checkbox {
-    --border-color: #{$c-light-secondary-4};
-    --checked-background-color: #{$c-purple-0};
+    --border-color:             #{$light-border};
+    --checked-background-color: #{$brand};
   }
 
+  // Messages
   .c-message-list {
-    --message-background-color: #{$c-light-neutral-2};
-    --my-message-background-color: #{$c-purple-0};
+    --message-background-color:    #{$light-bg-surface};
+    --my-message-background-color: #{$brand};
+  }
+}
+
+// ============================================
+// Dark Theme
+// ============================================
+.app[data-theme='dark'] {
+  color: #{$dark-text};
+
+  --background-color:      #{$dark-bg};
+  --background-color-1:    #{$dark-bg-subtle};
+  --background-color-2:    #{$brand-light};
+  --background-color-3:    #{$dark-bg-surface};
+  --common-color-0:        #{$brand-light};
+  --common-color-1:        #{$dark-text-muted};
+  --shadow-color:          #{$dark-shadow};
+  --placeholder-color:     #{$dark-text-placeholder};
+  --border-color:          #{$dark-border};
+  --border-color-1:        #{$brand-light};
+  --icon-background-color: #{$dark-bg-elevated};
+  --error-color:           #{$error-light};
+  --font-color-primary-0:  #{$brand-light};
+  --font-color-primary-1:  #{$dark-text};
+  --font-color-primary-2:  #{$dark-text};
+
+  // Login
+  .p-login {
+    --reset-password-link-color: #{$brand-dark};
+  }
+
+  // Navigation
+  .c-nav-link {
+    --font-color: #{$dark-text};
+  }
+
+  .c-brand {
+    --font-color: #{$dark-text};
+  }
+
+  // Inputs
+  .c-form-input,
+  .c-date-input {
+    --background-color:       #{$dark-bg-surface};
+    --border-color:           #{$dark-toggle-stroke};
+    --text-fill-color:        #{$dark-text};
+    --toggle-background-color:#{$dark-toggle-bg};
+    --toggle-stroke-color:    #{$dark-toggle-stroke};
+  }
+
+  // Sidebar
+  .c-sidebar {
+    --background-color:             #{$dark-bg-surface};
+    --background-item-color:        #{$dark-bg-surface};
+    --border-color:                 #{$dark-border-subtle};
+    --search-icon-background-color: #{$dark-bg-elevated};
+    --default-background-color:     #{$dark-bg-elevated};
+    --default-item-color:           #{$dark-text};
+  }
+
+  // Dropdown
+  .c-dropdown {
+    --menu-icon-background-color: #{$dark-bg-elevated};
+  }
+
+  // Pagination
+  .c-pagination {
+    --current-index-color: #{$brand-light};
+  }
+
+  // Channel list
+  .c-channel {
+    --hover-background-color: #{$dark-bg-elevated};
+    --font-color:             #{$dark-text};
+    --selected-font-color:    #{$white};
+    --last-message-font-color:#{$dark-text-secondary};
+  }
+
+  // Modals
+  .c-base-modal {
+    --modal-background-color:   #{$dark-bg-surface};
+    --modal-background-color-1: #{$dark-bg-overlay};
+    --border-color:             #{$dark-border};
+  }
+
+  // Checkbox
+  .c-round-checkbox {
+    --border-color:             #{$dark-border};
+    --checked-background-color: #{$brand-light};
+  }
+
+  // Messages
+  .c-message-list {
+    --message-background-color:    #{$dark-bg-elevated};
+    --my-message-background-color: #{$brand-light};
   }
 }

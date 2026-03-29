@@ -10,7 +10,7 @@ function AIIcon({ className = '' }) {
         height="800px"
         viewBox="0 0 64 64"
         strokeWidth="3"
-        stroke="#000000"
+        stroke="currentColor"
         fill="none"
       >
         <circle cx="34.52" cy="11.43" r="5.82" />
