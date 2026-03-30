@@ -14,6 +14,7 @@
     &.my-group {
         background: var(--my-message-gradient);
         color: var(--font-color-primary-2);
+        box-shadow: 0 2px 8px rgba(148, 93, 218, 0.3);
     }
 
     .message-text {
