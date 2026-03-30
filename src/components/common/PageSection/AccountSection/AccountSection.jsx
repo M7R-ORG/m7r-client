@@ -96,7 +96,7 @@ function AccountSection({ data }) {
         </div>
       </div>
 
-      <div className="section-content">
+      <div className="section-content visible">
         <div className="account-info">
           <div className="image">
             <ImgWrapper className="img-wrapper" src={imageSrc} alt="account-img" isLazy />
