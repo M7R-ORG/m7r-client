@@ -5,11 +5,11 @@
     display: flex;
     justify-content: stretch;
     align-items: center;
-    padding: 0 25px;
+    padding: 0 28px;
     gap: 16px;
 
     .loader {
-        width: 90px;
+        width: 50px;
         height: 100%;
         display: grid;
         place-items: center;
@@ -22,10 +22,9 @@
     }
 
     .image {
-        flex: 0 0 90px;
+        flex: 0 0 auto;
         display: grid;
         place-items: center;
-        height: 100%;
         user-select: none;
 
         img {
@@ -38,25 +37,28 @@
     }
 
     .info {
-        flex: 1 0;
+        flex: 1 1;
+        min-width: 0;
         display: flex;
         flex-direction: column;
-        align-items: stretch;
         justify-content: center;
-        gap: 4px;
+        gap: 2px;
         user-select: none;
-        padding-bottom: 4px;
 
         .channel-name {
-            font-size: 18px;
-            font-family: 'Roboto', sans-serif;
-            font-weight: 500;
+            font-size: 17px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
             color: var(--common-color-0);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .additional-info {
-            font-size: 14px;
-            font-family: 'Roboto', sans-serif;
+            font-size: 13px;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--common-color-1);
 
             .status-info {}
 
@@ -65,17 +67,17 @@
     }
 
     .search-wrapper {
+        flex: 0 0 auto;
         display: flex;
-        justify-content: center;
         align-items: center;
-        margin-right: 20px;
     }
 
     .menu {
+        flex: 0 0 auto;
         user-select: none;
         cursor: pointer;
-        height: 45px;
-        width: 45px;
+        height: 42px;
+        width: 42px;
         border-radius: 50%;
         display: grid;
         place-items: center;
