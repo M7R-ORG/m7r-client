@@ -19,6 +19,7 @@
       align-items: center;
       padding: 3px 10px 3px 10px;
       background: var(--background-color);
+      color: var(--text-fill-color);
       outline: none;
       font-family: 'Montserrat', sans-serif;
       font-size: 14px;
@@ -35,7 +36,7 @@
 
       &:-webkit-autofill,
       &:-webkit-autofill:focus {
-        box-shadow: 0 0 0 30px #fff inset !important;
+        box-shadow: 0 0 0 30px var(--background-color) inset !important;
         -webkit-text-fill-color: var(--text-fill-color);
       }
 

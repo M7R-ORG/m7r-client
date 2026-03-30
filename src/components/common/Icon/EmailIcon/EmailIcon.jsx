@@ -13,7 +13,7 @@ function EmailIcon({ className = '' }) {
       >
         <path
           d="M4 7.00005L10.2 11.65C11.2667 12.45 12.7333 12.45 13.8 11.65L20 7"
-          stroke="#000000"
+          stroke="currentColor"
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -24,7 +24,7 @@ function EmailIcon({ className = '' }) {
           width="18"
           height="14"
           rx="2"
-          stroke="#000000"
+          stroke="currentColor"
           strokeWidth="2"
           strokeLinecap="round"
         />

@@ -4,5 +4,11 @@
 
   svg {
     cursor: pointer;
+    filter: drop-shadow(0 0 6px var(--font-color-primary-0));
+    transition: filter 0.3s ease;
+
+    &:hover {
+      filter: drop-shadow(0 0 12px var(--font-color-primary-0));
+    }
   }
 }

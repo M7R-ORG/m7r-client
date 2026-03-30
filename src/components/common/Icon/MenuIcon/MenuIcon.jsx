@@ -12,7 +12,7 @@ function MenuIcon({ className = '' }) {
         fill="none"
       >
         <path
-          fill="#000000"
+          fill="currentColor"
           fillRule="evenodd"
           d="M12 3a2 2 0 10-4 0 2 2 0 004 0zm-2 5a2 2 0 110 4 2 2 0 010-4zm0 7a2 2 0 110 4 2 2 0 010-4z"
         />

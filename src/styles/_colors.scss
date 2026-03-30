@@ -1,46 +1,57 @@
-/* Dark Theme Colors */
-$c-dark-primary-0: #945dda;
-$c-dark-primary-1: #ffffff;
-$c-dark-primary-2: #ff0000;
-$c-dark-primary-3: #000000;
-$c-dark-primary-4: #8c00ff;
-$c-dark-primary-5: #552285;
+// ============================================
+// Brand Colors
+// ============================================
+$brand:          #945dda;
+$brand-light:    #a97cf8;
+$brand-vivid:    #8c00ff;
+$brand-dark:     #7b4fb8;
+$brand-deep:     #552285;
 
-$c-dark-neutral-0: #323232;
-$c-dark-neutral-1: #ffffff;
-$c-dark-neutral-2: #ffffff;
-$c-dark-neutral-3: #5555556b;
-$c-dark-neutral-4: #969696af;
+// ============================================
+// Common
+// ============================================
+$white:          #ffffff;
+$black:          #000000;
+$error:          #e53935;
+$error-light:    #ff6b6b;
 
-$c-dark-secondary-0: #b1b1b1;
-$c-dark-secondary-1: #00000010;
-$c-dark-secondary-2: #ebebeb;
-$c-dark-secondary-3: #535353;
-$c-dark-secondary-4: #00000020;
-$c-dark-secondary-5: #3f3f3f20;
+// ============================================
+// Light Theme Palette
+// ============================================
+$light-bg:              #fafafa;
+$light-bg-surface:      #f0f0f5;
+$light-bg-elevated:     #e4e4ec;
+$light-bg-overlay:      #4a4a6a6b;
 
-/* Light Theme Colors */
-$c-light-primary-0: #945dda;
-$c-light-primary-1: #ffffff;
-$c-light-primary-2: #ff0000;
-$c-light-primary-3: #000000;
-$c-light-primary-4: #8c00ff;
-$c-light-primary-5: #552285;
+$light-text:            #18182a;
+$light-text-secondary:  #444458;
+$light-text-muted:      #7e7e96;
+$light-text-placeholder:#9898b0;
 
-$c-light-neutral-0: #ffffff;
-$c-light-neutral-1: #ffffff;
-$c-light-neutral-2: #f5f5f5;
-$c-light-neutral-3: #5555556b;
-$c-light-neutral-4: #969696af;
+$light-border:          #c4c4d4;
+$light-border-subtle:   #d4d4e0;
+$light-shadow:          #40406020;
 
-$c-light-secondary-0: #b1b1b1;
-$c-light-secondary-1: #00000010;
-$c-light-secondary-2: #ebebeb;
-$c-light-secondary-3: #535353;
-$c-light-secondary-4: #00000020;
-$c-light-secondary-5: #0000001f;
+$light-toggle-bg:       #e4e2f0;
+$light-toggle-stroke:   #6b6980;
 
-/* Common Theme Colors */
-$c-black-0: #000000;
-$c-white-0: #ffffff;
-$c-purple-0: #945dda;
+// ============================================
+// Dark Theme Palette
+// ============================================
+$dark-bg:               #0f0f1a;
+$dark-bg-subtle:        #141425;
+$dark-bg-surface:       #1a1a2e;
+$dark-bg-elevated:      #252540;
+$dark-bg-overlay:       #3a3a5060;
+
+$dark-text:             #e8e8f0;
+$dark-text-secondary:   #a0a0b8;
+$dark-text-muted:       #6b6b88;
+$dark-text-placeholder: #707088;
+
+$dark-border:           #ffffff12;
+$dark-border-subtle:    #ffffff0a;
+$dark-shadow:           #00000040;
+
+$dark-toggle-bg:        #3a3a50;
+$dark-toggle-stroke:    #888899;

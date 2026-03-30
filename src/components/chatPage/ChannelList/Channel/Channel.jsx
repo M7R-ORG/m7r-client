@@ -44,7 +44,7 @@ function Channel({ onClick = () => {}, isActive = false, className = '', data = 
         </div>
 
         <div className="channel-info-bottom">
-          {lastMessage && (
+          {lastMessage ? (
             <>
               <div className="message">
                 <b>
@@ -59,6 +59,8 @@ function Channel({ onClick = () => {}, isActive = false, className = '', data = 
                 </div>
               )}
             </>
+          ) : (
+            <div className="message empty">No messages yet</div>
           )}
         </div>
       </div>
