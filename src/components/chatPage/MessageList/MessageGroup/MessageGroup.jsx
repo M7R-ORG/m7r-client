@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import moment from 'moment'
 import { useSelector } from 'react-redux'
-import { DoubleTickIcon } from '../../../common/Icon/_exports'
 import config from '../../../../config/configuration'
 import Message from '../Message/Message'
 import ImgWrapper from '../../../common/ImgWrapper/ImgWrapper'
@@ -10,10 +9,10 @@ import './MessageGroup.scss'
 
 function MessageGroup({ className = '', group = null, observerRef = null }) {
   const { accountSection } = usePageSection()
-  const { authorId, authorLogin, image, createdAt, messages, isRead } = group
+  const { authorId, authorLogin, image, createdAt, messages } = group
   const userId = useSelector((state) => state.auth.info.id)
-  const myGroupClass = +userId === +authorId ? 'my-group' : ''
-  const readClass = isRead ? 'read' : ''
+  const isMyGroup = +userId === +authorId
+  const myGroupClass = isMyGroup ? 'my-group' : ''
 
   const imageSrc = image
     ? `data:image/jpeg;base64, ${image}`
@@ -37,7 +36,6 @@ function MessageGroup({ className = '', group = null, observerRef = null }) {
             {authorLogin}
           </div>
           <div className="group-time">{formattedDate}</div>
-          <DoubleTickIcon className={`group-read ${readClass}`} />
         </div>
 
         <div className="group-messages">
@@ -47,6 +45,7 @@ function MessageGroup({ className = '', group = null, observerRef = null }) {
               key={message.id}
               message={message}
               className={myGroupClass}
+              isMyMessage={isMyGroup}
             />
           ))}
         </div>
@@ -67,8 +66,7 @@ MessageGroup.propTypes = {
     authorId: PropTypes.number,
     authorLogin: PropTypes.string,
     createdAt: PropTypes.string,
-    image: PropTypes.string,
-    isRead: PropTypes.bool
+    image: PropTypes.string
   }),
   observerRef: PropTypes.shape({
     current: PropTypes.instanceOf(IntersectionObserver)

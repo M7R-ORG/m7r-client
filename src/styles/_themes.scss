@@ -112,7 +112,7 @@
   .c-message-list {
     --message-background-color:    #{$light-bg-surface};
     --my-message-background-color: #{$brand};
-    --my-message-gradient:         linear-gradient(135deg, #b07cf8 0%, #8952e0 50%, #6f3fc4 100%);
+    --my-message-gradient:         linear-gradient(135deg, #7e4dd6 0%, #6d3cbf 60%, #5c2fa8 100%);
   }
 
   // New message
@@ -218,7 +218,7 @@
   .c-message-list {
     --message-background-color:    #{$dark-bg-elevated};
     --my-message-background-color: #{$brand-light};
-    --my-message-gradient:         linear-gradient(135deg, #9b6eef 0%, #7445c8 50%, #5e35a8 100%);
+    --my-message-gradient:         linear-gradient(135deg, #6e42d0 0%, #5c32b8 60%, #4a2598 100%);
   }
 
   // New message

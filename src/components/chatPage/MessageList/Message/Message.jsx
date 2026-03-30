@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import { useEffect, useRef, useState } from 'react'
 import Attachment from './Attachment/Attachment'
 import MediaViewerModal from '../../../common/Modal/MediaViewerModal/MediaViewerModal'
+import { DoubleTickIcon } from '../../../common/Icon/_exports'
 import { isImageAttachmentType } from '../../../../utils/helpers/attachmentTypeHelper'
 import './Message.scss'
 
@@ -10,12 +11,13 @@ const getMediaAttachmentIds = (attachments) =>
     .filter((attachment) => isImageAttachmentType(attachment.type))
     .map((attachment) => attachment.id)
 
-function Message({ onClick = () => {}, className = '', message = null, observerRef = null }) {
+function Message({ onClick = () => {}, className = '', message = null, observerRef = null, isMyMessage = false }) {
   const messageRef = useRef(null)
   const [isActiveMediaViewer, setIsActiveMediaViewer] = useState(false)
   const [defaultIdMediaViewer, setDefaultIdMediaViewer] = useState(null)
 
-  const { id, text, attachments } = message
+  const { id, text, attachments, isRead } = message
+  const readClass = isRead ? 'read' : ''
 
   const mediaAttachmentIds = getMediaAttachmentIds(attachments)
 
@@ -51,6 +53,7 @@ function Message({ onClick = () => {}, className = '', message = null, observerR
         role="presentation"
       >
         {!!text && <div className="message-text">{text}</div>}
+        {isMyMessage && <DoubleTickIcon className={`message-read ${readClass}`} />}
 
         {attachments.length > 0 && (
           <div className="message-attachments">
@@ -77,9 +80,11 @@ function Message({ onClick = () => {}, className = '', message = null, observerR
 Message.propTypes = {
   onClick: PropTypes.func,
   className: PropTypes.string,
+  isMyMessage: PropTypes.bool,
   message: PropTypes.shape({
     id: PropTypes.number,
-    text: PropTypes.string
+    text: PropTypes.string,
+    isRead: PropTypes.bool
   }),
   observerRef: PropTypes.shape({
     current: PropTypes.instanceOf(IntersectionObserver)

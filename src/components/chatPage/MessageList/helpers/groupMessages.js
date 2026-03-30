@@ -4,7 +4,6 @@ function isNeedToPrevGroup(lastGroup, message) {
   return (
     lastGroup?.messages &&
     lastGroup.authorId === message.authorId &&
-    lastGroup.isRead === message.isRead &&
     lastGroup.pageNumber === message.pageNumber &&
     new Date(message.createdAt).getMinutes() === new Date(lastGroup.createdAt).getMinutes()
   )
@@ -23,7 +22,6 @@ function groupMessages(messages, memberImages) {
         authorLogin: message.authorLogin,
         authorId: message.authorId,
         createdAt: message.createdAt,
-        isRead: message.isRead,
         image: memberImages.find((member) => member.id === message.authorId)?.image,
         messages: [message],
         pageNumber: message.pageNumber
