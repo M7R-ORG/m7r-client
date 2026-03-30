@@ -56,7 +56,7 @@
   .c-form-input,
   .c-date-input {
     --background-color:       #{$white};
-    --border-color:           #{$light-text-placeholder};
+    --border-color:           #{$light-border};
     --text-fill-color:        #{$light-text};
     --toggle-background-color:#{$light-toggle-bg};
     --toggle-stroke-color:    #{$light-toggle-stroke};
@@ -64,9 +64,9 @@
 
   // Sidebar
   .c-sidebar {
-    --background-color:             #{$white};
-    --background-item-color:        #{$white};
-    --border-color:                 #{$light-border-subtle};
+    --background-color:             #{$light-bg};
+    --background-item-color:        #{$light-bg-elevated};
+    --border-color:                 #{$light-border};
     --search-icon-background-color: #{$light-bg-surface};
     --default-background-color:     #{$light-bg-surface};
     --default-item-color:           #{$light-text};
@@ -84,10 +84,15 @@
 
   // Channel list
   .c-channel {
-    --hover-background-color: #{$light-bg-surface};
-    --font-color:             #{$light-text};
-    --selected-font-color:    #{$white};
-    --last-message-font-color:#{$light-text-secondary};
+    --hover-background-color:    #{$light-bg-surface};
+    --font-color:                #{$light-text};
+    --selected-font-color:       #{$white};
+    --last-message-font-color:   #{$light-text-secondary};
+    --active-channel-background: #{$light-bg-elevated};
+    --active-channel-gradient-start: #{$light-bg-elevated};
+    --active-channel-gradient-end:   #{$light-bg-surface};
+    --active-channel-border-color:   #{$light-border};
+    --active-channel-shadow:     #{$light-shadow};
   }
 
   // Modals
@@ -107,6 +112,13 @@
   .c-message-list {
     --message-background-color:    #{$light-bg-surface};
     --my-message-background-color: #{$brand};
+    --my-message-gradient:         linear-gradient(135deg, #{$brand-light}, #{$brand});
+  }
+
+  // New message
+  .c-new-message {
+    --send-btn-background:       rgba(148, 93, 218, 0.12);
+    --send-btn-hover-background: rgba(148, 93, 218, 0.22);
   }
 }
 
@@ -178,10 +190,15 @@
 
   // Channel list
   .c-channel {
-    --hover-background-color: #{$dark-bg-elevated};
-    --font-color:             #{$dark-text};
-    --selected-font-color:    #{$white};
-    --last-message-font-color:#{$dark-text-secondary};
+    --hover-background-color:    #{$dark-bg-elevated};
+    --font-color:                #{$dark-text};
+    --selected-font-color:       #{$white};
+    --last-message-font-color:   #{$dark-text-secondary};
+    --active-channel-background: #{$dark-bg-elevated};
+    --active-channel-gradient-start: rgba(148, 93, 218, 0.2);
+    --active-channel-gradient-end:   rgba(148, 93, 218, 0.06);
+    --active-channel-border-color:   rgba(148, 93, 218, 0.2);
+    --active-channel-shadow:     rgba(0, 0, 0, 0.1);
   }
 
   // Modals
@@ -201,5 +218,12 @@
   .c-message-list {
     --message-background-color:    #{$dark-bg-elevated};
     --my-message-background-color: #{$brand-light};
+    --my-message-gradient:         linear-gradient(135deg, #{$brand-light}, #{$brand-dark});
+  }
+
+  // New message
+  .c-new-message {
+    --send-btn-background:       rgba(169, 124, 248, 0.15);
+    --send-btn-hover-background: rgba(169, 124, 248, 0.28);
   }
 }

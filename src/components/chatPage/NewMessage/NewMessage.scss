@@ -17,9 +17,12 @@
         display: flex;
         justify-content: center;
         align-items: flex-end;
-        gap: 40px;
+        gap: 10px;
         margin-bottom: 35px;
-        max-width: 580px;
+        max-width: 620px;
+        background: var(--background-color-1);
+        border-radius: 30px;
+        padding: 5px 5px 5px 8px;
 
         .dropdown-wrapper {
             .dropdown {
@@ -28,34 +31,33 @@
         }
 
         .attachments {
-            min-height: 50px;
-            min-width: 50px;
-            border: solid 2px var(--font-color-primary-0);
+            min-height: 48px;
+            min-width: 48px;
+            border: none;
             border-radius: 50%;
-            background: var(--background-color-1);
+            background: transparent;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             display: grid;
             place-items: center;
             user-select: none;
+            flex-shrink: 0;
 
             &:hover {
-                background: var(--font-color-primary-0);
+                background: var(--send-btn-background);
 
-                svg {
-                    path {
-                        stroke: var(--font-color-primary-2);
-                    }
+                svg path {
+                    stroke: var(--common-color-0);
                 }
             }
 
             svg {
-                height: 40px;
-                width: 40px;
+                height: 22px;
+                width: 22px;
 
                 path {
-                    transition: all 0.3s ease;
-                    stroke: var(--font-color-primary-0);
+                    transition: all 0.2s ease;
+                    stroke: var(--placeholder-color);
                 }
             }
         }
@@ -63,15 +65,16 @@
         .message-input {
             border: solid 1px var(--border-color);
             border-radius: 25px;
-            width: 460px;
+            width: 100%;
             padding: 12px 12px;
-            background: var(--background-color-1);
+            background: transparent;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
-            min-height: 50px;
+            transition: border-color 0.3s ease;
+            min-height: 44px;
             user-select: none;
+            flex: 1;
 
             &.focused {
                 border-color: var(--common-color-0);
@@ -79,17 +82,17 @@
 
             textarea {
                 min-height: 21px;
-                padding: 1px 15px;
+                padding: 1px 8px;
                 max-height: 70px;
                 overflow-y: auto;
                 overflow-x: hidden;
                 width: 100%;
                 border: none;
                 outline: none;
-                font-size: 16px;
+                font-size: 15px;
                 background: transparent;
                 color: inherit;
-                font-family: 'Roboto', sans-serif;
+                font-family: 'Montserrat', sans-serif;
                 resize: none;
                 white-space: pre-line;
 
@@ -108,32 +111,34 @@
         }
 
         .send-btn {
-            min-height: 50px;
-            min-width: 50px;
-            border: solid 1px transparent;
+            min-height: 48px;
+            min-width: 48px;
+            border: none;
             border-radius: 50%;
-            background: var(--common-color-0);
+            background: var(--send-btn-background);
+            color: var(--common-color-0);
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             display: grid;
             place-items: center;
             user-select: none;
+            flex-shrink: 0;
 
             &:hover {
-                opacity: 0.7;
+                background: var(--send-btn-hover-background);
             }
 
             .send-btn-icon {
                 svg {
-                    height: 30px;
-                    width: 30px;
+                    height: 20px;
+                    width: 20px;
                 }
             }
 
             .send-btn-loader {
                 svg {
-                    height: 30px;
-                    width: 30px;
+                    height: 20px;
+                    width: 20px;
                 }
             }
         }
