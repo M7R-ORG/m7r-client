@@ -47,7 +47,7 @@
 
     .channel-info-top {
       display: flex;
-      align-items: baseline;
+      align-items: center;
       justify-content: space-between;
       gap: 8px;
 
@@ -63,7 +63,6 @@
         flex-shrink: 0;
         font-size: 11px;
         color: var(--common-color-1);
-        padding-right: 2px;
         white-space: nowrap;
       }
     }
@@ -71,7 +70,6 @@
     .channel-info-bottom {
       display: flex;
       align-items: center;
-      justify-content: space-between;
       gap: 8px;
       overflow: hidden;
 
@@ -94,22 +92,19 @@
 
       .counter {
         flex: 0 0 auto;
-        display: grid;
-        place-items: center;
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Montserrat', sans-serif;
         font-size: 10px;
         font-weight: 600;
-        transition: all 0.1s linear;
 
         div {
-          display: grid;
-          place-items: center;
-          min-width: 20px;
-          height: 20px;
-          padding: 0 5px;
-          border-radius: 10px;
-          background: var(--common-color-0);
-          color: var(--font-color-primary-2);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 18px;
+          padding: 0 8px;
+          border-radius: 9px;
+          background: var(--active-channel-gradient-start);
+          color: var(--common-color-0);
         }
       }
     }
