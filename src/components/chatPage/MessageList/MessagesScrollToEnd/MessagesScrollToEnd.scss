@@ -5,23 +5,27 @@
     place-items: center;
     border-radius: 50%;
     transition: all 0.3s ease;
-    border: solid 2px var(--border-color-1);
-    fill: var(--font-color-primary-0);
+    background: var(--background-color-1);
+    border: solid 1px var(--border-color);
+    fill: var(--common-color-0);
     opacity: 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 
     &:hover {
-        background: var(--font-color-primary-0);
-        fill: var(--font-color-primary-2);
+        background: var(--background-color-1);
+        fill: var(--common-color-0);
+        border-color: var(--common-color-0);
+        box-shadow: 0 4px 14px rgba(148, 93, 218, 0.25);
     }
 
     &.visible {
         opacity: 1;
-        height: 46px;
-        width: 46px;
+        height: 40px;
+        width: 40px;
         cursor: pointer;
     }
 
     .arrow-icon {
-        transform: rotateZ(90deg) translateX(2px) scale(1.1);
+        transform: rotateZ(90deg) translateX(1px) scale(0.9);
     }
 }
