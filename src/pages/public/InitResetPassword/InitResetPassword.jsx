@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Brand, FormButton, FormInput, Logo, NavLink } from '../../../components/_exports'
+import ThemeToggle from '../../../components/common/ThemeToggle/ThemeToggle'
 import { page } from '../../../constants/system'
 import api from '../../../api/api'
 import emailValidator from '../../../utils/validators/emailValidator'
@@ -78,6 +79,7 @@ function InitResetPassword() {
 
   return (
     <div className="p-init-reset-password">
+      <ThemeToggle className="guest-theme-toggle" />
       <div className="init-reset-password-header">
         <div className="brand-wrapper">
           <Brand className="brand">M|7|R</Brand>

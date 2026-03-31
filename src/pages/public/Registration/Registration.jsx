@@ -5,6 +5,7 @@ import { page } from '../../../constants/system'
 import { Brand, FormButton, FormDesc, FormTitle, Logo, NavLink } from '../../../components/_exports'
 import { Step1, Step2, Step3, Step4 } from '../../../components/registrationPage/Steps/_exports'
 import { ArrowIcon } from '../../../components/common/Icon/_exports'
+import ThemeToggle from '../../../components/common/ThemeToggle/ThemeToggle'
 import './Registration.scss'
 
 function Registration() {
@@ -115,6 +116,7 @@ function Registration() {
 
   return (
     <div className="p-registration">
+      <ThemeToggle className="guest-theme-toggle" />
       <div className="registration-header">
         <div className="brand-wrapper">
           <Brand className="brand">M|7|R</Brand>
