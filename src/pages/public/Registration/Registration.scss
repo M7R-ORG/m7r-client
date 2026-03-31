@@ -69,36 +69,6 @@
         }
       }
 
-      .description {
-        flex: 0 0 53%;
-        padding: 48px 15px 20px;
-        border-right: 2px solid var(--border-color);
-        display: flex;
-        flex-direction: column;
-        justify-content: stretch;
-        align-items: center;
-
-        .title {
-          flex: 0 0 30%;
-          display: grid;
-          place-items: center;
-          font-family: 'Montserrat', sans-serif;
-          font-size: 22px;
-          font-weight: 600;
-        }
-
-        .content {
-          word-wrap: break-word;
-          flex: 0 0 70%;
-          padding: 0 50px;
-          text-align: center;
-          font-family: 'Montserrat', sans-serif;
-          font-size: 14px;
-          font-weight: 400;
-          gap: 15px;
-        }
-      }
-
       .content {
         flex: 0 0 47%;
         padding: 48px 15px 20px;
@@ -146,18 +116,37 @@
         &.result-content {
           justify-content: center;
           align-items: center;
-          padding-bottom: 50px;
+          gap: 12px;
+
+          .result-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
 
           .status-text {
-            flex: 0 0 50px;
-            font-size: 30px;
+            font-size: 22px;
+            font-weight: 600;
             color: var(--font-color-primary-0);
+            text-align: center;
           }
 
           .reason {
-            flex: 0 0 75px;
             padding: 0 30px;
-            font-size: 18px;
+            font-size: 14px;
+            text-align: center;
+            color: var(--common-color-1);
+          }
+
+          .result-action {
+            margin-top: 8px;
+            display: flex;
+            justify-content: center;
+
+            .retry-button {
+              height: 42px;
+              width: 140px;
+            }
           }
         }
       }

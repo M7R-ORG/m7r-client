@@ -4,8 +4,9 @@ import api from '../../../api/api'
 import { page } from '../../../constants/system'
 import { Brand, FormButton, FormDesc, FormTitle, Logo, NavLink } from '../../../components/_exports'
 import { Step1, Step2, Step3, Step4 } from '../../../components/registrationPage/Steps/_exports'
-import { ArrowIcon } from '../../../components/common/Icon/_exports'
+import { ArrowIcon, StatusIcon } from '../../../components/common/Icon/_exports'
 import ThemeToggle from '../../../components/common/ThemeToggle/ThemeToggle'
+import RegistrationSidebar from '../../../components/registrationPage/RegistrationSidebar/RegistrationSidebar'
 import './Registration.scss'
 
 function Registration() {
@@ -133,27 +134,23 @@ function Registration() {
             <ArrowIcon onClick={prevStepHandler} className="arrow-icon" />
           </div>
 
-          <div className="description">
-            <div className="title">Create your account</div>
-            <div className="content">
-              <p>Provides fast and instant messaging, making communication more efficient</p>
-              <p>
-                Аllows you to exchange not only text messages, but also photos, videos, documents
-                and audio recordings
-              </p>
-              <p>
-                Provides encryption features, providing an increased level of security for the
-                exchange of personal information
-              </p>
-            </div>
-          </div>
+          <RegistrationSidebar currentStep={currentStepNumber} totalSteps={steps.length} />
           {result.isCompleted ? (
             <div className="content result-content">
+              <div className="result-icon">
+                <StatusIcon isSuccess={result.isSuccess} />
+              </div>
               <FormTitle className="status-text">
-                {result.isSuccess ? 'Success' : 'Failed'}
+                {result.isSuccess ? 'All done!' : 'Something went wrong'}
               </FormTitle>
-
               <FormDesc className="reason">{result.message}</FormDesc>
+              {!result.isSuccess && (
+                <div className="result-action">
+                  <FormButton className="retry-button" isActive onClick={prevStepHandler}>
+                    Try again
+                  </FormButton>
+                </div>
+              )}
             </div>
           ) : (
             <div className="content form-content">

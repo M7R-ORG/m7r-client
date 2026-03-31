@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import Loader1 from '../../../components/common/Loader/Loader1/Loader1'
 import { Brand, FormButton, Logo, NavLink } from '../../../components/_exports'
+import { StatusIcon } from '../../../components/common/Icon/_exports'
 import ThemeToggle from '../../../components/common/ThemeToggle/ThemeToggle'
 import { page } from '../../../constants/system'
 import api from '../../../api/api'
@@ -85,20 +86,21 @@ function ConfirmedRegistration() {
             <Loader1 className="loader" />
           ) : (
             <>
-              <div className="logo-wrapper">
+              <div className="logo-section">
                 <Logo className="logo" />
+                <StatusIcon className="status-badge" isSuccess={isSuccess} />
               </div>
 
-              <div className="title">{isSuccess ? 'Success' : 'Failure'}</div>
+              <div className="title">{isSuccess ? 'Success' : 'Failed'}</div>
 
               <div className="message">{message}</div>
 
               <div className="button-wrapper">
                 <FormButton
-                  className="login-button"
+                  className="action-button"
                   onClick={isSuccess ? continueHandler : againHandler}
                 >
-                  {isSuccess ? 'Continue' : 'Again'}
+                  {isSuccess ? 'Continue' : 'Try again'}
                 </FormButton>
               </div>
             </>
