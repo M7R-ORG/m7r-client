@@ -6,7 +6,7 @@
   width: 44px;
   text-decoration: none;
   border-radius: 12px;
-  transition: all 0.3s linear;
+  transition: all 0.35s ease;
   border: solid 1px transparent;
   color: var(--default-item-color);
 
@@ -15,7 +15,7 @@
     display: grid;
     place-items: center;
     height: 100%;
-    transition: all 0.3s linear;
+    transition: all 0.35s ease;
 
     svg {
       height: 23px;
@@ -30,7 +30,7 @@
     font-size: 14px;
     font-weight: 400;
     max-width: 0;
-    transition: all 0.3s linear;
+    transition: all 0.35s ease;
     overflow: hidden;
     white-space: nowrap;
   }
@@ -44,7 +44,7 @@
     font-family: 'Roboto', sans-serif;
     font-size: 10px;
     max-width: 0;
-    transition: all 0.1s linear;
+    transition: all 0.35s ease;
     overflow: hidden;
 
     .notice-counter-wrapper {

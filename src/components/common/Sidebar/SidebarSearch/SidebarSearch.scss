@@ -27,7 +27,7 @@
       }
 
       &:hover {
-        transition: all 0.3s linear;
+        transition: all 0.35s ease;
       }
     }
   }
@@ -37,7 +37,7 @@
     place-items: center;
     max-width: 0;
     overflow-x: hidden;
-    transition: all 0.5s linear;
+    transition: all 0.35s ease;
 
     input {
       outline: none;

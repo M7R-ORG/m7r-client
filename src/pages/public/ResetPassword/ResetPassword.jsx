@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { Brand, FormButton, FormInput, Logo, NavLink } from '../../../components/_exports'
+import ThemeToggle from '../../../components/common/ThemeToggle/ThemeToggle'
 import { page } from '../../../constants/system'
 import api from '../../../api/api'
 import cPasswordValidator from '../../../utils/validators/cPasswordValidator'
@@ -72,6 +73,7 @@ function ResetPassword() {
 
   return (
     <div className="p-reset-password">
+      <ThemeToggle className="guest-theme-toggle" />
       <RedirectModal
         isActive={isCompleted}
         link={page.login}

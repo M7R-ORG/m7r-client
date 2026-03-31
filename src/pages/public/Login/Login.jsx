@@ -4,6 +4,7 @@ import { useAuth } from '../../../hooks/_exports'
 import api from '../../../api/api'
 import { page } from '../../../constants/system'
 import { Brand, FormButton, Logo, NavLink, FormInput } from '../../../components/_exports'
+import ThemeToggle from '../../../components/common/ThemeToggle/ThemeToggle'
 import './Login.scss'
 
 const defaultClientMessage = 'Enter your login details'
@@ -64,6 +65,7 @@ function Login() {
 
   return (
     <div className="p-login">
+      <ThemeToggle className="guest-theme-toggle" />
       <div className="login-header">
         <div className="brand-wrapper">
           <Brand className="brand">M|7|R</Brand>

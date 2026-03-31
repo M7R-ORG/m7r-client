@@ -1,7 +1,7 @@
 .c-sidebar {
   position: relative;
   flex: 0 0 62px;
-  transition: all 0.6s ease;
+  transition: flex 0.4s ease;
   border-radius: 14px;
   border: solid 1px var(--border-color);
   box-shadow: 0px 0 15px 6px var(--shadow-color);
@@ -22,7 +22,7 @@
 
   &.expand {
     flex: 0 0 250px;
-    transition: all 0.6s ease;
+    transition: flex 0.4s ease;
 
     .sidebar-expander svg {
       transform: scaleX(-1);

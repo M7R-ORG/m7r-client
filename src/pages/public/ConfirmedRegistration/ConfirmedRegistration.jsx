@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import Loader1 from '../../../components/common/Loader/Loader1/Loader1'
 import { Brand, FormButton, Logo, NavLink } from '../../../components/_exports'
+import ThemeToggle from '../../../components/common/ThemeToggle/ThemeToggle'
 import { page } from '../../../constants/system'
 import api from '../../../api/api'
 import { useAuth } from '../../../hooks/_exports'
@@ -66,6 +67,7 @@ function ConfirmedRegistration() {
 
   return (
     <div className="p-confirm-registration">
+      <ThemeToggle className="guest-theme-toggle" />
       <div className="confirm-registration-header">
         <div className="brand-wrapper">
           <Brand className="brand">M|7|R</Brand>
