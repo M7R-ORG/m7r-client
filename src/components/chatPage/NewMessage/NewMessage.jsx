@@ -22,7 +22,7 @@ function isCorrectMessage(messageText, attachments) {
 function NewMessage({ className = '', channelId = null }) {
   const [message, setMessage] = useState('')
   const [isFocused, setIsFocused] = useState(false)
-  const [errorMessage, setErrorMessage] = useState(null)
+  const [, setErrorMessage] = useState(null)
   const [isSending, setIsSending] = useState(false)
   const fileInputRef = useRef(null)
   const [attachFiles, setAttachFiles] = useState([])

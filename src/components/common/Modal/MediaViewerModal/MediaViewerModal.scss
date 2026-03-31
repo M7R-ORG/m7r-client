@@ -1,6 +1,10 @@
 .c-media-viewer-modal {
     user-select: none;
 
+    .base-modal .modal {
+        overflow: hidden;
+    }
+
     .viewer-modal {
         display: flex;
         flex-direction: column;
@@ -65,7 +69,8 @@
                     max-width: 100%;
                     max-height: 95vh;
                     border-radius: 30px;
-                    cursor: pointer;
+                    cursor: zoom-in;
+                    will-change: transform;
                 }
 
                 .media-loader {
