@@ -26,7 +26,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
 
     .loader {
       width: 100%;
@@ -49,47 +48,54 @@
       width: 500px;
       display: flex;
       flex-direction: column;
-      justify-content: stretch;
-      align-items: stretch;
+      justify-content: center;
+      align-items: center;
       border-radius: 25px;
       box-shadow: 0px 0 10px 6px var(--shadow-color);
       padding: 48px 15px 20px;
 
-      .logo-wrapper {
-        flex: 0 0 80px;
+      .logo-section {
+        position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-bottom: 24px;
+
+        .status-badge {
+          position: absolute;
+          bottom: -8px;
+          right: -12px;
+
+          svg {
+            width: 28px;
+            height: 28px;
+          }
+        }
       }
 
       .title {
-        flex: 0 0 60px;
         font-family: 'Montserrat', sans-serif;
         font-weight: 600;
         font-size: 28px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        text-align: center;
+        margin-bottom: 12px;
       }
 
       .message {
-        flex: 0 0 120px;
         font-family: 'Montserrat', sans-serif;
         font-weight: 300;
         font-size: 18px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        text-align: center;
+        padding: 0 30px;
+        margin-bottom: 64px;
       }
 
       .button-wrapper {
-        padding-top: 40px;
-        flex: 0 0 120px;
         display: flex;
         justify-content: center;
         align-items: center;
 
-        .login-button {
+        .action-button {
           height: 48px;
           width: 160px;
         }

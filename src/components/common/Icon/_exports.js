@@ -28,6 +28,8 @@ import RoleIcon from './RoleIcon/RoleIcon'
 import SettingsIcon from './SettingsIcon/SettingsIcon'
 import ProfileIcon from './ProfileIcon/ProfileIcon'
 import LogoutIcon from './LogoutIcon/LogoutIcon'
+import LockIcon from './LockIcon/LockIcon'
+import CalendarIcon from './CalendarIcon/CalendarIcon'
 
 export {
   AIIcon,
@@ -59,5 +61,7 @@ export {
   RoleIcon,
   SettingsIcon,
   ProfileIcon,
-  LogoutIcon
+  LogoutIcon,
+  LockIcon,
+  CalendarIcon
 }

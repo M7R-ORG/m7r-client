@@ -1,0 +1,117 @@
+.c-registration-sidebar {
+  flex: 0 0 53%;
+  padding: 40px 30px 25px;
+  border-right: 2px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+
+  .sidebar-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .sidebar-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0 10px;
+  }
+
+  .sidebar-step {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    opacity: 0.4;
+
+    &.active {
+      opacity: 1;
+      background: var(--background-color-1);
+      box-shadow: 0 0 8px 2px var(--shadow-color);
+
+      .step-icon {
+        color: var(--font-color-primary-0);
+      }
+    }
+
+    &.completed {
+      opacity: 0.7;
+
+      .step-icon {
+        color: var(--font-color-primary-0);
+      }
+    }
+
+    .step-icon {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--common-color-1);
+      transition: color 0.3s ease;
+
+      svg {
+        width: 28px;
+        height: 28px;
+      }
+    }
+
+    .step-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .step-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .step-desc {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11.5px;
+      font-weight: 400;
+      color: var(--common-color-1);
+    }
+  }
+
+  .sidebar-progress {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 10px;
+
+    .progress-bar {
+      height: 4px;
+      width: 100%;
+      background: var(--border-color);
+      border-radius: 2px;
+      overflow: hidden;
+
+      .progress-fill {
+        height: 100%;
+        background: var(--font-color-primary-0);
+        border-radius: 2px;
+        transition: width 0.4s ease;
+      }
+    }
+
+    .progress-text {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--common-color-1);
+      text-align: center;
+    }
+  }
+}
