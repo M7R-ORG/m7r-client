@@ -4,7 +4,6 @@ services:
       context: .
       args:
         REACT_APP_SERVER_URL: ${REACT_APP_SERVER_URL}
-        REACT_APP_SERVER_TIMEOUT: ${REACT_APP_SERVER_TIMEOUT}
     image: samarkinivan/messenger-client:latest
     container_name: messenger-client
     restart: on-failure

@@ -2,7 +2,6 @@ FROM node:22-alpine AS build
 WORKDIR /app
 
 ARG REACT_APP_SERVER_URL
-ARG REACT_APP_SERVER_TIMEOUT
 
 COPY package.json package-lock.json* ./
 RUN npm ci
