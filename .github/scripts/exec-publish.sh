@@ -4,7 +4,9 @@ set -euo pipefail
 IMAGE_NAME="${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}"
 
 # build image from Dockerfile
-docker buildx build -t $IMAGE_NAME .
+docker buildx build \
+  --build-arg REACT_APP_SERVER_URL="${REACT_APP_SERVER_URL}" \
+  -t $IMAGE_NAME .
 
 # login to docker
 docker login -u $DOCKER_USERNAME -p $DOCKER_TOKEN

@@ -5,7 +5,7 @@ const config = {
   },
   server: {
     url: process.env.REACT_APP_SERVER_URL,
-    timeout: process.env.REACT_APP_SERVER_TIMEOUT
+    timeout: 20000
   }
 }
 
