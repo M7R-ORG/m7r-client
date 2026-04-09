@@ -66,13 +66,15 @@ function ChannelList({ className = '', selectedChannelId = null }) {
     }
   }, [chatHub, activeChannelType])
 
-  const loadChannels = async ({ searchField, pageNumber, pageSize, type }) => {
+  const loadChannels = async ({ searchField, pageNumber, pageSize, type, signal }) => {
     const { data, response } = await api.channel.accountChannels({
       searchField,
       pageNumber,
       pageSize,
       channelType: type
     })
+
+    if (signal?.aborted) return
 
     if (response?.data?.clientMessage) {
       throw new Error(response.data.clientMessage)
@@ -92,7 +94,7 @@ function ChannelList({ className = '', selectedChannelId = null }) {
   }
 
   const refreshChannels = useCallback(
-    async (search, isSmoothScroll) => {
+    async (search, isSmoothScroll, signal) => {
       const scrollBehavior = isSmoothScroll ? 'smooth' : 'auto'
 
       pageNumberRef.current = 0
@@ -108,12 +110,15 @@ function ChannelList({ className = '', selectedChannelId = null }) {
           pageNumber: pageNumberRef.current,
           pageSize: defaultPageSize,
           searchField: search,
-          type: activeChannelType
+          type: activeChannelType,
+          signal
         })
       } catch (err) {
         // temp
       } finally {
-        setIsListLoading(false)
+        if (!signal?.aborted) {
+          setIsListLoading(false)
+        }
       }
     },
     [activeChannelType]
@@ -124,7 +129,9 @@ function ChannelList({ className = '', selectedChannelId = null }) {
   }
 
   useEffect(() => {
-    refreshChannels(debouncedSearchChannel)
+    const abortController = new AbortController()
+    refreshChannels(debouncedSearchChannel, false, abortController.signal)
+    return () => abortController.abort()
   }, [debouncedSearchChannel, refreshChannels])
 
   const scrollHandler = async (event) => {
