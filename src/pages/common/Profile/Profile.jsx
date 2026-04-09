@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import config from '../../../config/configuration'
 import FormButton from '../../../components/common/Button/FormButton/FormButton'
+import Avatar from '../../../components/common/Avatar/Avatar'
 import {UploadIcon} from '../../../components/common/Icon/_exports'
 import api from '../../../api/api'
 import FileInput from '../../../components/chatPage/NewMessage/FileInput/FileInput'
@@ -15,10 +15,6 @@ function Profile() {
   const dispatch = useDispatch()
   const fileInputRef = useRef(null)
   const [isLoading, setIsLoading] = useState(false)
-
-  const imageSrc = image
-    ? `data:image/jpeg;base64, ${image}`
-    : `${config.app.publicPath}/defaultImages/user-profile.jpg`
 
   const uploadImageHandler = async (event) => {
     const [file] = event.target.files
@@ -58,7 +54,7 @@ function Profile() {
                 <UploadIcon className="update-icon" />
               </div>
 
-              <img src={imageSrc} alt="profile-img" />
+              <Avatar image={image} name={login} />
             </>
           )}
         </div>

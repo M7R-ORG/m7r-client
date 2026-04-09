@@ -36,6 +36,7 @@
         "props": false
       }
     ],
-    "no-unused-vars": "warn"
+    "no-unused-vars": "warn",
+    "no-plusplus": "off"
   }
 }

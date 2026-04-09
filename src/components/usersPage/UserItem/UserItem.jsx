@@ -5,8 +5,7 @@ import { activityStatus } from '../../../constants/system'
 import api from '../../../api/api'
 import UnblockIcon from '../../common/Icon/UnblockIcon/UnblockIcon'
 import BlockIcon from '../../common/Icon/BlockIcon/BlockIcon'
-import config from '../../../config/configuration'
-import ImgWrapper from '../../common/ImgWrapper/ImgWrapper'
+import Avatar from '../../common/Avatar/Avatar'
 import './UserItem.scss'
 
 function UserItem({ className = '', userInfo = null, loadUsers = null }) {
@@ -31,26 +30,22 @@ function UserItem({ className = '', userInfo = null, loadUsers = null }) {
         }
   ]
 
-  const imageSrc = image
-    ? `data:image/jpeg;base64, ${image}`
-    : `${config.app.publicPath}/defaultImages/user-profile.jpg`
-
   return (
     <tr className={`c-user-item ${className}`}>
-      <td id="image">
-        <ImgWrapper src={imageSrc} alt="user-img" />
+      <td className="image" aria-label={login}>
+        <Avatar image={image} name={login} />
       </td>
-      <td id="id">{id}</td>
-      <td id="email">{email}</td>
-      <td id="login">{login}</td>
-      <td id="birthday">{birthday}</td>
-      <td id="activity-status" className={activityStatusClass}>
+      <td className="cell-id">{id}</td>
+      <td className="email">{email}</td>
+      <td className="login">{login}</td>
+      <td className="birthday">{birthday}</td>
+      <td className={`activity-status ${activityStatusClass}`}>
         {status}
       </td>
-      <td id="banned" className={bannedClass}>
+      <td className={`banned ${bannedClass}`}>
         {isBanned ? 'Yes' : '-'}
       </td>
-      <td id="tools">
+      <td className="tools">
         <DropDown items={dropDownItems} className="bottom">
           <ToolsIcon className="tools-icon" aria-label="tools" />
         </DropDown>

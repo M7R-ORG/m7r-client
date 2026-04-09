@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
-import config from '../../../../config/configuration'
-import defaultImageMapper from '../../../../utils/mappers/defaultImageMapper'
-import ImgWrapper from '../../../common/ImgWrapper/ImgWrapper'
+import Avatar from '../../../common/Avatar/Avatar'
 import './Channel.scss'
 
 function Channel({ onClick = () => {}, isActive = false, className = '', data = null }) {
@@ -19,9 +17,6 @@ function Channel({ onClick = () => {}, isActive = false, className = '', data = 
     ? date.format('HH:mm')
     : date.format('D MMM')
 
-  const imageSrc = image
-    ? `data:image/jpeg;base64, ${image}`
-    : `${config.app.publicPath}/defaultImages/channels/${defaultImageMapper[type]}.jpg`
 
   useEffect(() => {
     setCounter(unreadMessagesCount)
@@ -34,7 +29,7 @@ function Channel({ onClick = () => {}, isActive = false, className = '', data = 
       role="presentation"
     >
       <div className="channel-image">
-        <ImgWrapper src={imageSrc} alt="channel-img" isLazy />
+        <Avatar image={image} name={name} isLazy />
       </div>
 
       <div className="channel-info">

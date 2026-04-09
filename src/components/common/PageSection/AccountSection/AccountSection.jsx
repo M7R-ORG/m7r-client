@@ -4,11 +4,10 @@ import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import { ArrowIcon, EmailIcon, FavoriteIcon, ProfileIcon, SendIcon } from '../../Icon/_exports'
 import { usePageSection } from '../../../../hooks/_exports'
-import ImgWrapper from '../../ImgWrapper/ImgWrapper'
+import Avatar from '../../Avatar/Avatar'
 import api from '../../../../api/api'
 import { activityStatus, page } from '../../../../constants/system'
 import formatLastOnlineAt from '../../../../utils/helpers/formatHelper'
-import config from '../../../../config/configuration'
 import './AccountSection.scss'
 
 const getActivityStatus = ({ status, lastOnlineAt }) => {
@@ -23,7 +22,7 @@ function AccountSection({ data }) {
   const { accountSection } = usePageSection()
   const [account, setAccount] = useState({})
   const [status, setStatus] = useState('')
-  const [image, setImage] = useState('')
+  const [image, setImage] = useState(undefined)
   const [isFavorite, setIsFavorite] = useState(false)
   const myAccountId = useSelector((state) => state.auth.info.id)
 
@@ -33,9 +32,6 @@ function AccountSection({ data }) {
 
   const isMyAccount = +myAccountId === accountId
 
-  const imageSrc = image
-    ? `data:image/jpeg;base64, ${image}`
-    : `${config.app.publicPath}/defaultImages/user-profile.jpg`
 
   useEffect(() => {
     const { activityStatus: activityState, lastOnlineAt } = account
@@ -76,8 +72,8 @@ function AccountSection({ data }) {
 
     api.account
       .imageByAccountId({ id })
-      .then((result) => setImage(result.data.image))
-      .catch()
+      .then((result) => setImage(result.data.image || null))
+      .catch(() => setImage(null))
   }
 
   useEffect(() => {
@@ -99,7 +95,7 @@ function AccountSection({ data }) {
       <div className="section-content visible">
         <div className="account-info">
           <div className="image">
-            <ImgWrapper className="img-wrapper" src={imageSrc} alt="account-img" isLazy />
+            <Avatar className="img-wrapper" image={image} name={account.login} isLazy />
           </div>
 
           <div className="login">{account.login || ''}</div>

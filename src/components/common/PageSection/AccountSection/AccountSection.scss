@@ -74,13 +74,11 @@
             overflow: hidden;
 
             .image {
-                flex: 0 0 130px;
+                flex: 0 0 auto;
+                width: 110px;
+                height: 110px;
 
-                .img-wrapper {
-                    overflow: hidden;
-                    display: grid;
-                    place-items: center;
-                    border-radius: 100%;
+                .c-avatar {
                     cursor: pointer;
                     border: 2px solid var(--border-color);
                     transition: border-color 0.3s ease;
@@ -89,10 +87,8 @@
                         border-color: var(--common-color-0);
                     }
 
-                    img {
-                        height: 110px;
-                        width: 110px;
-                        object-fit: cover;
+                    .c-avatar-placeholder span {
+                        font-size: 2.2em;
                     }
                 }
             }
@@ -139,7 +135,7 @@
 
                     &:hover {
                         border-color: var(--common-color-0);
-                        box-shadow: 0 2px 8px rgba(148, 93, 218, 0.2);
+                        box-shadow: 0 2px 8px var(--brand-shadow-sm);
                     }
                 }
             }

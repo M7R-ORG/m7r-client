@@ -1,12 +1,11 @@
 import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
-import config from '../../../../../config/configuration'
 import { activityStatus, page } from '../../../../../constants/system'
 import { RoundCheckbox } from '../../../../_exports'
 import { ArrowIcon } from '../../../../common/Icon/_exports'
 import api from '../../../../../api/api'
 import { getActivityStatus } from '../../../ChatHeader/ChatHeader'
-import ImgWrapper from '../../../../common/ImgWrapper/ImgWrapper'
+import Avatar from '../../../../common/Avatar/Avatar'
 import './UserItem.scss'
 
 function UserItem({
@@ -20,10 +19,6 @@ function UserItem({
   const { id, login, activityStatus: status, isBanned, image } = userInfo
   const statusClass = status.toLowerCase() === activityStatus.online ? 'online' : ''
   const bannedClass = isBanned ? 'yes' : ''
-
-  const imageSrc = image
-    ? `data:image/jpeg;base64, ${image}`
-    : `${config.app.publicPath}/defaultImages/user-profile.jpg`
 
   const onClickHandler = () => {
     onToggle(id)
@@ -57,13 +52,13 @@ function UserItem({
         <RoundCheckbox className="round-checkbox" checked={isChecked} />
       </div>
 
-      <div id="image">
-        <ImgWrapper src={imageSrc} alt="user-img" />
+      <div className="image">
+        <Avatar image={image} name={login} />
       </div>
 
       <div className="user-info">
-        <div id="login">{login}</div>
-        <div id="activity">{adaptedActivityStatus}</div>
+        <div className="login">{login}</div>
+        <div className="activity">{adaptedActivityStatus}</div>
       </div>
 
       <div className="direct" onClick={onClickDirectHandler} role="presentation">

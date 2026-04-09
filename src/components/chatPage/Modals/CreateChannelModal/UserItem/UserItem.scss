@@ -24,14 +24,12 @@
     transition: all 0.3s ease;
   }
 
-  #image {
-    flex-basis: 12%;
+  .image {
+    flex: 0 0 40px;
     display: grid;
     place-items: center;
 
-    img {
-      object-fit: cover;
-      border-radius: 50%;
+    .c-avatar {
       width: 40px;
       height: 40px;
     }
@@ -46,14 +44,14 @@
     align-items: stretch;
     gap: 4px;
 
-    #login {
+    .login {
       font-size: 16px;
       font-family: 'Roboto', sans-serif;
       font-weight: 500;
       color: var(--common-color-0);
     }
 
-    #activity{
+    .activity {
       font-size: 14px;
       font-family: 'Roboto', sans-serif;
     }
