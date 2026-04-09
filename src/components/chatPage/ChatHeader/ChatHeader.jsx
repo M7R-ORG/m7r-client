@@ -1,10 +1,8 @@
 import PropTypes from 'prop-types'
-import defaultImageMapper from '../../../utils/mappers/defaultImageMapper'
-import config from '../../../config/configuration'
 import { channelType } from '../../../constants/chat'
 import { MenuIcon } from '../../common/Icon/_exports'
 import { activityStatus } from '../../../constants/system'
-import ImgWrapper from '../../common/ImgWrapper/ImgWrapper'
+import Avatar from '../../common/Avatar/Avatar'
 import Loader2 from '../../common/Loader/Loader2/Loader2'
 import MessageSearch from './MessageSearch/MessageSearch'
 import formatLastOnlineAt from '../../../utils/helpers/formatHelper'
@@ -19,9 +17,6 @@ export const getActivityStatus = ({ status, lastOnlineAt }) => {
 }
 
 function ChatHeader({ className = '', channel = null, isLoading, setSearchMessage }) {
-  const imageSrc = channel?.image
-    ? `data:image/jpeg;base64, ${channel.image}`
-    : `${config.app.publicPath}/defaultImages/channels/${defaultImageMapper[channel?.type]}.jpg`
 
   const adaptedChatInfo = getActivityStatus({
     status: channel?.userActivityStatus,
@@ -35,7 +30,7 @@ function ChatHeader({ className = '', channel = null, isLoading, setSearchMessag
       ) : (
         <>
           <div className="image">
-            {channel && <ImgWrapper src={imageSrc} alt="channel-img" isLazy />}
+            {channel && <Avatar image={channel.image} name={channel.name} isLazy />}
           </div>
 
           <div className="info">

@@ -5,7 +5,7 @@ import { page } from '../../../../constants/system'
 import { useAuth } from '../../../../hooks/_exports'
 import MenuIcon from '../../Icon/MenuIcon/MenuIcon'
 import DropDown from '../../DropDown/DropDown'
-import config from '../../../../config/configuration'
+import Avatar from '../../Avatar/Avatar'
 import './SidebarProfile.scss'
 import { LogoutIcon, ProfileIcon, SettingsIcon } from '../../Icon/_exports'
 
@@ -40,19 +40,10 @@ function SidebarProfile({ className = '', isExpand = false }) {
     }
   ]
 
-  const imageSrc = image
-    ? `data:image/jpeg;base64, ${image}`
-    : `${config.app.publicPath}/defaultImages/user-profile.jpg`
-
   return (
     <div className={`c-sidebar-profile ${className} ${expandClass}`}>
       <div className="sidebar-profile-image">
-        <img
-          src={imageSrc}
-          alt="profile-img"
-          onClick={() => navigate(page.profile)}
-          role="presentation"
-        />
+        <Avatar image={image} name={login} onClick={() => navigate(page.profile)} />
       </div>
 
       <div className="sidebar-profile-info">

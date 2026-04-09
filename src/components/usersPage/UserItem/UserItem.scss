@@ -1,34 +1,33 @@
 .c-user-item {
-  #image {
-    img {
-      object-fit: cover;
-      border-radius: 50%;
-      width: 45px;
-      height: 45px;
+  .image {
+    .c-avatar {
+      width: 38px;
+      height: 38px;
+      margin: 0 auto;
     }
   }
 
-  #id {
+  .cell-id {
     font-size: 16px;
   }
 
-  #email {
+  .email {
     user-select: text;
   }
 
-  #activity-status {
+  .activity-status {
     &.online {
       color: var(--font-color-primary-0);
     }
   }
 
-  #banned {
+  .banned {
     &.yes {
       color: var(--font-color-primary-0);
     }
   }
 
-  #tools {
+  .tools {
     height: 100%;
 
     .tools-icon {

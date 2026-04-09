@@ -34,11 +34,8 @@
         font-weight: 400;
       }
 
-      &:-webkit-autofill,
-      &:-webkit-autofill:focus {
-        box-shadow: 0 0 0 30px var(--background-color) inset !important;
-        -webkit-text-fill-color: var(--text-fill-color);
-      }
+      // autofill colors are set in _themes.scss with raw values
+      // because Chrome ignores CSS variables inside :-webkit-autofill
 
       &::-webkit-outer-spin-button,
       &::-webkit-inner-spin-button {

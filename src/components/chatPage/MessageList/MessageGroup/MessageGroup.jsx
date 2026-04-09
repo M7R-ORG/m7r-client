@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types'
 import moment from 'moment'
 import { useSelector } from 'react-redux'
-import config from '../../../../config/configuration'
 import Message from '../Message/Message'
-import ImgWrapper from '../../../common/ImgWrapper/ImgWrapper'
+import Avatar from '../../../common/Avatar/Avatar'
 import usePageSection from '../../../../hooks/usePageSection'
 import './MessageGroup.scss'
 
@@ -14,10 +13,6 @@ function MessageGroup({ className = '', group = null, observerRef = null }) {
   const isMyGroup = +userId === +authorId
   const myGroupClass = isMyGroup ? 'my-group' : ''
 
-  const imageSrc = image
-    ? `data:image/jpeg;base64, ${image}`
-    : `${config.app.publicPath}/defaultImages/channels/direct-channel.jpg`
-
   const formattedDate = moment(createdAt).format('HH:mm')
 
   const imgClickHandler = () => {
@@ -27,7 +22,7 @@ function MessageGroup({ className = '', group = null, observerRef = null }) {
   return (
     <div className={`c-message-group ${className} ${myGroupClass}`}>
       <div className="author-img">
-        <ImgWrapper src={imageSrc} alt="user-img" onClick={imgClickHandler} isLazy />
+        <Avatar image={image} name={authorLogin} onClick={imgClickHandler} isLazy />
       </div>
 
       <div className="data-wrapper">

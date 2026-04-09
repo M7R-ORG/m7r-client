@@ -29,11 +29,9 @@
         height: 100%;
         padding: 0 15px;
 
-        img {
+        .c-avatar {
             width: 45px;
             height: 45px;
-            object-fit: cover;
-            border-radius: 50%;
             cursor: pointer;
         }
     }
