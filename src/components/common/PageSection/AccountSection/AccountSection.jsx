@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import { ArrowIcon, EmailIcon, FavoriteIcon, ProfileIcon, SendIcon } from '../../Icon/_exports'
 import { usePageSection } from '../../../../hooks/_exports'
 import Avatar from '../../Avatar/Avatar'
+import Loader2 from '../../Loader/Loader2/Loader2'
 import api from '../../../../api/api'
 import { activityStatus, page } from '../../../../constants/system'
 import formatLastOnlineAt from '../../../../utils/helpers/formatHelper'
@@ -24,6 +25,7 @@ function AccountSection({ data }) {
   const [status, setStatus] = useState('')
   const [image, setImage] = useState(undefined)
   const [isFavorite, setIsFavorite] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const myAccountId = useSelector((state) => state.auth.info.id)
 
   const navigate = useNavigate()
@@ -65,15 +67,18 @@ function AccountSection({ data }) {
   }
 
   const loadAccount = async (id) => {
-    api.account
-      .accountById({ id })
-      .then((result) => setAccount(result.data))
-      .catch()
+    setIsLoading(true)
 
-    api.account
-      .imageByAccountId({ id })
-      .then((result) => setImage(result.data.image || null))
-      .catch(() => setImage(null))
+    await Promise.all([
+      api.account.accountById({ id })
+        .then((result) => setAccount(result.data))
+        .catch(),
+      api.account.imageByAccountId({ id })
+        .then((result) => setImage(result.data.image || null))
+        .catch(() => setImage(null))
+    ])
+
+    setIsLoading(false)
   }
 
   useEffect(() => {
@@ -93,45 +98,51 @@ function AccountSection({ data }) {
       </div>
 
       <div className="section-content visible">
-        <div className="account-info">
-          <div className="image">
-            <Avatar className="img-wrapper" image={image} name={account.login} isLazy />
+        {isLoading ? (
+          <div className="account-loader">
+            <Loader2 />
           </div>
-
-          <div className="login">{account.login || ''}</div>
-
-          <div className="status">{status || ''}</div>
-
-          <div className="actions">
-            {!isMyAccount && (
-              <div className="direct" onClick={onCLickDirectHandler} role="presentation">
-                <SendIcon />
-              </div>
-            )}
-
-            {!isMyAccount && (
-              <div className="favorite" onClick={onCLickFavoriteHandler} role="presentation">
-                <FavoriteIcon isActive={isFavorite} />
-              </div>
-            )}
-          </div>
-
-          <div className="additional-info">
-            <div className="info-item">
-              <div className="icon">
-                <EmailIcon className='email-icon'/>
-              </div>
-              <p>{account.email || ''}</p>
+        ) : (
+          <div className="account-info">
+            <div className="image">
+              <Avatar className="img-wrapper" image={image} name={account.login} isLazy />
             </div>
 
-            <div className="info-item">
-              <div className="icon">
-                <ProfileIcon className='profile-icon'/>
+            <div className="login">{account.login || ''}</div>
+
+            <div className="status">{status || ''}</div>
+
+            <div className="actions">
+              {!isMyAccount && (
+                <div className="direct" onClick={onCLickDirectHandler} role="presentation">
+                  <SendIcon />
+                </div>
+              )}
+
+              {!isMyAccount && (
+                <div className="favorite" onClick={onCLickFavoriteHandler} role="presentation">
+                  <FavoriteIcon isActive={isFavorite} />
+                </div>
+              )}
+            </div>
+
+            <div className="additional-info">
+              <div className="info-item">
+                <div className="icon">
+                  <EmailIcon className='email-icon'/>
+                </div>
+                <p>{account.email || ''}</p>
               </div>
-              <p>{account.role?.toLowerCase() || ''}</p>
+
+              <div className="info-item">
+                <div className="icon">
+                  <ProfileIcon className='profile-icon'/>
+                </div>
+                <p>{account.role?.toLowerCase() || ''}</p>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   )
