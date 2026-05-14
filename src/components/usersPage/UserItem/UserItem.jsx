@@ -9,7 +9,7 @@ import Avatar from '../../common/Avatar/Avatar'
 import './UserItem.scss'
 
 function UserItem({ className = '', userInfo = null, loadUsers = null }) {
-  const { id, login, email, birthday, activityStatus: status, isBanned, image } = userInfo
+  const { id, login, email, birthday, activityStatus: status, isBanned, imageId } = userInfo
   const activityStatusClass = status.toLowerCase() === activityStatus.online ? 'online' : ''
   const bannedClass = isBanned ? 'yes' : ''
   const dropDownItems = [
@@ -33,7 +33,7 @@ function UserItem({ className = '', userInfo = null, loadUsers = null }) {
   return (
     <tr className={`c-user-item ${className}`}>
       <td className="image" aria-label={login}>
-        <Avatar image={image} name={login} />
+        <Avatar imageId={imageId} name={login} />
       </td>
       <td className="cell-id">{id}</td>
       <td className="email">{email}</td>
@@ -61,7 +61,7 @@ UserItem.propTypes = {
     login: PropTypes.string,
     email: PropTypes.string,
     role: PropTypes.string,
-    image: PropTypes.string,
+    imageId: PropTypes.string,
     birthday: PropTypes.string,
     activityStatus: PropTypes.string,
     isBanned: PropTypes.bool

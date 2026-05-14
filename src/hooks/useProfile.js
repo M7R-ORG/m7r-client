@@ -15,7 +15,7 @@ const useProfile = () => {
       })
 
       api.account.image().then((result) => {
-        dispatch(updateInfo({ image: result.data?.image }))
+        dispatch(updateInfo({ imageId: result.data?.imageId }))
       })
     } else {
       dispatch(

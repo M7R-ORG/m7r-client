@@ -10,7 +10,7 @@ import './SidebarProfile.scss'
 import { LogoutIcon, ProfileIcon, SettingsIcon } from '../../Icon/_exports'
 
 function SidebarProfile({ className = '', isExpand = false }) {
-  const { login, email, image } = useSelector((state) => state.user.info)
+  const { login, email, imageId } = useSelector((state) => state.user.info)
   const expandClass = isExpand ? 'expand' : ''
   const { logOut } = useAuth()
   const navigate = useNavigate()
@@ -43,7 +43,7 @@ function SidebarProfile({ className = '', isExpand = false }) {
   return (
     <div className={`c-sidebar-profile ${className} ${expandClass}`}>
       <div className="sidebar-profile-image">
-        <Avatar image={image} name={login} onClick={() => navigate(page.profile)} />
+        <Avatar imageId={imageId} name={login} onClick={() => navigate(page.profile)} />
       </div>
 
       <div className="sidebar-profile-info">

@@ -14,16 +14,15 @@ const accountApi = {
     return response
   },
 
-  uploadImage: async ({ image }) => {
-    const response = await axiosInstance.post(`${path}/upload-image`, { image })
+  uploadImage: async ({ fileId }) => {
+    const response = await axiosInstance.post(`${path}/upload-image`, { fileId })
     return response
   },
 
-  accounts: async ({ pageNumber, pageSize, isLoadImage, searchField }) => {
+  accounts: async ({ pageNumber, pageSize, searchField }) => {
     const params = [
       `pagination.pageNumber=${pageNumber || 0}`,
       `pagination.pageSize=${pageSize || 100}`,
-      `isLoadImage=${isLoadImage || false}`,
       `searchField=${searchField}`
     ]
 

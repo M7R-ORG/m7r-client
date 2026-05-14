@@ -18,8 +18,7 @@ function Users() {
 
       const { data, response } = await api.user.users({
         pageNumber,
-        pageSize,
-        isLoadImage: true
+        pageSize
       })
 
       if (response?.data?.clientMessage) {

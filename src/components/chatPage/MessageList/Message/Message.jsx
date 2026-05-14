@@ -6,10 +6,8 @@ import { DoubleTickIcon } from '../../../common/Icon/_exports'
 import { isImageAttachmentType } from '../../../../utils/helpers/attachmentTypeHelper'
 import './Message.scss'
 
-const getMediaAttachmentIds = (attachments) =>
-  attachments
-    .filter((attachment) => isImageAttachmentType(attachment.type))
-    .map((attachment) => attachment.id)
+const getMediaAttachments = (attachments) =>
+  attachments.filter((attachment) => isImageAttachmentType(attachment.type))
 
 function Message({ onClick = () => {}, className = '', message = null, observerRef = null, isMyMessage = false }) {
   const messageRef = useRef(null)
@@ -19,7 +17,7 @@ function Message({ onClick = () => {}, className = '', message = null, observerR
   const { id, text, attachments, isRead } = message
   const readClass = isRead ? 'read' : ''
 
-  const mediaAttachmentIds = getMediaAttachmentIds(attachments)
+  const mediaAttachments = getMediaAttachments(attachments)
 
   useEffect(() => {
     const currentObserver = observerRef.current
@@ -41,7 +39,7 @@ function Message({ onClick = () => {}, className = '', message = null, observerR
       <MediaViewerModal
         isActive={isActiveMediaViewer}
         setIsActive={setIsActiveMediaViewer}
-        attachmentIds={mediaAttachmentIds}
+        attachments={mediaAttachments}
         defaultActiveAttachmentId={defaultIdMediaViewer}
       />
 

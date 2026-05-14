@@ -16,7 +16,7 @@ function UserItem({
   setIsActive = () => {}
 }) {
   const navigate = useNavigate()
-  const { id, login, activityStatus: status, isBanned, image } = userInfo
+  const { id, login, activityStatus: status, isBanned, imageId } = userInfo
   const statusClass = status.toLowerCase() === activityStatus.online ? 'online' : ''
   const bannedClass = isBanned ? 'yes' : ''
 
@@ -53,7 +53,7 @@ function UserItem({
       </div>
 
       <div className="image">
-        <Avatar image={image} name={login} />
+        <Avatar imageId={imageId} name={login} />
       </div>
 
       <div className="user-info">
@@ -75,7 +75,7 @@ UserItem.propTypes = {
     login: PropTypes.string,
     email: PropTypes.string,
     role: PropTypes.string,
-    image: PropTypes.string,
+    imageId: PropTypes.string,
     activityStatus: PropTypes.string,
     lastOnlineAt: PropTypes.string,
     isBanned: PropTypes.bool

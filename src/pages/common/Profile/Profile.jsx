@@ -5,31 +5,28 @@ import Avatar from '../../../components/common/Avatar/Avatar'
 import {UploadIcon} from '../../../components/common/Icon/_exports'
 import api from '../../../api/api'
 import FileInput from '../../../components/chatPage/NewMessage/FileInput/FileInput'
-import { encodeToBase64 } from '../../../utils/helpers/encodingHelper'
 import { updateInfo } from '../../../redux/slices/userSlice'
 import Loader1 from '../../../components/common/Loader/Loader1/Loader1'
 import './Profile.scss'
 
 function Profile() {
-  const { login, email, image, birthday } = useSelector((state) => state.user.info)
+  const { login, email, imageId, birthday } = useSelector((state) => state.user.info)
   const dispatch = useDispatch()
   const fileInputRef = useRef(null)
   const [isLoading, setIsLoading] = useState(false)
 
   const uploadImageHandler = async (event) => {
     const [file] = event.target.files
-    const imgBase64 = await encodeToBase64(file).then((result) => result.split(',')[1])
 
     setIsLoading(true)
 
-    api.account
-      .uploadImage({ image: imgBase64 })
-      .then((result) => {
-        dispatch(updateInfo({ image: result.data?.image }))
-      })
-      .finally(() => {
-        setIsLoading(false)
-      })
+    try {
+      const { data: uploaded } = await api.filestorage.upload({ file })
+      const { data: saved } = await api.account.uploadImage({ fileId: uploaded.fileId })
+      dispatch(updateInfo({ imageId: saved?.imageId }))
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -54,7 +51,7 @@ function Profile() {
                 <UploadIcon className="update-icon" />
               </div>
 
-              <Avatar image={image} name={login} />
+              <Avatar imageId={imageId} name={login} />
             </>
           )}
         </div>

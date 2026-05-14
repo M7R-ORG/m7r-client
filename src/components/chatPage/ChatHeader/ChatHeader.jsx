@@ -30,7 +30,7 @@ function ChatHeader({ className = '', channel = null, isLoading, setSearchMessag
       ) : (
         <>
           <div className="image">
-            {channel && <Avatar image={channel.image} name={channel.name} isLazy />}
+            {channel && <Avatar imageId={channel.imageId} name={channel.name} isLazy />}
           </div>
 
           <div className="info">
@@ -65,7 +65,7 @@ ChatHeader.propTypes = {
   channel: PropTypes.shape({
     name: PropTypes.string,
     type: PropTypes.string,
-    image: PropTypes.string,
+    imageId: PropTypes.string,
     membersCount: PropTypes.number,
     userActivityStatus: PropTypes.string,
     userLastOnlineAt: PropTypes.string

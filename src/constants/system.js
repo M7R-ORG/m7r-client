@@ -44,7 +44,8 @@ const services = {
   accounts: 'accounts',
   chat: 'chat',
   notifications: 'notifications',
-  ai: 'ai'
+  ai: 'ai',
+  files: 'files'
 }
 
 const section = {

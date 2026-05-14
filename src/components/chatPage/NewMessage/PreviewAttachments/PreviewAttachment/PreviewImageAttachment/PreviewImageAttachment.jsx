@@ -1,13 +1,26 @@
 import PropTypes from 'prop-types'
+import { useEffect, useState } from 'react'
+import { getImageUrl } from '../../../../../../utils/helpers/filestorageHelper'
 import './PreviewImageAttachment.scss'
 
 function PreviewImageAttachment({ className = '', attachment }) {
-  const { type, content } = attachment
+  const { file, fileId } = attachment
+  const [localUrl, setLocalUrl] = useState(null)
+
+  useEffect(() => {
+    if (!file || fileId) return undefined
+
+    const url = URL.createObjectURL(file)
+    setLocalUrl(url)
+    return () => URL.revokeObjectURL(url)
+  }, [file, fileId])
+
+  const src = fileId ? getImageUrl(fileId) : localUrl
 
   return (
     <div className={`c-preview-image-attachment ${className}`}>
-      {content ? (
-        <img className="preview-file" src={`data:${type};base64,${content}`} alt="attachment" />
+      {src ? (
+        <img className="preview-file" src={src} alt="attachment" />
       ) : (
         <div className="preview-file" />
       )}
@@ -18,8 +31,8 @@ function PreviewImageAttachment({ className = '', attachment }) {
 PreviewImageAttachment.propTypes = {
   className: PropTypes.string,
   attachment: PropTypes.shape({
-    type: PropTypes.string,
-    content: PropTypes.string
+    file: PropTypes.instanceOf(File),
+    fileId: PropTypes.string
   })
 }
 

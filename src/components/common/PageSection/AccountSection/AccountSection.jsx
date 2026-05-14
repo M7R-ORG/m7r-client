@@ -23,7 +23,7 @@ function AccountSection({ data }) {
   const { accountSection } = usePageSection()
   const [account, setAccount] = useState({})
   const [status, setStatus] = useState('')
-  const [image, setImage] = useState(undefined)
+  const [imageId, setImage] = useState(undefined)
   const [isFavorite, setIsFavorite] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const myAccountId = useSelector((state) => state.auth.info.id)
@@ -74,7 +74,7 @@ function AccountSection({ data }) {
         .then((result) => setAccount(result.data))
         .catch(),
       api.account.imageByAccountId({ id })
-        .then((result) => setImage(result.data.image || null))
+        .then((result) => setImage(result.data.imageId || null))
         .catch(() => setImage(null))
     ])
 
@@ -104,8 +104,8 @@ function AccountSection({ data }) {
           </div>
         ) : (
           <div className="account-info">
-            <div className="image">
-              <Avatar className="img-wrapper" image={image} name={account.login} isLazy />
+            <div className="imageId">
+              <Avatar className="img-wrapper" imageId={imageId} name={account.login} isLazy />
             </div>
 
             <div className="login">{account.login || ''}</div>

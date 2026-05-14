@@ -1,18 +1,11 @@
 import PropTypes from 'prop-types'
-import Loader2 from '../../../../../common/Loader/Loader2/Loader2'
-import { FileIcon, RemoveIcon } from '../../../../../common/Icon/_exports'
-import { attachmentStatus } from '../../../../../../constants/chat'
+import { FileIcon } from '../../../../../common/Icon/_exports'
 import { formatBytes, getFileExtension } from '../../../../../../utils/helpers/commonHelper'
+import { getFileUrl } from '../../../../../../utils/helpers/filestorageHelper'
 import './FileAttachment.scss'
 
-const fileStatusElementMapper = {
-  [attachmentStatus.success]: <FileIcon className="file-icon file-downloader-icon" />,
-  [attachmentStatus.loading]: <Loader2 className="file-icon file-loader-icon" />,
-  [attachmentStatus.error]: <RemoveIcon className="file-icon file-error-icon" />
-}
-
-function FileAttachment({ className = '', attachment, status }) {
-  const { name, content, type, size } = attachment
+function FileAttachment({ className = '', attachment }) {
+  const { name, fileId, size } = attachment
 
   const fileExtension = getFileExtension(name)
   const formattedSize = formatBytes(size)
@@ -23,11 +16,11 @@ function FileAttachment({ className = '', attachment, status }) {
         <div className="file-downloader-container">
           <a
             className="download-file-icon-container"
-            href={`data:${type};base64, ${content}`}
+            href={getFileUrl(fileId)}
             download={name}
             aria-label={`Download ${name}`}
           >
-            {fileStatusElementMapper[status]}
+            <FileIcon className="file-icon file-downloader-icon" />
           </a>
         </div>
         <div className="file-info-container">
@@ -45,12 +38,10 @@ function FileAttachment({ className = '', attachment, status }) {
 FileAttachment.propTypes = {
   className: PropTypes.string,
   attachment: PropTypes.shape({
-    content: PropTypes.string,
-    type: PropTypes.string,
+    fileId: PropTypes.string,
     name: PropTypes.string,
     size: PropTypes.number
-  }),
-  status: PropTypes.string
+  })
 }
 
 export default FileAttachment
