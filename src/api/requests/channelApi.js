@@ -62,10 +62,12 @@ const channelApi = {
     return response
   },
 
-  memberImages: async ({ channelId }) => {
+  memberImages: async ({ channelId, signal }) => {
     const params = [`channelId=${channelId}`]
 
-    const response = await axiosInstance.get(`${path}/member-images?${params.join('&')}`)
+    const response = await axiosInstance.get(`${path}/member-images?${params.join('&')}`, {
+      signal
+    })
     return response
   }
 }
