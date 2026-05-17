@@ -6,6 +6,7 @@ import useRole from './useRole'
 import useSignalRHub from './useSignalRHub'
 import useProfile from './useProfile'
 import usePageSection from './usePageSection'
+import useImageUrl from './useImageUrl'
 
 export {
   useAuth,
@@ -15,5 +16,6 @@ export {
   useRole,
   useSignalRHub,
   useProfile,
-  usePageSection
+  usePageSection,
+  useImageUrl
 }

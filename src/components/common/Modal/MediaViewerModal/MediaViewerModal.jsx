@@ -2,7 +2,8 @@ import { useEffect, useState, useCallback, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { BaseModal } from '../../../_exports'
 import ArrowIcon from '../../Icon/ArrowIcon/ArrowIcon'
-import { getImageUrl, imageVariant } from '../../../../utils/helpers/filestorageHelper'
+import { useImageUrl } from '../../../../hooks/_exports'
+import { imageVariant } from '../../../../utils/helpers/filestorageHelper'
 import './MediaViewerModal.scss'
 
 const MIN_SCALE = 1
@@ -24,6 +25,7 @@ function MediaViewerModal({
   const imageRef = useRef(null)
 
   const currentAttachment = attachments[attachmentIndex]
+  const currentSrc = useImageUrl(currentAttachment?.fileId, imageVariant.original)
 
   const resetZoom = useCallback(() => {
     setScale(1)
@@ -121,11 +123,11 @@ function MediaViewerModal({
             onMouseDown={mouseDownHandler}
             role="presentation"
           >
-            {currentAttachment && (
+            {currentSrc && (
               <img
                 ref={imageRef}
                 className="image"
-                src={getImageUrl(currentAttachment.fileId, imageVariant.original)}
+                src={currentSrc}
                 alt="attachment"
                 style={{
                   transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
