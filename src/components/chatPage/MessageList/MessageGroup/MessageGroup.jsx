@@ -8,7 +8,7 @@ import './MessageGroup.scss'
 
 function MessageGroup({ className = '', group = null, observerRef = null }) {
   const { accountSection } = usePageSection()
-  const { authorId, authorLogin, image, createdAt, messages } = group
+  const { authorId, authorLogin, imageId, createdAt, messages } = group
   const userId = useSelector((state) => state.auth.info.id)
   const isMyGroup = +userId === +authorId
   const myGroupClass = isMyGroup ? 'my-group' : ''
@@ -22,7 +22,7 @@ function MessageGroup({ className = '', group = null, observerRef = null }) {
   return (
     <div className={`c-message-group ${className} ${myGroupClass}`}>
       <div className="author-img">
-        <Avatar image={image} name={authorLogin} onClick={imgClickHandler} isLazy />
+        <Avatar imageId={imageId} name={authorLogin} onClick={imgClickHandler} isLazy />
       </div>
 
       <div className="data-wrapper">
@@ -61,7 +61,7 @@ MessageGroup.propTypes = {
     authorId: PropTypes.number,
     authorLogin: PropTypes.string,
     createdAt: PropTypes.string,
-    image: PropTypes.string
+    imageId: PropTypes.string
   }),
   observerRef: PropTypes.shape({
     current: PropTypes.instanceOf(IntersectionObserver)

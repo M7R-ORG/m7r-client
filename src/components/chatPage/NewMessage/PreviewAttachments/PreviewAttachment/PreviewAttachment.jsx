@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import { useCallback, useEffect, useState } from 'react'
 import { chatMethod } from '../../../../../socket/hubHandlers'
+import api from '../../../../../api/api'
 import Loader1 from '../../../../common/Loader/Loader1/Loader1'
 import PreviewImageAttachment from './PreviewImageAttachment/PreviewImageAttachment'
 import PreviewFileAttachment from './PreviewFileAttachment/PreviewFileAttachment'
@@ -26,47 +27,53 @@ const attachmentTypeMapper = (attachment) => {
 
 function PreviewAttachment({ className = '', attachment, setAttachFiles }) {
   const isUploaded = attachment.id !== undefined
-  const [isLoaded, setIsLoaded] = useState(false)
-  const [adaptedAttachment, setAdaptedAttachment] = useState(attachment)
+  const [fileId, setFileId] = useState(attachment.fileId)
   const chatHub = useSelector((state) => state.signalR.chatHub)
+  const isPending = !fileId
 
   const removeFile = useCallback(
     (attachmentUId) => {
-      if (isLoaded) {
-        chatHub.connection
-          .invoke(chatMethod.removeFile, { uniqueId: attachmentUId })
-          .then(() => {
-            setAttachFiles((files) => files.filter((file) => file.uniqueId !== attachmentUId))
-          })
-          .catch()
-      }
+      if (isPending) return
+
+      chatHub.connection
+        .invoke(chatMethod.removeFile, { uniqueId: attachmentUId })
+        .then(() => {
+          if (fileId) {
+            api.filestorage.delete({ id: fileId }).catch()
+          }
+          setAttachFiles((files) => files.filter((file) => file.uniqueId !== attachmentUId))
+        })
+        .catch()
     },
-    [chatHub, setAttachFiles, isLoaded]
+    [chatHub, setAttachFiles, isPending, fileId]
   )
 
   useEffect(() => {
-    if (isUploaded) {
-      chatHub.connection
-        .invoke(chatMethod.loadFile, { attachmentId: attachment.id })
-        .then((result) => {
-          setAdaptedAttachment((prevAttachment) => ({
-            ...prevAttachment,
-            content: result.content
-          }))
-          setIsLoaded(true)
+    if (isUploaded) return
+
+    const { file } = attachment
+
+    api.filestorage
+      .upload({ file })
+      .then((result) => {
+        const uploadedFileId = result.data.fileId
+        setFileId(uploadedFileId)
+
+        return chatHub.connection.invoke(chatMethod.uploadFile, {
+          uniqueId: attachment.uniqueId,
+          fileId: uploadedFileId,
+          type: file.type,
+          name: file.name,
+          size: file.size,
+          channelId: attachment.channelId
         })
-        .catch(() => setIsLoaded(false))
-    } else {
-      chatHub.connection
-        .invoke(chatMethod.uploadFile, attachment)
-        .then(() => setIsLoaded(true))
-        .catch(() => setIsLoaded(false))
-    }
+      })
+      .catch(() => {})
   }, [chatHub, attachment, isUploaded])
 
   return (
     <div className={`c-preview-attachment ${className}`}>
-      {!isLoaded && <Loader1 className="img-loader" />}
+      {isPending && <Loader1 className="img-loader" />}
 
       <div
         className="remove-container"
@@ -76,7 +83,7 @@ function PreviewAttachment({ className = '', attachment, setAttachFiles }) {
         <RemoveIcon className="remove-icon" />
       </div>
 
-      {attachmentTypeMapper(adaptedAttachment)}
+      {attachmentTypeMapper({ ...attachment, fileId })}
     </div>
   )
 }
@@ -85,10 +92,13 @@ PreviewAttachment.propTypes = {
   className: PropTypes.string,
   attachment: PropTypes.shape({
     id: PropTypes.number,
-    content: PropTypes.string,
+    file: PropTypes.instanceOf(File),
+    fileId: PropTypes.string,
     uniqueId: PropTypes.string,
     type: PropTypes.string,
-    isLoaded: PropTypes.bool
+    name: PropTypes.string,
+    size: PropTypes.number,
+    channelId: PropTypes.number
   }),
   setAttachFiles: PropTypes.func
 }

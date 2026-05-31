@@ -8,12 +8,12 @@ const sectionMapper = (data) => ({
   [section.account]: <AccountSection data={data} />
 })
 
-function PageLayout({ page }) {
+function PageLayout({ children }) {
   const { type, isActive, data } = useSelector((state) => state.section.pageSection)
 
   return (
     <div className="page-layout">
-      <div className="page-wrapper">{page}</div>
+      <div className="page-wrapper">{children}</div>
 
       <div className={`page-section-wrapper ${isActive ? 'active' : ''}`}>
         {sectionMapper(data)[type]}
@@ -23,7 +23,7 @@ function PageLayout({ page }) {
 }
 
 PageLayout.propTypes = {
-  page: PropTypes.element.isRequired
+  children: PropTypes.node.isRequired
 }
 
 export default PageLayout

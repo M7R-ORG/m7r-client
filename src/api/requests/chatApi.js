@@ -11,7 +11,7 @@ const chatApi = {
     return response
   },
 
-  messages: async ({ channelId, pageNumber, pageSize, skip, searchField }) => {
+  messages: async ({ channelId, pageNumber, pageSize, skip, searchField, signal }) => {
     const params = [
       `channelId=${channelId}`,
       `searchField=${searchField || ''}`,
@@ -20,7 +20,7 @@ const chatApi = {
       `pagination.skip=${skip || 0}`
     ]
 
-    const response = await axiosInstance.get(`${path}/messages?${params.join('&')}`)
+    const response = await axiosInstance.get(`${path}/messages?${params.join('&')}`, { signal })
     return response
   }
 }

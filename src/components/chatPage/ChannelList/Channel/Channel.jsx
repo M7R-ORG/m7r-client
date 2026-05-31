@@ -7,7 +7,7 @@ import './Channel.scss'
 function Channel({ onClick = () => {}, isActive = false, className = '', data = null }) {
   const [counter, setCounter] = useState(0)
 
-  const { image, lastMessage, name, lastActivity, type, unreadMessagesCount } = data
+  const { imageId, lastMessage, name, lastActivity, unreadMessagesCount } = data
 
   const date = moment(lastActivity)
 
@@ -29,7 +29,7 @@ function Channel({ onClick = () => {}, isActive = false, className = '', data = 
       role="presentation"
     >
       <div className="channel-image">
-        <Avatar image={image} name={name} isLazy />
+        <Avatar imageId={imageId} name={name} isLazy />
       </div>
 
       <div className="channel-info">
@@ -67,7 +67,7 @@ Channel.propTypes = {
   onClick: PropTypes.func,
   className: PropTypes.string,
   data: PropTypes.shape({
-    image: PropTypes.string,
+    imageId: PropTypes.string,
     lastMessage: PropTypes.shape({
       author: PropTypes.string,
       content: PropTypes.string

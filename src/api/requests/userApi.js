@@ -21,11 +21,10 @@ const userApi = {
     return response
   },
 
-  users: async ({ pageNumber, pageSize, isLoadImage }) => {
+  users: async ({ pageNumber, pageSize }) => {
     const params = [
       `pagination.pageNumber=${pageNumber || 0}`,
-      `pagination.pageSize=${pageSize || 100}`,
-      `isLoadImage=${isLoadImage || false}`
+      `pagination.pageSize=${pageSize || 100}`
     ]
 
     const response = await axiosInstance.get(`${path}/users?${params.join('&')}`)

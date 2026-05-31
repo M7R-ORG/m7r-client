@@ -8,7 +8,6 @@ import {ImgIcon, FileIcon, VideoIcon, AttachmentIcon, SendIcon} from '../../comm
 import FileInput from './FileInput/FileInput'
 import Loader2 from '../../common/Loader/Loader2/Loader2'
 import PreviewAttachments from './PreviewAttachments/PreviewAttachments'
-import { encodeToBase64 } from '../../../utils/helpers/encodingHelper'
 import { acceptedFiles, acceptedImages, acceptedVideos } from './acceptedFiles'
 import './NewMessage.scss'
 
@@ -121,19 +120,17 @@ function NewMessage({ className = '', channelId = null }) {
       }
 
       const checkUniqFile = (file) =>
-        attachFiles.every((currentFile) => currentFile.name !== file.name)
+        attachFiles.every((existing) => existing.name !== file.name)
 
       Array.from(files)
         .filter((file) => checkUniqFile(file))
-        .forEach(async (file) => {
-          const dataBase64 = await encodeToBase64(file)
-
+        .forEach((file) => {
           setAttachFiles((prevFiles) => [
             ...prevFiles,
             {
+              file,
               name: file.name,
               size: file.size,
-              content: dataBase64.split(',')[1],
               type: file.type,
               uniqueId: uuid(),
               channelId

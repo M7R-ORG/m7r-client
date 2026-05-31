@@ -29,8 +29,7 @@ function CreateAIChannelStep2({ setIsActive }) {
       const { data, response } = await api.account.accounts({
         pageNumber,
         pageSize,
-        searchField,
-        isLoadImage: true
+        searchField
       })
 
       if (response?.data?.clientMessage) {

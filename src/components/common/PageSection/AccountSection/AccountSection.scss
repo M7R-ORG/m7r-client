@@ -64,6 +64,14 @@
         border-top: solid 1px var(--border-color);
         user-select: none;
 
+        .account-loader {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--common-color-0);
+        }
+
         .account-info {
             height: 100%;
             display: flex;
@@ -126,17 +134,32 @@
                     border: solid 1px var(--border-color);
                     border-radius: 10px;
                     background: var(--background-color);
+                    color: var(--common-color-0);
                     cursor: pointer;
                     transition: all 0.3s ease;
 
                     svg {
-                        fill: var(--common-color-0);
+                        width: 20px;
+                        height: 20px;
                     }
 
                     &:hover {
                         border-color: var(--common-color-0);
                         box-shadow: 0 2px 8px var(--brand-shadow-sm);
                     }
+                }
+
+                .favorite svg {
+                    fill: var(--common-color-0);
+                }
+
+                .direct svg path {
+                    stroke-width: 1.5;
+                    transition: fill 0.2s ease;
+                }
+
+                .direct:hover svg path {
+                    fill: var(--common-color-0);
                 }
             }
 

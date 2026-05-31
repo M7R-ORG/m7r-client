@@ -22,7 +22,7 @@ function groupMessages(messages, memberImages) {
         authorLogin: message.authorLogin,
         authorId: message.authorId,
         createdAt: message.createdAt,
-        image: memberImages.find((member) => member.id === message.authorId)?.image,
+        imageId: memberImages.find((member) => member.id === message.authorId)?.imageId,
         messages: [message],
         pageNumber: message.pageNumber
       })

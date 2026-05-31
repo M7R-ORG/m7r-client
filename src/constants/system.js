@@ -31,7 +31,8 @@ const page = {
   users: '/users',
   resetPassword: '/reset-password',
   initResetPassword: '/init-reset-password',
-  aiProfiles: '/ai-profiles'
+  aiProfiles: '/ai-profiles',
+  search: '/search'
 }
 
 const hub = {
@@ -44,11 +45,18 @@ const services = {
   accounts: 'accounts',
   chat: 'chat',
   notifications: 'notifications',
-  ai: 'ai'
+  ai: 'ai',
+  files: 'files'
 }
 
 const section = {
   account: 'account'
 }
 
-export { language, theme, role, page, hub, activityStatus, services, section }
+const searchFilter = {
+  all: 'all',
+  people: 'people',
+  channels: 'channels'
+}
+
+export { language, theme, role, page, hub, activityStatus, services, section, searchFilter }

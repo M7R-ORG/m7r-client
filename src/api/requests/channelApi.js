@@ -32,7 +32,7 @@ const channelApi = {
   },
 
   connect: async ({ channelId }) => {
-    const response = await axiosInstance.post(`${path}/connect`, {
+    const response = await axiosInstance.post(`${path}/join-channel`, {
       channelId
     })
     return response
@@ -50,6 +50,19 @@ const channelApi = {
     return response
   },
 
+  publicChannels: async ({ pageNumber, pageSize, searchField, signal }) => {
+    const params = [
+      `pagination.pageNumber=${pageNumber || 0}`,
+      `pagination.pageSize=${pageSize || 20}`,
+      `searchField=${searchField || ''}`
+    ]
+
+    const response = await axiosInstance.get(`${path}/public-channels?${params.join('&')}`, {
+      signal
+    })
+    return response
+  },
+
   accountChannel: async ({ id }) => {
     const response = await axiosInstance.get(`${path}/account-channels/${id}`)
     return response
@@ -62,10 +75,12 @@ const channelApi = {
     return response
   },
 
-  memberImages: async ({ channelId }) => {
+  memberImages: async ({ channelId, signal }) => {
     const params = [`channelId=${channelId}`]
 
-    const response = await axiosInstance.get(`${path}/member-images?${params.join('&')}`)
+    const response = await axiosInstance.get(`${path}/member-images?${params.join('&')}`, {
+      signal
+    })
     return response
   }
 }

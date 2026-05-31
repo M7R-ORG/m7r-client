@@ -98,12 +98,18 @@ function MessageList({ className = '', chatId = null, searchMessage = '' }) {
   }, [chatId, isListLoading])
 
   useEffect(() => {
-    api.channel.memberImages({ channelId: chatId }).then(({ data }) => {
-      setMemberImages(data?.memberImages || [])
+    const controller = new AbortController()
+
+    api.channel.memberImages({ channelId: chatId, signal: controller.signal }).then((res) => {
+      if (!controller.signal.aborted){
+        setMemberImages(res?.data?.memberImages || [])
+      }
     })
+
+    return () => controller.abort()
   }, [chatId])
 
-  const loadMessages = async ({ channelId, pageNumber, pageSize, skip, searchField }) => {
+  const loadMessages = async ({ channelId, pageNumber, pageSize, skip, searchField, signal }) => {
     if (!channelId) {
       return
     }
@@ -113,8 +119,13 @@ function MessageList({ className = '', chatId = null, searchMessage = '' }) {
       pageNumber,
       pageSize,
       skip,
-      searchField
+      searchField,
+      signal
     })
+
+    if (signal?.aborted) {
+      return
+    }
 
     if (response?.data?.clientMessage) {
       throw new Error(response.data.clientMessage)
@@ -144,7 +155,7 @@ function MessageList({ className = '', chatId = null, searchMessage = '' }) {
   }
 
   const refreshMessages = useCallback(
-    async (search) => {
+    async (search, signal) => {
       pageNumberRef.current = 0
       skipRef.current = 0
       try {
@@ -156,17 +167,22 @@ function MessageList({ className = '', chatId = null, searchMessage = '' }) {
           pageNumber: pageNumberRef.current,
           pageSize: defaultPageSize,
           searchField: search,
-          skip: skipRef.current
+          skip: skipRef.current,
+          signal
         })
       } finally {
-        setIsListLoading(false)
+        if (!signal?.aborted) {
+          setIsListLoading(false)
+        }
       }
     },
     [chatId]
   )
 
   useEffect(() => {
-    refreshMessages(debouncedSearchMessage)
+    const controller = new AbortController()
+    refreshMessages(debouncedSearchMessage, controller.signal)
+    return () => controller.abort()
   }, [debouncedSearchMessage, refreshMessages])
 
   const fetchMoreMessages = async () => {

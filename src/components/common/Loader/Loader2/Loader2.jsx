@@ -7,7 +7,7 @@ function Loader2({ className = '' }) {
       <svg
         width="24"
         height="24"
-        stroke="#fff  "
+        stroke="currentColor"
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
       >

@@ -1,10 +1,9 @@
-import { useSelector } from 'react-redux'
 import { useEffect, useState, useCallback, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { BaseModal } from '../../../_exports'
 import ArrowIcon from '../../Icon/ArrowIcon/ArrowIcon'
-import { chatMethod } from '../../../../socket/hubHandlers'
-import Loader2 from '../../Loader/Loader2/Loader2'
+import { useImageUrl } from '../../../../hooks/_exports'
+import { imageVariant } from '../../../../utils/helpers/filestorageHelper'
 import './MediaViewerModal.scss'
 
 const MIN_SCALE = 1
@@ -15,12 +14,10 @@ function MediaViewerModal({
   className = '',
   isActive = false,
   setIsActive = () => {},
-  attachmentIds = [],
+  attachments = [],
   defaultActiveAttachmentId
 }) {
-  const chatHub = useSelector((state) => state.signalR.chatHub)
   const [attachmentIndex, setAttachmentIndex] = useState(0)
-  const [attachments, setAttachments] = useState([])
   const [scale, setScale] = useState(1)
   const [position, setPosition] = useState({ x: 0, y: 0 })
   const [isDragging, setIsDragging] = useState(false)
@@ -28,6 +25,7 @@ function MediaViewerModal({
   const imageRef = useRef(null)
 
   const currentAttachment = attachments[attachmentIndex]
+  const currentSrc = useImageUrl(currentAttachment?.fileId, imageVariant.original)
 
   const resetZoom = useCallback(() => {
     setScale(1)
@@ -35,30 +33,12 @@ function MediaViewerModal({
   }, [])
 
   useEffect(() => {
-    setAttachments([])
     resetZoom()
   }, [isActive, resetZoom])
 
   useEffect(() => {
-    const index = attachmentIds.indexOf(defaultActiveAttachmentId)
-
-    setAttachmentIndex(index)
-  }, [defaultActiveAttachmentId, attachmentIds])
-
-  useEffect(() => {
-    if (isActive) {
-      attachmentIds.forEach((attachmentId) => {
-        chatHub.connection
-          .invoke(chatMethod.loadFile, { attachmentId })
-          .then((attachment) => {
-            setAttachments((prevAttachments) =>
-              [...prevAttachments, attachment].sort((prev, next) => prev.id - next.id)
-            )
-          })
-          .catch(() => {})
-      })
-    }
-  }, [chatHub, attachmentIds, isActive])
+    setAttachmentIndex(attachments.findIndex((a) => a.id === defaultActiveAttachmentId))
+  }, [defaultActiveAttachmentId, attachments])
 
   useEffect(() => {
     resetZoom()
@@ -143,11 +123,11 @@ function MediaViewerModal({
             onMouseDown={mouseDownHandler}
             role="presentation"
           >
-            {currentAttachment ? (
+            {currentSrc && (
               <img
                 ref={imageRef}
                 className="image"
-                src={`data:${currentAttachment.type};base64, ${currentAttachment.content}`}
+                src={currentSrc}
                 alt="attachment"
                 style={{
                   transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
@@ -155,8 +135,6 @@ function MediaViewerModal({
                 }}
                 draggable={false}
               />
-            ) : (
-              <Loader2 className="media-loader" />
             )}
           </div>
 
@@ -173,7 +151,12 @@ MediaViewerModal.propTypes = {
   className: PropTypes.string,
   isActive: PropTypes.bool,
   setIsActive: PropTypes.func,
-  attachmentIds: PropTypes.arrayOf(PropTypes.number),
+  attachments: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      fileId: PropTypes.string
+    })
+  ),
   defaultActiveAttachmentId: PropTypes.number
 }
 
