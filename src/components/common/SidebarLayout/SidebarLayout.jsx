@@ -1,19 +1,17 @@
-import PropTypes from 'prop-types'
+import { Outlet } from 'react-router-dom'
 import Sidebar from '../Sidebar/Sidebar'
 import PageLayout from '../../pageLayout/PageLayout'
 import './SidebarLayout.scss'
 
-function SidebarLayout({ page }) {
+function SidebarLayout() {
   return (
     <div className="c-sidebar-layout">
       <Sidebar />
-      <PageLayout page={page} />
+      <PageLayout>
+        <Outlet />
+      </PageLayout>
     </div>
   )
-}
-
-SidebarLayout.propTypes = {
-  page: PropTypes.element.isRequired
 }
 
 export default SidebarLayout

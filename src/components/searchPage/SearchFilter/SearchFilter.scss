@@ -1,0 +1,33 @@
+.c-search-filter {
+  display: inline-flex;
+  align-items: stretch;
+  gap: 4px;
+  padding: 4px;
+  border: solid 1px var(--border-color);
+  border-radius: 12px;
+  background: var(--background-color-1);
+
+  .filter-tab {
+    min-width: 84px;
+    padding: 6px 14px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--placeholder-color);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+
+    &:hover {
+      color: var(--font-color-primary-1);
+    }
+
+    &.active {
+      background: var(--background-color);
+      color: var(--common-color-0);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    }
+  }
+}

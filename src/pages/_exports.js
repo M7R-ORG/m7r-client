@@ -17,6 +17,7 @@ import Home from './common/Home/Home'
 import Profile from './common/Profile/Profile'
 import AIProfiles from './common/AIProfiles/AIProfiles'
 import Settings from './common/Settings/Settings'
+import Search from './common/Search/Search'
 import Error from './common/Error/Error'
 
 export {
@@ -30,6 +31,7 @@ export {
   Home,
   AIProfiles,
   Settings,
+  Search,
   Error,
   ConfirmedRegistration
 }

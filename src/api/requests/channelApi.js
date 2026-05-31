@@ -32,7 +32,7 @@ const channelApi = {
   },
 
   connect: async ({ channelId }) => {
-    const response = await axiosInstance.post(`${path}/connect`, {
+    const response = await axiosInstance.post(`${path}/join-channel`, {
       channelId
     })
     return response
@@ -47,6 +47,19 @@ const channelApi = {
     ]
 
     const response = await axiosInstance.get(`${path}/account-channels?${params.join('&')}`)
+    return response
+  },
+
+  publicChannels: async ({ pageNumber, pageSize, searchField, signal }) => {
+    const params = [
+      `pagination.pageNumber=${pageNumber || 0}`,
+      `pagination.pageSize=${pageSize || 20}`,
+      `searchField=${searchField || ''}`
+    ]
+
+    const response = await axiosInstance.get(`${path}/public-channels?${params.join('&')}`, {
+      signal
+    })
     return response
   },
 

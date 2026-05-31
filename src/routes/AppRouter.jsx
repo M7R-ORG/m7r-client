@@ -12,7 +12,8 @@ import {
   ResetPassword,
   InitResetPassword,
   AIProfiles,
-  Settings
+  Settings,
+  Search
 } from '../pages/_exports'
 import { RoutePermissionGuard, SidebarLayout } from '../components/_exports'
 
@@ -27,18 +28,21 @@ function LoggedRouter() {
     <Routes>
       <Route path="*" element={<Navigate to={page.chat} />} />
 
-      <Route element={<RoutePermissionGuard permittedRoles={[role.admin]} />}>
-        <Route path="users" element={<SidebarLayout page={<Users />} />} />
-      </Route>
+      <Route element={<SidebarLayout />}>
+        <Route element={<RoutePermissionGuard permittedRoles={[role.admin]} />}>
+          <Route path="users" element={<Users />} />
+        </Route>
 
-      <Route
-        element={<RoutePermissionGuard permittedRoles={[role.user, role.admin, role.aiBot]} />}
-      >
-        <Route path="home" element={<SidebarLayout page={<Home />} />} />
-        <Route path="chat/:id?" element={<SidebarLayout page={<Chat />} />} />
-        <Route path="ai-profiles" element={<SidebarLayout page={<AIProfiles />} />} />
-        <Route path="profile" element={<SidebarLayout page={<Profile />} />} />
-        <Route path="settings" element={<SidebarLayout page={<Settings />} />} />
+        <Route
+          element={<RoutePermissionGuard permittedRoles={[role.user, role.admin, role.aiBot]} />}
+        >
+          <Route path="home" element={<Home />} />
+          <Route path="chat/:id?" element={<Chat />} />
+          <Route path="ai-profiles" element={<AIProfiles />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="settings" element={<Settings />} />
+          <Route path="search" element={<Search />} />
+        </Route>
       </Route>
     </Routes>
   )

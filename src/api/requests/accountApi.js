@@ -19,14 +19,14 @@ const accountApi = {
     return response
   },
 
-  accounts: async ({ pageNumber, pageSize, searchField }) => {
+  accounts: async ({ pageNumber, pageSize, searchField, signal }) => {
     const params = [
       `pagination.pageNumber=${pageNumber || 0}`,
       `pagination.pageSize=${pageSize || 100}`,
       `searchField=${searchField}`
     ]
 
-    const response = await axiosInstance.get(`${path}/accounts?${params.join('&')}`)
+    const response = await axiosInstance.get(`${path}/accounts?${params.join('&')}`, { signal })
     return response
   },
 
