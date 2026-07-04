@@ -5,6 +5,7 @@ import api from '../../../api/api'
 import { page } from '../../../constants/system'
 import { Brand, FormButton, Logo, NavLink, FormInput } from '../../../components/_exports'
 import ThemeToggle from '../../../components/common/ThemeToggle/ThemeToggle'
+import getValidationErrorMessage from '../../../utils/helpers/errorHelper'
 import './Login.scss'
 
 const defaultClientMessage = 'Enter your login details'
@@ -33,7 +34,7 @@ function Login() {
       const { data, response } = await api.auth.login({ email, password })
 
       if (response?.data?.errors) {
-        throw new Error('Validation error')
+        throw new Error(getValidationErrorMessage(response.data.errors))
       }
 
       if (response?.data?.clientMessage) {

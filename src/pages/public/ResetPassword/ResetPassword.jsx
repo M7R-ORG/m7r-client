@@ -6,6 +6,7 @@ import { page } from '../../../constants/system'
 import api from '../../../api/api'
 import cPasswordValidator from '../../../utils/validators/cPasswordValidator'
 import passwordValidator from '../../../utils/validators/passwordValidator'
+import getValidationErrorMessage from '../../../utils/helpers/errorHelper'
 import RedirectModal from '../../../components/common/Modal/RedirectModal/RedirectModal'
 import './ResetPassword.scss'
 
@@ -42,7 +43,7 @@ function ResetPassword() {
       })
 
       if (response?.data?.errors) {
-        throw new Error('Validation error')
+        throw new Error(getValidationErrorMessage(response.data.errors))
       }
 
       if (response?.data?.clientMessage) {
