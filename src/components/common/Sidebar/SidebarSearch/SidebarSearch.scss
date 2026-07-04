@@ -22,6 +22,7 @@
     cursor: pointer;
     display: grid;
     place-items: center;
+    transition: flex-basis 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
     .search-icon {
       height: 100%;
@@ -44,7 +45,7 @@
     place-items: center;
     max-width: 0;
     overflow-x: hidden;
-    transition: all 0.35s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
     input {
       outline: none;
