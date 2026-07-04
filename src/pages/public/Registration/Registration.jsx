@@ -7,6 +7,7 @@ import { Step1, Step2, Step3, Step4 } from '../../../components/registrationPage
 import { ArrowIcon, StatusIcon } from '../../../components/common/Icon/_exports'
 import ThemeToggle from '../../../components/common/ThemeToggle/ThemeToggle'
 import RegistrationSidebar from '../../../components/registrationPage/RegistrationSidebar/RegistrationSidebar'
+import getValidationErrorMessage from '../../../utils/helpers/errorHelper'
 import './Registration.scss'
 
 function Registration() {
@@ -57,7 +58,7 @@ function Registration() {
       })
 
       if (response?.data?.errors) {
-        throw new Error('Validation error')
+        throw new Error(getValidationErrorMessage(response.data.errors))
       }
 
       if (response?.data?.clientMessage) {

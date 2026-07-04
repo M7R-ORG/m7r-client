@@ -1,4 +1,8 @@
 .c-sidebar-expander {
   display: grid;
   place-items: center;
+
+  svg {
+    transition: transform 0.3s ease;
+  }
 }

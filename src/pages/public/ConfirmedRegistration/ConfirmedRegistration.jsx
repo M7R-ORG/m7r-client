@@ -7,6 +7,7 @@ import ThemeToggle from '../../../components/common/ThemeToggle/ThemeToggle'
 import { page } from '../../../constants/system'
 import api from '../../../api/api'
 import { useAuth } from '../../../hooks/_exports'
+import getValidationErrorMessage from '../../../utils/helpers/errorHelper'
 import './ConfirmedRegistration.scss'
 
 function ConfirmedRegistration() {
@@ -31,7 +32,7 @@ function ConfirmedRegistration() {
       const { data, response } = await api.user.confirmation({ confirmation: code })
 
       if (response?.data?.errors) {
-        throw new Error('Validation error')
+        throw new Error(getValidationErrorMessage(response.data.errors))
       }
 
       if (response?.data?.clientMessage) {
