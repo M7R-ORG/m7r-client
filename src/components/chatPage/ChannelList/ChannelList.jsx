@@ -22,7 +22,7 @@ const defaultPageSize = 15
 
 function ChannelList({ className = '', selectedChannelId = null }) {
   const navigate = useNavigate()
-  const [isListLoading, setIsListLoading] = useState(false)
+  const [isListLoading, setIsListLoading] = useState(true)
   const [isScrollLoading, setIsScrollLoading] = useState(false)
   const [channels, setChannels] = useState([])
   const [pagesCount, setPagesCount] = useState(0)
