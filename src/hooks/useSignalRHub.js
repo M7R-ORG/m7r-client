@@ -4,14 +4,16 @@ import signalR from '../socket/signalR'
 
 const useSignalRHub = (hubName, action) => {
   const dispatch = useDispatch()
-  const isLogged = useSelector((state) => state.auth.info.isLogged)
+  const { isLogged, accessTokenExp } = useSelector((state) => state.auth.info)
   const connectionRef = useRef(signalR[hubName])
   const [isConnected, setIsConnected] = useState(false)
+
+  const isTokenValid = accessTokenExp > Date.now()
 
   useEffect(() => {
     const connection = connectionRef.current
 
-    if (isLogged) {
+    if (isLogged && isTokenValid) {
       connection
         .start()
         .then(() => {
@@ -26,7 +28,7 @@ const useSignalRHub = (hubName, action) => {
       connection.stop()
       setIsConnected(false)
     }
-  }, [isLogged, hubName])
+  }, [isLogged, isTokenValid, hubName])
 
   useEffect(() => {
     dispatch(
