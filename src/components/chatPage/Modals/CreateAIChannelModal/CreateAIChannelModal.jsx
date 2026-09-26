@@ -10,6 +10,7 @@ import CreateAIChannelStep2 from './SecondStep/CreateAIChannelStep2'
 import api from '../../../../api/api'
 import channelNameValidator from '../../../../utils/validators/channelNameValidator'
 import Selector from '../../../common/Selector/Selector/Selector'
+import { keyboardKey } from '../../../../constants/system'
 import './CreateAIChannelModal.scss'
 
 const createChannelMapper = {
@@ -104,7 +105,7 @@ function CreateAIChannelModal({
   }
 
   const submitKeyDownHandler = (event) => {
-    if (event.key === 'Enter' && !isCreateChannelLoading) {
+    if (event.key === keyboardKey.enter && !isCreateChannelLoading) {
       nextStepHandler()
     }
   }

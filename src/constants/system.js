@@ -40,6 +40,16 @@ const hub = {
   state: 'state'
 }
 
+const keyboardKey = {
+  enter: 'Enter',
+  escape: 'Escape',
+  alt: 'Alt',
+  b: 'b',
+  bUpper: 'B',
+  q: 'q',
+  qUpper: 'Q'
+}
+
 const services = {
   auth: 'auth',
   chat: 'chat',
@@ -58,4 +68,15 @@ const searchFilter = {
   channels: 'channels'
 }
 
-export { language, theme, role, page, hub, activityStatus, services, section, searchFilter }
+export {
+  language,
+  theme,
+  role,
+  page,
+  hub,
+  activityStatus,
+  keyboardKey,
+  services,
+  section,
+  searchFilter
+}

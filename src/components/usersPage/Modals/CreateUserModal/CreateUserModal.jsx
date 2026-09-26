@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { BaseModal, Brand, FormButton, FormInput } from '../../../_exports'
 import api from '../../../../api/api'
+import { keyboardKey } from '../../../../constants/system'
 import './CreateUserModal.scss'
 
 const toUserData = (user) => ({
@@ -62,7 +63,7 @@ function CreateUserModal({ className = '', isActive = false, setIsActive, refres
   }
 
   const submitKeyDownHandler = (event) => {
-    if (event.key === 'Enter' && !isLoading) {
+    if (event.key === keyboardKey.enter && !isLoading) {
       submitHandler()
     }
   }

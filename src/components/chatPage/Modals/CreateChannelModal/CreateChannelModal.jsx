@@ -10,6 +10,7 @@ import ValidIcon from '../../../common/Input/FormInput/ValidIcon/ValidIcon'
 import channelNameValidator from '../../../../utils/validators/channelNameValidator'
 import Loader1 from '../../../common/Loader/Loader1/Loader1'
 import ChannelTypeSwitcher from './ChannelTypeSwitcher/ChannelTypeSwitcher'
+import { keyboardKey } from '../../../../constants/system'
 import './CreateChannelModal.scss'
 
 const defaultPageSize = 10
@@ -139,7 +140,7 @@ function CreateChannelModal({
   }, [isActive])
 
   const submitKeyDownHandler = (event) => {
-    if (event.key === 'Enter' && !isCreateChannelLoading) {
+    if (event.key === keyboardKey.enter && !isCreateChannelLoading) {
       createChannelHandler()
     }
   }

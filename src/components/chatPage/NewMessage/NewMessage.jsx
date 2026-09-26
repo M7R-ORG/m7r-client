@@ -9,6 +9,7 @@ import FileInput from './FileInput/FileInput'
 import Loader2 from '../../common/Loader/Loader2/Loader2'
 import PreviewAttachments from './PreviewAttachments/PreviewAttachments'
 import { acceptedFiles, acceptedImages, acceptedVideos } from './acceptedFiles'
+import { keyboardKey } from '../../../constants/system'
 import './NewMessage.scss'
 
 const maxSizeFiles = 10000000
@@ -52,7 +53,7 @@ function NewMessage({ className = '', channelId = null }) {
   }
 
   const onKeyDownHandler = (event) => {
-    if (event.key === 'Enter' && !event.shiftKey && !isSending) {
+    if (event.key === keyboardKey.enter && !event.shiftKey && !isSending) {
       event.preventDefault()
       sendMessageHandler()
     }

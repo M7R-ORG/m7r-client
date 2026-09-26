@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useAuth } from '../../../hooks/_exports'
 import api from '../../../api/api'
-import { page } from '../../../constants/system'
+import { page, keyboardKey } from '../../../constants/system'
 import { Brand, FormButton, Logo, NavLink, FormInput } from '../../../components/_exports'
 import ThemeToggle from '../../../components/common/ThemeToggle/ThemeToggle'
 import getValidationErrorMessage from '../../../utils/helpers/errorHelper'
@@ -59,7 +59,7 @@ function Login() {
   }
 
   const submitKeyDownHandler = (event) => {
-    if (event.key === 'Enter' && !isLoading) {
+    if (event.key === keyboardKey.enter && !isLoading) {
       loginHandler()
     }
   }

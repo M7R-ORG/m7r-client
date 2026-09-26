@@ -1,6 +1,6 @@
 import { useCallback, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { searchFilter } from '../../../constants/system'
+import { searchFilter, keyboardKey } from '../../../constants/system'
 import { useDebounce } from '../../../hooks/_exports'
 import {
   useSearchQueryParams,
@@ -63,7 +63,7 @@ function Search() {
   })
 
   const onSearchKeyDown = (event) => {
-    if (event.key !== 'Escape') {
+    if (event.key !== keyboardKey.escape) {
       return
     }
     if (query) {

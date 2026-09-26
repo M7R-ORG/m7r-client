@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Brand, FormButton, FormInput, Logo, NavLink } from '../../../components/_exports'
 import ThemeToggle from '../../../components/common/ThemeToggle/ThemeToggle'
-import { page } from '../../../constants/system'
+import { page, keyboardKey } from '../../../constants/system'
 import api from '../../../api/api'
 import emailValidator from '../../../utils/validators/emailValidator'
 import './InitResetPassword.scss'
@@ -72,7 +72,7 @@ function InitResetPassword() {
   }
 
   const submitKeyDownHandler = (event) => {
-    if (event.key === 'Enter' && !isLoading) {
+    if (event.key === keyboardKey.enter && !isLoading) {
       initResetPasswordHandler()
     }
   }

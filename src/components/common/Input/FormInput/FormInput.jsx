@@ -4,6 +4,7 @@ import ShowIcon from './ShowIcon/ShowIcon'
 import HideIcon from './HideIcon/HideIcon'
 import ToolTip1 from '../../ToolTip/ToolTip1/ToolTip1'
 import ValidIcon from './ValidIcon/ValidIcon'
+import { keyboardKey } from '../../../../constants/system'
 import './FormInput.scss'
 
 function FormInput({
@@ -46,13 +47,13 @@ function FormInput({
   }
 
   const toggleKeyDownHandler = (event) => {
-    if (event.key === 'Alt') {
+    if (event.key === keyboardKey.alt) {
       setIsVisiblePassword(true)
     }
   }
 
   const toggleKeyUpHandler = (event) => {
-    if (event.key === 'Alt') {
+    if (event.key === keyboardKey.alt) {
       setIsVisiblePassword(false)
     }
   }

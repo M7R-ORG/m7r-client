@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { CSSTransition } from 'react-transition-group'
+import { keyboardKey } from '../../../../constants/system'
 import './BaseModal.scss'
 
 function BaseModal({
@@ -26,7 +27,7 @@ function BaseModal({
 
     if (isActive) {
       keyDownHandler = (event) => {
-        if (event.key === 'Escape') {
+        if (event.key === keyboardKey.escape) {
           setIsActive(false)
         }
       }
