@@ -31,6 +31,21 @@ const userApi = {
     return response
   },
 
+  createUser: async ({ email, login, password, birthday }) => {
+    const response = await axiosInstance.post(`${path}/users`, { email, login, password, birthday })
+    return response
+  },
+
+  updateUser: async ({ id, email, login, password, birthday }) => {
+    const response = await axiosInstance.put(`${path}/users/${id}`, {
+      email,
+      login,
+      password,
+      birthday
+    })
+    return response
+  },
+
   blockUser: async ({ id }) => {
     const response = await axiosInstance.post(`${path}/block-user`, { id })
     return response
