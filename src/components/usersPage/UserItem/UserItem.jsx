@@ -6,14 +6,20 @@ import api from '../../../api/api'
 import UnblockIcon from '../../common/Icon/UnblockIcon/UnblockIcon'
 import BlockIcon from '../../common/Icon/BlockIcon/BlockIcon'
 import Avatar from '../../common/Avatar/Avatar'
+import { EditIcon } from '../../common/Icon/_exports'
 import StatusBadge from './StatusBadge/StatusBadge'
 import './UserItem.scss'
 
-function UserItem({ className = '', userInfo = null, loadUsers = null }) {
+function UserItem({ className = '', userInfo = null, loadUsers = null, openUpdateModal = null }) {
   const { id, login, email, birthday, activityStatus: status, isBanned, imageId } = userInfo
   const isOnline = status.toLowerCase() === activityStatus.online
   const bannedClass = isBanned ? 'yes' : ''
   const dropDownItems = [
+    {
+      icon: <EditIcon className="dropdown-icon" />,
+      title: 'Edit',
+      onClick: () => openUpdateModal(userInfo)
+    },
     isBanned
       ? {
           icon: <UnblockIcon className="dropdown-icon" />,
@@ -67,7 +73,8 @@ UserItem.propTypes = {
     activityStatus: PropTypes.string,
     isBanned: PropTypes.bool
   }),
-  loadUsers: PropTypes.func
+  loadUsers: PropTypes.func,
+  openUpdateModal: PropTypes.func
 }
 
 export default UserItem

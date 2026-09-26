@@ -2,6 +2,8 @@ import { useCallback, useEffect, useState } from 'react'
 import api from '../../../api/api'
 import { UserItem, PageHeader, Pagination } from '../../../components/_exports'
 import Loader1 from '../../../components/common/Loader/Loader1/Loader1'
+import { CreateIcon1 } from '../../../components/common/Icon/_exports'
+import CreateUserModal from '../../../components/usersPage/Modals/CreateUserModal/CreateUserModal'
 import './Users.scss'
 
 const pageSize = 15
@@ -11,6 +13,8 @@ function Users() {
   const [users, setUsers] = useState([])
   const [pageNumber, setPageNumber] = useState(0)
   const [pagesCount, setPagesCount] = useState(0)
+  const [isActiveCreateUserModal, setIsActiveCreateUserModal] = useState(false)
+  const [editableUser, setEditableUser] = useState(null)
 
   const loadUsers = useCallback(async () => {
     try {
@@ -54,9 +58,35 @@ function Users() {
     }
   }
 
+  const openUpdateModal = (user) => {
+    setEditableUser(user)
+    setIsActiveCreateUserModal(true)
+  }
+
+  useEffect(() => {
+    if (!isActiveCreateUserModal) {
+      setEditableUser(null)
+    }
+  }, [isActiveCreateUserModal])
+
   return (
     <div className="p-users">
-      <PageHeader className="users-header" text="Users" />
+      <CreateUserModal
+        isActive={isActiveCreateUserModal}
+        setIsActive={setIsActiveCreateUserModal}
+        refreshUsers={loadUsers}
+        user={editableUser}
+      />
+
+      <PageHeader className="users-header" text="Users">
+        <div
+          className="header-item new-user-item"
+          onClick={() => setIsActiveCreateUserModal(true)}
+          role="presentation"
+        >
+          <CreateIcon1 />
+        </div>
+      </PageHeader>
 
       <div className="users-content">
         {isLoading ? (
@@ -82,7 +112,12 @@ function Users() {
 
             <tbody className="table-body">
               {users.map((user) => (
-                <UserItem key={user.id} userInfo={user} loadUsers={loadUsers} />
+                <UserItem
+                  key={user.id}
+                  userInfo={user}
+                  loadUsers={loadUsers}
+                  openUpdateModal={openUpdateModal}
+                />
               ))}
             </tbody>
           </table>
