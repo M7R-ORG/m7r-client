@@ -36,10 +36,19 @@
       align-items: stretch;
       border-radius: 25px;
       box-shadow: 0px 0 10px 6px var(--shadow-color);
-      padding: 48px 15px 27px;
+      padding: 36px 15px 27px;
+
+      &.error {
+        animation: login-panel-shake 0.42s ease;
+
+        .client-message {
+          color: var(--error-color);
+          font-weight: 500;
+        }
+      }
 
       .logo-wrapper {
-        flex: 0 0 80px;
+        flex: 0 0 100px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -118,5 +127,34 @@
         }
       }
     }
+  }
+}
+
+@keyframes login-panel-shake {
+  0%,
+  100% {
+    transform: none;
+  }
+
+  20% {
+    transform: translateX(-7px);
+  }
+
+  40% {
+    transform: translateX(6px);
+  }
+
+  60% {
+    transform: translateX(-4px);
+  }
+
+  80% {
+    transform: translateX(3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .p-login .login-content .login-panel.error {
+    animation: none;
   }
 }

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { Brand, FormButton, FormInput, Logo, NavLink } from '../../../components/_exports'
 import ThemeToggle from '../../../components/common/ThemeToggle/ThemeToggle'
-import { page } from '../../../constants/system'
+import { page, keyboardKey } from '../../../constants/system'
 import api from '../../../api/api'
 import cPasswordValidator from '../../../utils/validators/cPasswordValidator'
 import passwordValidator from '../../../utils/validators/passwordValidator'
@@ -67,7 +67,7 @@ function ResetPassword() {
   }
 
   const submitKeyDownHandler = (event) => {
-    if (event.key === 'Enter' && !isLoading) {
+    if (event.key === keyboardKey.enter && !isLoading) {
       resetPasswordHandler()
     }
   }

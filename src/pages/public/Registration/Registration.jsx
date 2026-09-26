@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { useEffect, useState } from 'react'
 import api from '../../../api/api'
-import { page } from '../../../constants/system'
+import { page, keyboardKey } from '../../../constants/system'
 import { Brand, FormButton, FormDesc, FormTitle, Logo, NavLink } from '../../../components/_exports'
 import { Step1, Step2, Step3, Step4 } from '../../../components/registrationPage/Steps/_exports'
 import { ArrowIcon, StatusIcon } from '../../../components/common/Icon/_exports'
@@ -111,7 +111,7 @@ function Registration() {
   }
 
   const keyDownHandler = async (event) => {
-    if (event.key === 'Enter' && isActiveBtn && !isLoading) {
+    if (event.key === keyboardKey.enter && isActiveBtn && !isLoading) {
       await nextStepHandler()
     }
   }

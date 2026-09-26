@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { page, role } from '../../../constants/system'
+import { page, role, keyboardKey } from '../../../constants/system'
 import { useKeyDown } from '../../../hooks/_exports'
 import SidebarItem from './SidebarItem/SidebarItem'
 import SidebarHeader from './SidebarHeader/SidebarHeader'
@@ -28,7 +28,7 @@ function Sidebar() {
         setExpand((isExpand) => !isExpand)
       }
     },
-    ['B', 'b']
+    [keyboardKey.bUpper, keyboardKey.b]
   )
 
   return (

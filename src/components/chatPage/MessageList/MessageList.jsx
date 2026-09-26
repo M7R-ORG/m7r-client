@@ -13,6 +13,7 @@ import groupMessages from './helpers/groupMessages'
 import MessagesScrollToEnd from './MessagesScrollToEnd/MessagesScrollToEnd'
 import useMessagesReceiver from './hooks/useMessagesReceiver'
 import useReadMessagesReceiver from './hooks/useReadMessagesReceiver'
+import { keyboardKey } from '../../../constants/system'
 import './MessageList.scss'
 
 const defaultPageSize = 30
@@ -224,7 +225,7 @@ function MessageList({ className = '', chatId = null, searchMessage = '' }) {
         scrollToEnd(messageListRef.current, true)
       }
     },
-    ['Q', 'q']
+    [keyboardKey.qUpper, keyboardKey.q]
   )
 
   const isEmpty = !isListLoading && messages.length === 0

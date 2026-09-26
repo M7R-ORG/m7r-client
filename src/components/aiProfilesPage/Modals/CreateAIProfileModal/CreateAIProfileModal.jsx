@@ -5,6 +5,7 @@ import api from '../../../../api/api'
 import GroupedSelector from '../../../common/Selector/GroupedSelector/GroupedSelector'
 import { aiModel, aiModelItems } from '../../../../constants/ai'
 import TextArea from '../../../common/TextArea/TextArea'
+import { keyboardKey } from '../../../../constants/system'
 import './CreateAIProfileModal.scss'
 
 function checkProfileData(profileInfo) {
@@ -57,7 +58,7 @@ function CreateAIProfileModal({
   }
 
   const submitKeyDownHandler = (event) => {
-    if (event.key === 'Enter' && !isCreateProfileLoading) {
+    if (event.key === keyboardKey.enter && !isCreateProfileLoading) {
       createProfileHandler()
     }
   }
