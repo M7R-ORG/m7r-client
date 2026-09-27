@@ -12,7 +12,7 @@
     align-items: center;
     gap: 12px;
     border: solid 1px var(--border-color);
-    border-radius: 22px;
+    border-radius: 14px;
     background: var(--background-color);
     color: inherit;
     font-family: 'Montserrat', sans-serif;
@@ -50,7 +50,7 @@
     flex-direction: column;
     gap: 2px;
     border: solid 1px var(--border-color);
-    border-radius: 16px;
+    border-radius: 14px;
     background: var(--background-color);
     box-shadow: 0 8px 24px var(--shadow-color);
 
@@ -61,7 +61,7 @@
       justify-content: space-between;
       align-items: center;
       border: none;
-      border-radius: 12px;
+      border-radius: 10px;
       background: transparent;
       color: inherit;
       font-family: 'Montserrat', sans-serif;
