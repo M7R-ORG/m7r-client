@@ -14,6 +14,13 @@
   --font-color-primary-1: #{$black};        // primary text
   --font-color-primary-2: #{$white};        // inverse text
 
+  --on-brand-color:       #{$white};
+  --error-background:     #{$error-a14};
+
+  --neutral-shadow-lg:    #{$black-a25};
+  --neutral-shadow-xs:    #{$black-a12};
+  --neutral-shadow-xxs:   #{$black-a08};
+
   .c-brand {
     --font-color-1: var(--brand);
   }
@@ -38,6 +45,7 @@
   --common-color-0:        var(--brand-vivid);
   --common-color-1:        #{$light-text-muted};
   --shadow-color:          #{$light-shadow};
+  --page-glow-color:       rgba(var(--brand-rgb), 0.08);
   --placeholder-color:     #{$light-text-placeholder};
   --border-color:          #{$light-border};
   --border-color-1:        var(--brand);
@@ -158,8 +166,8 @@
   --brand-shadow:     rgba(var(--brand-rgb), 0.3);
   --brand-shadow-sm:  rgba(var(--brand-rgb), 0.2);
   --brand-shadow-xs:  rgba(var(--brand-rgb), 0.25);
-  --neutral-shadow:   #{rgba($black, 0.2)};
-  --neutral-shadow-sm:#{rgba($black, 0.15)};
+  --neutral-shadow:   #{$black-a20};
+  --neutral-shadow-sm:#{$black-a15};
 
 }
 
@@ -176,6 +184,7 @@
   --common-color-0:        var(--brand-light);
   --common-color-1:        #{$dark-text-muted};
   --shadow-color:          #{$dark-shadow};
+  --page-glow-color:       rgba(var(--brand-rgb), 0.15);
   --placeholder-color:     #{$dark-text-placeholder};
   --border-color:          #{$dark-border};
   --border-color-1:        var(--brand-light);
@@ -248,7 +257,7 @@
     --active-channel-gradient-start: rgba(var(--brand-rgb), 0.2);
     --active-channel-gradient-end:   rgba(var(--brand-rgb), 0.06);
     --active-channel-border-color:   rgba(var(--brand-rgb), 0.2);
-    --active-channel-shadow:     rgba(0, 0, 0, 0.1);
+    --active-channel-shadow:     #{$black-a10};
   }
 
   // Modals
@@ -292,7 +301,7 @@
   --brand-shadow:     rgba(var(--brand-light-rgb), 0.3);
   --brand-shadow-sm:  rgba(var(--brand-light-rgb), 0.2);
   --brand-shadow-xs:  rgba(var(--brand-light-rgb), 0.25);
-  --neutral-shadow:   #{rgba($black, 0.2)};
-  --neutral-shadow-sm:#{rgba($black, 0.15)};
+  --neutral-shadow:   #{$black-a20};
+  --neutral-shadow-sm:#{$black-a15};
 
 }

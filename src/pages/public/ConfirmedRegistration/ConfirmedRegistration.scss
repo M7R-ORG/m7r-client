@@ -6,7 +6,8 @@
   flex-direction: column;
   justify-content: stretch;
   align-items: stretch;
-  background: var(--background-color);
+  background: radial-gradient(900px 760px at 50% 50%, var(--page-glow-color), transparent 70%),
+    var(--background-color);
   user-select: none;
   cursor: default;
 
@@ -51,6 +52,7 @@
       justify-content: center;
       align-items: center;
       border-radius: 25px;
+      background: var(--background-color);
       box-shadow: 0px 0 10px 6px var(--shadow-color);
       padding: 48px 15px 20px;
 

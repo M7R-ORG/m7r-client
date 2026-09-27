@@ -7,6 +7,34 @@ $error:          #e53935;
 $error-light:    #ff6b6b;
 
 // ============================================
+// Alpha Variants
+// ============================================
+$black-a08:             rgba($black, 0.08);
+$black-a10:             rgba($black, 0.1);
+$black-a12:             rgba($black, 0.12);
+$black-a15:             rgba($black, 0.15);
+$black-a20:             rgba($black, 0.2);
+$black-a25:             rgba($black, 0.25);
+
+$error-a14:             rgba($error, 0.14);
+
+// ============================================
+// Avatar Gradients
+// ============================================
+$avatar-gradients: (
+  (#7c3aed, #a78bfa),
+  (#6d28d9, #c084fc),
+  (#4f46e5, #818cf8),
+  (#7e22ce, #d946ef),
+  (#2563eb, #60a5fa),
+  (#9333ea, #c084fc),
+  (#6366f1, #a5b4fc),
+  (#8b5cf6, #e879f9),
+  (#4338ca, #7c3aed),
+  (#5b21b6, #a78bfa)
+);
+
+// ============================================
 // Light Theme Palette
 // ============================================
 $light-bg:              #fafafa;
