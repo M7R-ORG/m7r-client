@@ -2,12 +2,15 @@
   height: 100%;
   width: 100%;
   overflow-y: auto;
+  scroll-behavior: smooth;
+  container: settings / inline-size;
 
   .settings-header {
     max-width: 860px;
   }
 
   .settings-content {
+    position: relative;
     width: 90%;
     max-width: 860px;
     margin: 0 auto;
@@ -26,6 +29,20 @@
         max-width: 560px;
         margin: 0 auto;
       }
+    }
+
+    .settings-nav {
+      position: absolute;
+      top: 24px;
+      bottom: 40px;
+      left: calc(100% + 32px);
+      width: 180px;
+    }
+  }
+
+  @container settings (max-width: 1320px) {
+    .settings-content .settings-nav {
+      display: none;
     }
   }
 

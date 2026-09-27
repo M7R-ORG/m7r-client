@@ -14,7 +14,13 @@ import AccentColorPicker from '../../../components/settingsPage/AccentColorPicke
 import ChatBackgroundPicker from '../../../components/settingsPage/ChatBackgroundPicker/ChatBackgroundPicker'
 import SettingsSelect from '../../../components/settingsPage/SettingsSelect/SettingsSelect'
 import ChatPreview from '../../../components/settingsPage/ChatPreview/ChatPreview'
+import SettingsNav from '../../../components/settingsPage/SettingsNav/SettingsNav'
 import './Settings.scss'
+
+const settingsSection = {
+  appearance: 'settings-appearance',
+  language: 'settings-language'
+}
 
 const languageNames = {
   [language.english]: 'English',
@@ -27,6 +33,17 @@ function Settings() {
   const chatBackground = useSelector((state) => state.system.chatBackground)
   const dispatch = useDispatch()
   const { formatMessage, locale: systemLanguage } = useIntl()
+
+  const sections = [
+    {
+      id: settingsSection.language,
+      title: formatMessage(translations.settings.language.title)
+    },
+    {
+      id: settingsSection.appearance,
+      title: formatMessage(translations.settings.appearance.title)
+    }
+  ]
 
   const themeOptions = [
     {
@@ -56,6 +73,20 @@ function Settings() {
 
       <div className="settings-content">
         <SettingsSection
+          id={settingsSection.language}
+          title={formatMessage(translations.settings.language.title)}
+        >
+          <SettingsField label={formatMessage(translations.settings.language.interface)}>
+            <SettingsSelect
+              options={languageOptions}
+              value={systemLanguage}
+              onChange={(value) => dispatch(setLanguage(value))}
+            />
+          </SettingsField>
+        </SettingsSection>
+
+        <SettingsSection
+          id={settingsSection.appearance}
           title={formatMessage(translations.settings.appearance.title)}
           description={formatMessage(translations.settings.appearance.description)}
         >
@@ -86,15 +117,7 @@ function Settings() {
           </SettingsField>
         </SettingsSection>
 
-        <SettingsSection title={formatMessage(translations.settings.language.title)}>
-          <SettingsField label={formatMessage(translations.settings.language.interface)}>
-            <SettingsSelect
-              options={languageOptions}
-              value={systemLanguage}
-              onChange={(value) => dispatch(setLanguage(value))}
-            />
-          </SettingsField>
-        </SettingsSection>
+        <SettingsNav className="settings-nav" sections={sections} />
       </div>
     </div>
   )

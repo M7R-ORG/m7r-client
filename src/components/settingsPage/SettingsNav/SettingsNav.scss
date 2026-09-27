@@ -1,0 +1,33 @@
+.c-settings-nav {
+  user-select: none;
+
+  .settings-nav-list {
+    position: sticky;
+    top: 24px;
+    display: flex;
+    flex-direction: column;
+    border-left: solid 1px var(--border-color);
+    scroll-target-group: auto;
+  }
+
+  .settings-nav-item {
+    margin-left: -1px;
+    padding: 8px 16px;
+    border-left: solid 2px transparent;
+    color: var(--common-color-1);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.25s ease;
+
+    &:hover {
+      color: var(--font-color-primary-1);
+    }
+
+    &:target-current {
+      color: var(--font-color-primary-0);
+      border-left-color: var(--border-color-1);
+    }
+  }
+}
