@@ -9,7 +9,7 @@ import MenuIcon from '../../Icon/MenuIcon/MenuIcon'
 import DropDown from '../../DropDown/DropDown'
 import Avatar from '../../Avatar/Avatar'
 import './SidebarProfile.scss'
-import { LogoutIcon, ProfileIcon, SettingsIcon } from '../../Icon/_exports'
+import { LogoutIcon, ProfileIcon } from '../../Icon/_exports'
 
 function SidebarProfile({ className = '', isExpand = false }) {
   const { login, email, imageId } = useSelector((state) => state.user.info)
@@ -24,13 +24,6 @@ function SidebarProfile({ className = '', isExpand = false }) {
       title: formatMessage(translations.common.menu.profile),
       onClick: () => {
         navigate(page.profile)
-      }
-    },
-    {
-      icon: <SettingsIcon />,
-      title: formatMessage(translations.common.menu.settings),
-      onClick: () => {
-        navigate(page.settings)
       }
     },
     {

@@ -21,7 +21,7 @@ function SidebarItem({
       <div className="sidebar-item-icon">{children}</div>
       <div className="sidebar-item-title">{title}</div>
       <div className="sidebar-item-notice-counter">
-        <div className="notice-counter-wrapper">{counter}</div>
+        {!!counter && <div className="notice-counter-wrapper">{counter}</div>}
       </div>
     </Link>
   )

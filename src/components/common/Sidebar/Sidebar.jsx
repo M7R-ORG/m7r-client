@@ -9,7 +9,7 @@ import SidebarSearch from './SidebarSearch/SidebarSearch'
 import SidebarTheme from './SidebarTheme/SidebarTheme'
 import SidebarProfile from './SidebarProfile/SidebarProfile'
 import SidebarExpander from './SidebarExpander/SidebarExpander'
-import { AIIcon, HomeIcon, MessengerIcon, UsersIcon } from '../Icon/_exports'
+import { AIIcon, HomeIcon, MessengerIcon, SettingsIcon, UsersIcon } from '../Icon/_exports'
 import ComponentPermissionGuard from '../../permission/ComponentPermissionGuard'
 import './Sidebar.scss'
 
@@ -90,6 +90,15 @@ function Sidebar() {
             <UsersIcon />
           </SidebarItem>
         </ComponentPermissionGuard>
+
+        <SidebarItem
+          className="sidebar-item sidebar-item-settings"
+          link={page.settings}
+          title={formatMessage(translations.common.sidebar.settings)}
+          isExpand={expand}
+        >
+          <SettingsIcon />
+        </SidebarItem>
       </div>
 
       <div className="sidebar-theme-container">

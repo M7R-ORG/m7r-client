@@ -44,11 +44,11 @@ const en = {
       messenger: { id: 'common.sidebar.messenger', defaultMessage: 'Messenger' },
       aiProfiles: { id: 'common.sidebar.aiProfiles', defaultMessage: 'AI Profiles' },
       users: { id: 'common.sidebar.users', defaultMessage: 'Users (A)' },
-      openSearch: { id: 'common.sidebar.openSearch', defaultMessage: 'Open search' }
+      openSearch: { id: 'common.sidebar.openSearch', defaultMessage: 'Open search' },
+      settings: { id: 'common.sidebar.settings', defaultMessage: 'Settings' }
     },
     menu: {
       profile: { id: 'common.menu.profile', defaultMessage: 'Profile' },
-      settings: { id: 'common.menu.settings', defaultMessage: 'Settings' },
       logout: { id: 'common.menu.logout', defaultMessage: 'Log out' }
     }
   },

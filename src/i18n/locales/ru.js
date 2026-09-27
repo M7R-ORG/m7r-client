@@ -33,8 +33,8 @@ const ru = {
   'common.sidebar.aiProfiles': 'AI-профили',
   'common.sidebar.users': 'Пользователи (A)',
   'common.sidebar.openSearch': 'Открыть поиск',
+  'common.sidebar.settings': 'Настройки',
   'common.menu.profile': 'Профиль',
-  'common.menu.settings': 'Настройки',
   'common.menu.logout': 'Выйти',
 
   'auth.signIn': 'Войти',
