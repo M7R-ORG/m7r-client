@@ -110,7 +110,7 @@ const ru = {
   'admin.users.offline': 'Не в сети',
   'admin.users.block': 'Заблокировать',
   'admin.users.unblock': 'Разблокировать',
-  'admin.users.newPassword': 'Новый пароль (оставьте пустым, чтобы не менять)',
+  'admin.users.newPassword': 'Новый пароль (если нужно обновить)',
   'admin.users.requiredFields': 'Заполните все обязательные поля',
   'admin.aiProfiles.title': 'AI-профили',
   'admin.aiProfiles.model': 'Модель',

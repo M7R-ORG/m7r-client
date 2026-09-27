@@ -34,8 +34,9 @@
         font-family: 'Roboto', sans-serif;
         padding: 3px 18px;
 
-        &::placeholder {
-          font-size: 13px;
+        &.password,
+        &[type='date'] {
+          padding-right: 50px;
         }
       }
 

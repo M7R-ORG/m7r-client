@@ -36,6 +36,7 @@
 // ============================================
 .app[data-theme='light'] {
   color: #{$light-text};
+  color-scheme: light;
 
   // Global
   --background-color:      #{$light-bg};
@@ -176,6 +177,7 @@
 // ============================================
 .app[data-theme='dark'] {
   color: #{$dark-text};
+  color-scheme: dark;
 
   --background-color:      #{$dark-bg};
   --background-color-1:    #{$dark-bg-subtle};

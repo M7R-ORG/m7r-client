@@ -84,7 +84,7 @@ function FormInput({
       )}
 
       <input
-        className={`form-input ${className} ${isPassword ? 'password' : ''}`}
+        className={`form-input ${className} ${isPassword ? 'password' : ''} ${value ? '' : 'empty'}`}
         type={isVisiblePassword ? 'text' : type}
         autoComplete={autoComplete}
         placeholder={placeholder}
