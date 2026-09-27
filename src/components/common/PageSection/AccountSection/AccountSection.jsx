@@ -110,7 +110,7 @@ function AccountSection({ data }) {
           </div>
         ) : (
           <div className="account-info">
-            <div className="imageId">
+            <div className="image">
               <Avatar className="img-wrapper" imageId={imageId} name={account.login} isLazy />
             </div>
 
