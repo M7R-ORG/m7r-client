@@ -3,11 +3,9 @@ import { useEffect, useState } from 'react'
 import { useAuth } from '../../../hooks/_exports'
 import api from '../../../api/api'
 import { page, keyboardKey } from '../../../constants/system'
-import { Brand, FormButton, NavLink, FormInput } from '../../../components/_exports'
+import { Brand, FormButton, Logo, NavLink, FormInput } from '../../../components/_exports'
 import ThemeToggle from '../../../components/common/ThemeToggle/ThemeToggle'
-import LogoIndicator from '../../../components/loginPage/LogoIndicator/LogoIndicator'
 import getValidationErrorMessage from '../../../utils/helpers/errorHelper'
-import { emailValidator } from '../../../utils/validators/_exports'
 import './Login.scss'
 
 const defaultClientMessage = 'Enter your login details'
@@ -16,26 +14,22 @@ function Login() {
   const navigate = useNavigate()
   const { logIn } = useAuth()
   const [loginData, setLoginData] = useState({})
-  const [errorMessage, setErrorMessage] = useState('')
+  const [message, setMessage] = useState(defaultClientMessage)
   const [isLoading, setIsLoading] = useState(false)
   const [isActiveBtn, setIsActiveBtn] = useState(false)
-  const [isValidEmail, setIsValidEmail] = useState(false)
 
   const { email, password } = loginData
-  const hasPassword = Boolean(password)
-  const progress = (Number(isValidEmail) + Number(hasPassword)) / 2
 
   useEffect(() => {
     const isActive = loginData.email && loginData.password
 
-    setErrorMessage('')
+    setMessage(defaultClientMessage)
     setIsActiveBtn(!!isActive)
   }, [loginData])
 
   const loginHandler = async () => {
     try {
       setIsLoading(true)
-      setErrorMessage('')
 
       const { data, response } = await api.auth.login({ email, password })
 
@@ -54,7 +48,7 @@ function Login() {
       logIn(data)
       navigate(page.home)
     } catch (error) {
-      setErrorMessage(error.message)
+      setMessage(error.message)
     } finally {
       setIsLoading(false)
     }
@@ -85,23 +79,14 @@ function Login() {
       </div>
 
       <div className="login-content">
-        <div
-          className={`login-panel ${errorMessage ? 'error' : ''}`}
-          onKeyDown={submitKeyDownHandler}
-          role="presentation"
-        >
+        <div className="login-panel" onKeyDown={submitKeyDownHandler} role="presentation">
           <div className="logo-wrapper">
-            <LogoIndicator
-              className="logo"
-              progress={progress}
-              isLoading={isLoading}
-              isError={!!errorMessage}
-            />
+            <Logo className="logo" />
           </div>
 
           <div className="title">Sign in</div>
 
-          <div className="client-message">{errorMessage || defaultClientMessage}</div>
+          <div className="client-message">{message}</div>
 
           <form className="form" onSubmit={(e) => submitHandler(e)}>
             <div className="inputs-wrapper">
@@ -112,8 +97,6 @@ function Login() {
                 onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
                 value={email}
                 pattern=".+@.+\..+"
-                validator={emailValidator}
-                onValid={setIsValidEmail}
                 required
               />
               <FormInput
@@ -122,7 +105,6 @@ function Login() {
                 placeholder="Password"
                 onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
                 value={password}
-                isPassword
                 required
               />
             </div>
