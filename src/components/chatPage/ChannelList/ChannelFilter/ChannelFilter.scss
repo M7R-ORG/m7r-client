@@ -11,9 +11,9 @@
   .filter {
     height: 100%;
     cursor: pointer;
-    flex: 1 1 auto;
-    min-width: 0;
+    flex: 1 0 auto;
     padding: 0 6px;
+    white-space: nowrap;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -32,9 +32,6 @@
     }
 
     .title {
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
       font-size: 14px;
       font-family: 'Montserrat', sans-serif;
     }

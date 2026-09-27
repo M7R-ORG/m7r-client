@@ -39,9 +39,7 @@ function ChannelFilter({ className = '', setType = () => {}, type = null }) {
           onClick={() => setType(info.type)}
           role="presentation"
         >
-          <div className="title" title={formatMessage(info.title)}>
-            {formatMessage(info.title)}
-          </div>
+          <div className="title">{formatMessage(info.title)}</div>
         </div>
       ))}
     </div>
