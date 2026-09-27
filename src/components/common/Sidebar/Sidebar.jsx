@@ -1,5 +1,7 @@
 import { useState } from 'react'
+import { useIntl } from 'react-intl'
 import { page, role, keyboardKey } from '../../../constants/system'
+import { translations } from '../../../i18n'
 import { useKeyDown } from '../../../hooks/_exports'
 import SidebarItem from './SidebarItem/SidebarItem'
 import SidebarHeader from './SidebarHeader/SidebarHeader'
@@ -12,6 +14,7 @@ import ComponentPermissionGuard from '../../permission/ComponentPermissionGuard'
 import './Sidebar.scss'
 
 function Sidebar() {
+  const { formatMessage } = useIntl()
   const [expand, setExpand] = useState(false)
 
   const expandHandler = () => {
@@ -49,7 +52,7 @@ function Sidebar() {
         <SidebarItem
           className="sidebar-item"
           link={page.home}
-          title="Home"
+          title={formatMessage(translations.common.sidebar.home)}
           isExpand={expand}
           noticeCounter={1}
         >
@@ -59,7 +62,7 @@ function Sidebar() {
         <SidebarItem
           className="sidebar-item"
           link={page.chat}
-          title="Messenger"
+          title={formatMessage(translations.common.sidebar.messenger)}
           isExpand={expand}
           noticeCounter={1}
         >
@@ -69,7 +72,7 @@ function Sidebar() {
         <SidebarItem
           className="sidebar-item"
           link={page.aiProfiles}
-          title="AI Profiles"
+          title={formatMessage(translations.common.sidebar.aiProfiles)}
           isExpand={expand}
           noticeCounter={1}
         >
@@ -80,7 +83,7 @@ function Sidebar() {
           <SidebarItem
             className="sidebar-item"
             link={page.users}
-            title="Users (A)"
+            title={formatMessage(translations.common.sidebar.users)}
             isExpand={expand}
             noticeCounter={1}
           >

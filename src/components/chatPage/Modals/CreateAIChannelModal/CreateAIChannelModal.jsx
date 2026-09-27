@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import { CSSTransition } from 'react-transition-group'
+import { useIntl } from 'react-intl'
 import { BaseModal, Brand, FormButton, FormInput, SearchInput } from '../../../_exports'
 import ValidIcon from '../../../common/Input/FormInput/ValidIcon/ValidIcon'
+import { translations } from '../../../../i18n'
 import { useDebounce } from '../../../../hooks/_exports'
 import { channelType as chatType } from '../../../../constants/chat'
 import CreateAIChannelStep1 from './FirstStep/CreateAIChannelStep1'
@@ -22,15 +24,18 @@ const createChannelMapper = {
 const chatTypeSelectorItems = [
   {
     key: 0,
-    value: chatType.private
+    value: chatType.private,
+    label: translations.chat.channelType.private
   },
   {
     key: 1,
-    value: chatType.public
+    value: chatType.public,
+    label: translations.chat.channelType.public
   },
   {
     key: 2,
-    value: chatType.direct
+    value: chatType.direct,
+    label: translations.chat.channelType.direct
   }
 ]
 
@@ -40,6 +45,7 @@ function CreateAIChannelModal({
   setIsActive = () => {},
   onCreatedChannel = () => {}
 }) {
+  const { formatMessage } = useIntl()
   const [channelName, setChannelName] = useState('')
   const [channelType, setChannelType] = useState(chatType.public)
   const [errorMessage, setErrorMessage] = useState(null)
@@ -57,7 +63,7 @@ function CreateAIChannelModal({
       setIsCreateChannelLoading(true)
 
       if (createChannelMapper[channelType] === undefined) {
-        throw new Error('Channel type is not correct')
+        throw new Error(formatMessage(translations.chat.errors.invalidChannelType))
       }
 
       channelNameValidator(channelName)
@@ -73,7 +79,7 @@ function CreateAIChannelModal({
       }
 
       if (!data || response?.data?.errors) {
-        throw new Error('Something went wrong')
+        throw new Error(formatMessage(translations.common.somethingWentWrong))
       }
 
       if (data.isSuccess) {
@@ -99,7 +105,7 @@ function CreateAIChannelModal({
     } else if (profileId) {
       setCurrentStep((prevStep) => (prevStep < steps.length - 1 ? prevStep + 1 : prevStep))
     } else {
-      setErrorMessage('Please select a profile')
+      setErrorMessage(formatMessage(translations.chat.errors.selectProfile))
       setIsShowError(true)
     }
   }
@@ -109,6 +115,11 @@ function CreateAIChannelModal({
       nextStepHandler()
     }
   }
+
+  const localizedChatTypeItems = chatTypeSelectorItems.map((item) => ({
+    ...item,
+    label: formatMessage(item.label)
+  }))
 
   useEffect(() => {
     if (!isActive) {
@@ -166,7 +177,7 @@ function CreateAIChannelModal({
               <FormInput
                 className="form-input"
                 type="text"
-                placeholder="Enter name"
+                placeholder={formatMessage(translations.chat.createChannel.namePlaceholder)}
                 onChange={(e) => setChannelName(e.target.value)}
                 value={channelName}
                 pattern=".*"
@@ -177,7 +188,7 @@ function CreateAIChannelModal({
             <div className="channel-type-switcher">
               <Selector
                 className="type-switcher"
-                items={chatTypeSelectorItems}
+                items={localizedChatTypeItems}
                 selectedValue={channelType}
                 setSelectedValue={setChannelType}
               />
@@ -189,7 +200,7 @@ function CreateAIChannelModal({
                 onClick={nextStepHandler}
                 isLoading={isCreateChannelLoading}
               >
-                Continue
+                {formatMessage(translations.common.continue)}
               </FormButton>
             </div>
           </div>

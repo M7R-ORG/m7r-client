@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types'
+import { useIntl } from 'react-intl'
 import { channelType } from '../../../constants/chat'
 import { MenuIcon } from '../../common/Icon/_exports'
 import { activityStatus } from '../../../constants/system'
@@ -6,21 +7,26 @@ import Avatar from '../../common/Avatar/Avatar'
 import Loader2 from '../../common/Loader/Loader2/Loader2'
 import MessageSearch from './MessageSearch/MessageSearch'
 import formatLastOnlineAt from '../../../utils/helpers/formatHelper'
+import { translations } from '../../../i18n'
 import './ChatHeader.scss'
 
-export const getActivityStatus = ({ status, lastOnlineAt }) => {
+export const getActivityStatus = ({ status, lastOnlineAt, formatMessage }) => {
   const isOnline = status?.toLowerCase() === activityStatus.online
 
-  const result = isOnline ? 'Online now' : formatLastOnlineAt(lastOnlineAt)
+  const result = isOnline
+    ? formatMessage(translations.common.onlineNow)
+    : formatLastOnlineAt(lastOnlineAt)
 
   return result
 }
 
 function ChatHeader({ className = '', channel = null, isLoading, setSearchMessage }) {
+  const { formatMessage } = useIntl()
 
   const adaptedChatInfo = getActivityStatus({
     status: channel?.userActivityStatus,
-    lastOnlineAt: channel?.userLastOnlineAt
+    lastOnlineAt: channel?.userLastOnlineAt,
+    formatMessage
   })
 
   return (
@@ -40,7 +46,9 @@ function ChatHeader({ className = '', channel = null, isLoading, setSearchMessag
               {channel?.type === channelType.direct ? (
                 <div className="status-info">{adaptedChatInfo}</div>
               ) : (
-                <div className="members-count">Members: {channel?.membersCount}</div>
+                <div className="members-count">
+                  {formatMessage(translations.chat.members, { count: channel?.membersCount ?? '' })}
+                </div>
               )}
             </div>
           </div>

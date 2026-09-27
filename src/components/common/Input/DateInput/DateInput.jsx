@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import { useIntl } from 'react-intl'
 import ToolTip1 from '../../ToolTip/ToolTip1/ToolTip1'
 import ValidIcon from '../FormInput/ValidIcon/ValidIcon'
 import birthdayValidator from '../../../../utils/validators/birthdayValidator'
+import { translations } from '../../../../i18n'
 import './DateInput.scss'
 
 function dateAdapter(strDate) {
@@ -12,6 +14,7 @@ function dateAdapter(strDate) {
 }
 
 function DateInput({ setValue = () => {}, className = '', onValid = () => {}, value = null }) {
+  const { formatMessage } = useIntl()
   const [validDate, setValidDate] = useState({})
   const [errorMessage, setErrorMessage] = useState(null)
   const [date, setDate] = useState(dateAdapter(value))
@@ -72,7 +75,7 @@ function DateInput({ setValue = () => {}, className = '', onValid = () => {}, va
         <input
           type="number"
           className="date-input day"
-          placeholder="Day"
+          placeholder={formatMessage(translations.common.dateInput.day)}
           onChange={onChangeDayHandler}
           value={day || ''}
           required
@@ -83,7 +86,7 @@ function DateInput({ setValue = () => {}, className = '', onValid = () => {}, va
         <input
           type="number"
           className="date-input month"
-          placeholder="Month"
+          placeholder={formatMessage(translations.common.dateInput.month)}
           onChange={onChangeMonthHandler}
           value={month || ''}
           required
@@ -94,7 +97,7 @@ function DateInput({ setValue = () => {}, className = '', onValid = () => {}, va
         <input
           type="number"
           className="date-input year"
-          placeholder="Year"
+          placeholder={formatMessage(translations.common.dateInput.year)}
           onChange={onChangeYearHandler}
           value={year || ''}
           required

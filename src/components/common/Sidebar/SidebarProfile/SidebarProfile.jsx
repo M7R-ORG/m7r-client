@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { useIntl } from 'react-intl'
 import { page } from '../../../../constants/system'
+import { translations } from '../../../../i18n'
 import { useAuth } from '../../../../hooks/_exports'
 import MenuIcon from '../../Icon/MenuIcon/MenuIcon'
 import DropDown from '../../DropDown/DropDown'
@@ -14,25 +16,26 @@ function SidebarProfile({ className = '', isExpand = false }) {
   const expandClass = isExpand ? 'expand' : ''
   const { logOut } = useAuth()
   const navigate = useNavigate()
+  const { formatMessage } = useIntl()
 
   const menuItems = [
     {
       icon: <ProfileIcon />,
-      title: 'Profile',
+      title: formatMessage(translations.common.menu.profile),
       onClick: () => {
         navigate(page.profile)
       }
     },
     {
       icon: <SettingsIcon />,
-      title: 'Settings',
+      title: formatMessage(translations.common.menu.settings),
       onClick: () => {
         navigate(page.settings)
       }
     },
     {
       icon: <LogoutIcon />,
-      title: 'LogOut',
+      title: formatMessage(translations.common.menu.logout),
       onClick: () => {
         logOut()
         navigate(page.login)

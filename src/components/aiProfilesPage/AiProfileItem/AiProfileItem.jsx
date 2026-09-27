@@ -1,15 +1,18 @@
 import { useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import { useIntl } from 'react-intl'
 import DropDown from '../../common/DropDown/DropDown'
 import config from '../../../config/configuration'
 import ImgWrapper from '../../common/ImgWrapper/ImgWrapper'
 import api from '../../../api/api'
 import { CreateIcon, EditIcon, RemoveIcon, ToolsIcon } from '../../common/Icon/_exports'
 import { page } from '../../../constants/system'
+import { translations } from '../../../i18n'
 import './AiProfileItem.scss'
 
 function AiProfileItem({ className = '', profileInfo = null, refreshProfiles, openUpdateModal }) {
   const navigate = useNavigate()
+  const { formatMessage } = useIntl()
   const { id, integration, model, name, template, temperature, apiKey } = profileInfo
 
   const imageSrc = `${config.app.publicPath}/defaultImages/ai-integrations/${integration}.png`
@@ -28,21 +31,21 @@ function AiProfileItem({ className = '', profileInfo = null, refreshProfiles, op
   const dropDownItems = [
     {
       icon: <CreateIcon className="dropdown-icon" />,
-      title: 'Direct',
+      title: formatMessage(translations.admin.aiProfiles.direct),
       onClick: () => {
         createDirect()
       }
     },
     {
       icon: <EditIcon className="dropdown-icon" />,
-      title: 'Edit',
+      title: formatMessage(translations.admin.edit),
       onClick: () => {
         openUpdateModal(profileInfo)
       }
     },
     {
       icon: <RemoveIcon className="dropdown-icon" />,
-      title: 'Remove',
+      title: formatMessage(translations.admin.aiProfiles.remove),
       onClick: () => {
         api.aiProfile.delete({ id }).then(() => {
           refreshProfiles()

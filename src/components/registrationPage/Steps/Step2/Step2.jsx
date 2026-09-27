@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import { useIntl } from 'react-intl'
 import { FormDesc, FormInput, FormTitle } from '../../../_exports'
 import { loginValidator } from '../../../../utils/validators/_exports'
+import { translations } from '../../../../i18n'
 import './Step2.scss'
 
 function Step2({
@@ -10,6 +12,7 @@ function Step2({
   registrationData = null,
   setIsValid = () => {}
 }) {
+  const { formatMessage } = useIntl()
   const [isValidLogin, setIsValidLogin] = useState(false)
 
   const { login } = registrationData
@@ -20,15 +23,19 @@ function Step2({
 
   return (
     <div className={`c-registration-step ${className}`}>
-      <FormTitle className="login-title">Enter your login</FormTitle>
+      <FormTitle className="login-title">
+        {formatMessage(translations.auth.registration.login.title)}
+      </FormTitle>
 
-      <FormDesc className="login-desc">Your login will be used to identify your account</FormDesc>
+      <FormDesc className="login-desc">
+        {formatMessage(translations.auth.registration.login.description)}
+      </FormDesc>
 
       <div className="inputs">
         <FormInput
           className="login-input"
           type="login"
-          placeholder="Login"
+          placeholder={formatMessage(translations.common.login)}
           onChange={(e) =>
             setRegistrationData({
               ...registrationData,

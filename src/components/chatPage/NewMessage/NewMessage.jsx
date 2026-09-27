@@ -2,6 +2,7 @@ import { v4 as uuid } from 'uuid'
 import { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
+import { useIntl } from 'react-intl'
 import { chatMethod } from '../../../socket/hubHandlers'
 import DropDown from '../../common/DropDown/DropDown'
 import {ImgIcon, FileIcon, VideoIcon, AttachmentIcon, SendIcon} from '../../common/Icon/_exports'
@@ -10,6 +11,7 @@ import Loader2 from '../../common/Loader/Loader2/Loader2'
 import PreviewAttachments from './PreviewAttachments/PreviewAttachments'
 import { acceptedFiles, acceptedImages, acceptedVideos } from './acceptedFiles'
 import { keyboardKey } from '../../../constants/system'
+import { translations } from '../../../i18n'
 import './NewMessage.scss'
 
 const maxSizeFiles = 10000000
@@ -20,6 +22,7 @@ function isCorrectMessage(messageText, attachments) {
 }
 
 function NewMessage({ className = '', channelId = null }) {
+  const { formatMessage } = useIntl()
   const [message, setMessage] = useState('')
   const [isFocused, setIsFocused] = useState(false)
   const [, setErrorMessage] = useState(null)
@@ -84,17 +87,17 @@ function NewMessage({ className = '', channelId = null }) {
   const menuItems = [
     {
       icon: <ImgIcon />,
-      title: 'Image',
+      title: formatMessage(translations.chat.newMessage.image),
       onClick: () => dropDownAttachmentClickHandler(acceptedImages)
     },
     {
       icon: <FileIcon />,
-      title: 'File',
+      title: formatMessage(translations.chat.newMessage.file),
       onClick: () => dropDownAttachmentClickHandler(acceptedFiles)
     },
     {
       icon: <VideoIcon />,
-      title: 'Video',
+      title: formatMessage(translations.chat.newMessage.video),
       onClick: () => dropDownAttachmentClickHandler(acceptedVideos)
     }
   ]
@@ -113,11 +116,11 @@ function NewMessage({ className = '', channelId = null }) {
       const { count, size } = getFilesSummary([...attachFiles, ...files])
 
       if (count > maxCountFiles) {
-        throw new Error('Maximum number of attached files exceeded')
+        throw new Error(formatMessage(translations.chat.errors.tooManyFiles))
       }
 
       if (size > maxSizeFiles) {
-        throw new Error('Maximum size of attached files exceeded')
+        throw new Error(formatMessage(translations.chat.errors.filesTooLarge))
       }
 
       const checkUniqFile = (file) =>
@@ -188,7 +191,7 @@ function NewMessage({ className = '', channelId = null }) {
             onChange={(e) => setMessage(e.target.value)}
             value={message}
             onKeyDown={onKeyDownHandler}
-            placeholder="Enter message"
+            placeholder={formatMessage(translations.chat.newMessage.placeholder)}
             readOnly={isSending}
           />
         </div>

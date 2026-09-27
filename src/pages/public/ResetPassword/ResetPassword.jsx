@@ -1,23 +1,25 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { useIntl } from 'react-intl'
 import { Brand, FormButton, FormInput, Logo, NavLink } from '../../../components/_exports'
 import ThemeToggle from '../../../components/common/ThemeToggle/ThemeToggle'
 import { page, keyboardKey } from '../../../constants/system'
 import api from '../../../api/api'
+import { translations } from '../../../i18n'
 import cPasswordValidator from '../../../utils/validators/cPasswordValidator'
 import passwordValidator from '../../../utils/validators/passwordValidator'
 import getValidationErrorMessage from '../../../utils/helpers/errorHelper'
 import RedirectModal from '../../../components/common/Modal/RedirectModal/RedirectModal'
 import './ResetPassword.scss'
 
-const defaultClientMessage = 'Enter your new password'
 const redirectModalDelay = 3
 
 function ResetPassword() {
   const [searchParams] = useSearchParams()
+  const { formatMessage } = useIntl()
   const [password, setPassword] = useState('')
   const [confirmationPassword, setConfirmationPassword] = useState('')
-  const [message, setMessage] = useState(defaultClientMessage)
+  const [message, setMessage] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [isActiveBtn, setIsActiveBtn] = useState(false)
   const [isValidPassword, setIsValidPassword] = useState(false)
@@ -29,7 +31,7 @@ function ResetPassword() {
   useEffect(() => {
     const isActive = resetToken && isValidPassword && isValidCPassword
 
-    setMessage(defaultClientMessage)
+    setMessage('')
     setIsActiveBtn(!!isActive)
   }, [resetToken, isValidPassword, isValidCPassword])
 
@@ -51,7 +53,7 @@ function ResetPassword() {
       }
 
       if (!data) {
-        throw new Error('Something went wrong')
+        throw new Error(formatMessage(translations.common.somethingWentWrong))
       }
 
       setIsCompleted(true)
@@ -79,8 +81,8 @@ function ResetPassword() {
         isActive={isCompleted}
         link={page.login}
         delay={redirectModalDelay}
-        title="Success"
-        message="Redirect to login page"
+        title={formatMessage(translations.common.success)}
+        message={formatMessage(translations.auth.resetPassword.redirect)}
       />
 
       <div className="reset-password-header">
@@ -89,7 +91,7 @@ function ResetPassword() {
         </div>
         <div className="sign-in-wrapper">
           <NavLink className="sign-in" link={page.login}>
-            Sign In
+            {formatMessage(translations.auth.signIn)}
           </NavLink>
         </div>
       </div>
@@ -100,16 +102,18 @@ function ResetPassword() {
             <Logo className="logo" />
           </div>
 
-          <div className="title">Reset password</div>
+          <div className="title">{formatMessage(translations.auth.resetPassword.title)}</div>
 
-          <div className="client-message">{message}</div>
+          <div className="client-message">
+            {message || formatMessage(translations.auth.resetPassword.description)}
+          </div>
 
           <form className="form" onSubmit={(e) => submitHandler(e)}>
             <div className="inputs-wrapper">
               <FormInput
                 className="password-input"
                 type="password"
-                placeholder="New password"
+                placeholder={formatMessage(translations.auth.resetPassword.newPassword)}
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
                 validator={passwordValidator}
@@ -121,7 +125,7 @@ function ResetPassword() {
               <FormInput
                 className="password-input"
                 type="password"
-                placeholder="Confirm password"
+                placeholder={formatMessage(translations.auth.resetPassword.confirmPassword)}
                 onChange={(e) => setConfirmationPassword(e.target.value)}
                 value={confirmationPassword}
                 validator={(cPassword) => cPasswordValidator(password, cPassword)}
@@ -137,7 +141,7 @@ function ResetPassword() {
                 isLoading={isLoading}
                 onClick={resetPasswordHandler}
               >
-                Reset password
+                {formatMessage(translations.auth.resetPassword.submit)}
               </FormButton>
             </div>
           </form>

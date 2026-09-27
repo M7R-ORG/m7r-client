@@ -1,3 +1,5 @@
+import { intlFormatMessage, translations } from '../../i18n'
+
 const emailMaxLength = 100
 const emailMinLength = 5
 
@@ -13,15 +15,19 @@ function emailValidator(email) {
   const errors = []
 
   if (!isValidMaxLength) {
-    errors.push('* The length of the entered email must be less than 100 characters')
+    errors.push(
+      intlFormatMessage(translations.auth.validation.emailMaxLength, { count: emailMaxLength })
+    )
   }
 
   if (!isValidMinLength) {
-    errors.push('* The length of the entered email must be more than 5 characters')
+    errors.push(
+      intlFormatMessage(translations.auth.validation.emailMinLength, { count: emailMinLength })
+    )
   }
 
   if (!isValidPattern) {
-    errors.push('* The entered email must match the pattern')
+    errors.push(intlFormatMessage(translations.auth.validation.emailPattern))
   }
 
   const valid = isValidMaxLength && isValidMinLength && isValidPattern

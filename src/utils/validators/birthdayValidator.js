@@ -1,3 +1,5 @@
+import { intlFormatMessage, translations } from '../../i18n'
+
 const dayMinValue = 1
 const dayMaxValue = 31
 
@@ -16,7 +18,7 @@ function dayValidator(day) {
 
   const valid = isValidPattern && isValidMaxValue && isValidMinValue
 
-  const error = !valid ? '* Incorrect day' : null
+  const error = !valid ? intlFormatMessage(translations.auth.validation.incorrectDay) : null
 
   return { valid, error }
 }
@@ -30,7 +32,7 @@ function monthValidator(month) {
 
   const valid = isValidPattern && isValidMaxValue && isValidMinValue
 
-  const error = !valid ? '* Incorrect month' : null
+  const error = !valid ? intlFormatMessage(translations.auth.validation.incorrectMonth) : null
 
   return { valid, error }
 }
@@ -44,7 +46,7 @@ function yearValidator(year) {
 
   const valid = isValidPattern && isValidMaxValue && isValidMinValue
 
-  const error = !valid ? '* Incorrect year' : null
+  const error = !valid ? intlFormatMessage(translations.auth.validation.incorrectYear) : null
 
   return { valid, error }
 }

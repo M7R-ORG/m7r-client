@@ -11,7 +11,7 @@ function Selector({ className, items, setSelectedValue, selectedValue }) {
       <select name="select" value={selectedValue} onChange={changeValueHandler}>
         {items.map((item) => (
           <option key={item.key} value={item.value}>
-            {item.value}
+            {item.label ?? item.value}
           </option>
         ))}
       </select>
@@ -26,7 +26,8 @@ Selector.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
       key: PropTypes.number,
-      value: PropTypes.string
+      value: PropTypes.string,
+      label: PropTypes.string
     })
   )
 }

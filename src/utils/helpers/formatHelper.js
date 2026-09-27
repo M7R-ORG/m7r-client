@@ -1,4 +1,5 @@
 import moment from "moment"
+import { intlFormatDate, intlFormatMessage, shortDateFormat, translations } from '../../i18n'
 
 function formatLastOnlineAt(lastOnlineAt) {
   if (!lastOnlineAt) {
@@ -7,8 +8,10 @@ function formatLastOnlineAt(lastOnlineAt) {
   const date = moment(lastOnlineAt)
 
   const formattedDate = date.isSame(moment(), 'day')
-    ? `Seen today at ${date.format('HH:mm')}`
-    : `Seen on ${date.format('D MMM')}`
+    ? intlFormatMessage(translations.common.seenToday, { time: date.format('HH:mm') })
+    : intlFormatMessage(translations.common.seenOn, {
+        date: intlFormatDate(lastOnlineAt, shortDateFormat)
+      })
 
   return formattedDate
 }

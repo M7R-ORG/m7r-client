@@ -1,16 +1,18 @@
 import { useEffect, useState } from 'react'
+import { useIntl } from 'react-intl'
 import { Brand, FormButton, FormInput, Logo, NavLink } from '../../../components/_exports'
 import ThemeToggle from '../../../components/common/ThemeToggle/ThemeToggle'
 import { page, keyboardKey } from '../../../constants/system'
 import api from '../../../api/api'
+import { translations } from '../../../i18n'
 import emailValidator from '../../../utils/validators/emailValidator'
 import './InitResetPassword.scss'
 
-const defaultClientMessage = 'Enter your email'
 const resendTiming = 30
 
 function InitResetPassword() {
-  const [message, setMessage] = useState(defaultClientMessage)
+  const { formatMessage } = useIntl()
+  const [message, setMessage] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [isActiveBtn, setIsActiveBtn] = useState(false)
   const [email, setEmail] = useState('')
@@ -25,7 +27,7 @@ function InitResetPassword() {
   }, [isValidEmail, timer])
 
   useEffect(() => {
-    setMessage(defaultClientMessage)
+    setMessage('')
   }, [email])
 
   useEffect(() => {
@@ -55,7 +57,7 @@ function InitResetPassword() {
       }
 
       if (!data || response?.data?.errors) {
-        throw new Error('Something went wrong')
+        throw new Error(formatMessage(translations.common.somethingWentWrong))
       }
 
       setIsSuccess(true)
@@ -86,7 +88,7 @@ function InitResetPassword() {
         </div>
         <div className="sign-in-wrapper">
           <NavLink className="sign-in" link={page.login}>
-            Sign In
+            {formatMessage(translations.auth.signIn)}
           </NavLink>
         </div>
       </div>
@@ -97,10 +99,16 @@ function InitResetPassword() {
             <Logo className="logo" />
           </div>
 
-          <div className="title">{isSuccess ? 'Success' : 'Forgot password?'}</div>
+          <div className="title">
+            {isSuccess
+              ? formatMessage(translations.common.success)
+              : formatMessage(translations.auth.forgotPassword)}
+          </div>
 
           <div className="client-message">
-            {isSuccess ? 'A reset link has been sent to your email address' : message}
+            {isSuccess
+              ? formatMessage(translations.auth.initResetPassword.linkSent)
+              : message || formatMessage(translations.auth.initResetPassword.description)}
           </div>
 
           <form className="form" onSubmit={(e) => submitHandler(e)}>
@@ -109,7 +117,7 @@ function InitResetPassword() {
                 <FormInput
                   className="email-input"
                   type="email"
-                  placeholder="Email"
+                  placeholder={formatMessage(translations.common.email)}
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
                   validator={emailValidator}
@@ -122,9 +130,10 @@ function InitResetPassword() {
             {isSuccess && !!timer && (
               <div className="button-timeout-wrapper">
                 <div className="button-timeout">
-                  <p>{`Didn't receive a message?`}</p>
+                  <p>{formatMessage(translations.auth.initResetPassword.notReceived)}</p>
                   <p>
-                    Try again in <b>{timer}</b> seconds
+                    {formatMessage(translations.auth.initResetPassword.resendIn)} <b>{timer}</b>{' '}
+                    {formatMessage(translations.auth.initResetPassword.seconds)}
                   </p>
                 </div>
               </div>
@@ -137,7 +146,7 @@ function InitResetPassword() {
                 isLoading={isLoading}
                 onClick={initResetPasswordHandler}
               >
-                Send reset link
+                {formatMessage(translations.auth.initResetPassword.submit)}
               </FormButton>
             </div>
           </form>

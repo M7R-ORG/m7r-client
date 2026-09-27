@@ -1,45 +1,51 @@
 import PropTypes from 'prop-types'
+import { useIntl } from 'react-intl'
 import { EmailIcon, ProfileIcon, CalendarIcon, LockIcon } from '../../common/Icon/_exports'
+import { translations } from '../../../i18n'
 import './RegistrationSidebar.scss'
 
 const stepsData = [
   {
-    title: 'Enter your email',
-    description: 'Your email will be used to log into your account',
+    title: translations.auth.registration.steps.email.title,
+    description: translations.auth.registration.steps.email.description,
     icon: <EmailIcon />
   },
   {
-    title: 'Choose a username',
-    description: 'This is how other users will find and recognize you',
+    title: translations.auth.registration.steps.login.title,
+    description: translations.auth.registration.steps.login.description,
     icon: <ProfileIcon />
   },
   {
-    title: 'Create a password',
-    description: 'Use a strong password to keep your account secure',
+    title: translations.auth.registration.steps.password.title,
+    description: translations.auth.registration.steps.password.description,
     icon: <LockIcon />
   },
   {
-    title: 'Your birthday',
-    description: 'Used for age verification and personalization',
+    title: translations.auth.registration.steps.birthday.title,
+    description: translations.auth.registration.steps.birthday.description,
     icon: <CalendarIcon />
   }
 ]
 
 function RegistrationSidebar({ currentStep, totalSteps }) {
+  const { formatMessage } = useIntl()
+
   return (
     <div className="c-registration-sidebar">
-      <div className="sidebar-title">Create your account</div>
+      <div className="sidebar-title">{formatMessage(translations.auth.registration.title)}</div>
 
       <div className="sidebar-steps">
         {stepsData.map((step, index) => (
           <div
-            key={step.title}
-            className={`sidebar-step ${index === currentStep ? 'active' : ''} ${index < currentStep ? 'completed' : ''}`}
+            key={step.title.id}
+            className={`sidebar-step ${index === currentStep ? 'active' : ''} ${
+              index < currentStep ? 'completed' : ''
+            }`}
           >
             <div className="step-icon">{step.icon}</div>
             <div className="step-text">
-              <div className="step-name">{step.title}</div>
-              <div className="step-desc">{step.description}</div>
+              <div className="step-name">{formatMessage(step.title)}</div>
+              <div className="step-desc">{formatMessage(step.description)}</div>
             </div>
           </div>
         ))}
@@ -53,7 +59,10 @@ function RegistrationSidebar({ currentStep, totalSteps }) {
           />
         </div>
         <div className="progress-text">
-          Step {currentStep + 1} of {totalSteps}
+          {formatMessage(translations.auth.registration.progress, {
+            current: currentStep + 1,
+            total: totalSteps
+          })}
         </div>
       </div>
     </div>

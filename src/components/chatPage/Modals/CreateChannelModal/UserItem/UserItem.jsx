@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
+import { useIntl } from 'react-intl'
 import { activityStatus, page } from '../../../../../constants/system'
 import { RoundCheckbox } from '../../../../_exports'
 import { ArrowIcon } from '../../../../common/Icon/_exports'
@@ -16,6 +17,7 @@ function UserItem({
   setIsActive = () => {}
 }) {
   const navigate = useNavigate()
+  const { formatMessage } = useIntl()
   const { id, login, activityStatus: status, isBanned, imageId } = userInfo
   const statusClass = status.toLowerCase() === activityStatus.online ? 'online' : ''
   const bannedClass = isBanned ? 'yes' : ''
@@ -39,7 +41,8 @@ function UserItem({
 
   const adaptedActivityStatus = getActivityStatus({
     status: userInfo.activityStatus,
-    lastOnlineAt: userInfo.lastOnlineAt
+    lastOnlineAt: userInfo.lastOnlineAt,
+    formatMessage
   })
 
   return (

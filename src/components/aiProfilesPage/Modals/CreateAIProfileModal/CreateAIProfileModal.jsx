@@ -1,11 +1,13 @@
 import { useCallback, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import { useIntl } from 'react-intl'
 import { BaseModal, Brand, FormButton, FormInput } from '../../../_exports'
 import api from '../../../../api/api'
 import GroupedSelector from '../../../common/Selector/GroupedSelector/GroupedSelector'
 import { aiModel, aiModelItems } from '../../../../constants/ai'
 import TextArea from '../../../common/TextArea/TextArea'
 import { keyboardKey } from '../../../../constants/system'
+import { translations } from '../../../../i18n'
 import './CreateAIProfileModal.scss'
 
 function checkProfileData(profileInfo) {
@@ -27,6 +29,7 @@ function CreateAIProfileModal({
   refreshProfiles,
   profile
 }) {
+  const { formatMessage } = useIntl()
   const [profileInfo, setProfileInfo] = useState(profile ?? defaultProfileData)
   const [isCreateProfileLoading, setIsCreateProfileLoading] = useState(false)
 
@@ -87,7 +90,7 @@ function CreateAIProfileModal({
                 <FormInput
                   className="form-input"
                   type="text"
-                  placeholder="Name"
+                  placeholder={formatMessage(translations.common.name)}
                   onChange={(event) =>
                     setProfileInfo((prevProfile) => ({
                       ...prevProfile,
@@ -103,7 +106,7 @@ function CreateAIProfileModal({
               <div className="model-selector">
                 <GroupedSelector
                   className="selector"
-                  placeholder="Select AI Model"
+                  placeholder={formatMessage(translations.admin.aiProfiles.selectModel)}
                   items={aiModelItems}
                   selectedValue={profileInfo.model}
                   setSelectedValue={selectModelHandler}
@@ -114,7 +117,7 @@ function CreateAIProfileModal({
                 <FormInput
                   className="form-input"
                   type="number"
-                  placeholder="Temperature"
+                  placeholder={formatMessage(translations.admin.aiProfiles.temperature)}
                   onChange={(event) =>
                     setProfileInfo((prevProfile) => ({
                       ...prevProfile,
@@ -135,7 +138,7 @@ function CreateAIProfileModal({
               <div className="template-input">
                 <TextArea
                   className="textarea"
-                  placeholder="Enter template"
+                  placeholder={formatMessage(translations.admin.aiProfiles.enterTemplate)}
                   value={profileInfo.template || ''}
                   onChange={(event) =>
                     setProfileInfo((prevProfile) => ({
@@ -153,7 +156,7 @@ function CreateAIProfileModal({
                   <FormInput
                     className="form-input"
                     type="text"
-                    placeholder="Additional key"
+                    placeholder={formatMessage(translations.admin.aiProfiles.additionalKey)}
                     onChange={(event) =>
                       setProfileInfo((prevProfile) => ({
                         ...prevProfile,
@@ -174,7 +177,7 @@ function CreateAIProfileModal({
               <FormInput
                 className="form-input"
                 type="text"
-                placeholder="Enter api-key"
+                placeholder={formatMessage(translations.admin.aiProfiles.enterApiKey)}
                 onChange={(event) =>
                   setProfileInfo((prevProfile) => ({
                     ...prevProfile,
@@ -193,7 +196,9 @@ function CreateAIProfileModal({
                 onClick={createProfileHandler}
                 isLoading={isCreateProfileLoading}
               >
-                {profile ? 'Update' : 'Create'}
+                {profile
+                  ? formatMessage(translations.admin.update)
+                  : formatMessage(translations.admin.create)}
               </FormButton>
             </div>
           </div>

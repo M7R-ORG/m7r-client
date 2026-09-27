@@ -1,11 +1,15 @@
 import PropTypes from 'prop-types'
+import { useIntl } from 'react-intl'
 import { activityStatus } from '../../../constants/system'
 import SearchResultRow from './SearchResultRow'
+import { translations } from '../../../i18n'
 
 const isUserOnline = (user) =>
   (user.activityStatus || '').toLowerCase() === activityStatus.online
 
 function PersonRow({ person, onOpen = () => {} }) {
+  const { formatMessage } = useIntl()
+
   return (
     <SearchResultRow
       imageId={person.imageId}
@@ -13,12 +17,12 @@ function PersonRow({ person, onOpen = () => {} }) {
       title={person.login}
       subtitle={
         isUserOnline(person) ? (
-          <span className="online">Online</span>
+          <span className="online">{formatMessage(translations.common.online)}</span>
         ) : (
           person.email || ''
         )
       }
-      action="Message"
+      action={formatMessage(translations.search.message)}
       onClick={onOpen}
     />
   )

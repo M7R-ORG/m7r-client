@@ -1,6 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { useEffect, useState } from 'react'
+import { useIntl } from 'react-intl'
 import api from '../../../api/api'
+import { translations } from '../../../i18n'
 import { page, keyboardKey } from '../../../constants/system'
 import { Brand, FormButton, FormDesc, FormTitle, Logo, NavLink } from '../../../components/_exports'
 import { Step1, Step2, Step3, Step4 } from '../../../components/registrationPage/Steps/_exports'
@@ -11,6 +13,7 @@ import getValidationErrorMessage from '../../../utils/helpers/errorHelper'
 import './Registration.scss'
 
 function Registration() {
+  const { formatMessage } = useIntl()
   const [registrationData, setRegistrationData] = useState({
     login: '',
     email: '',
@@ -66,14 +69,14 @@ function Registration() {
       }
 
       if (!data?.isSuccess) {
-        throw new Error('Something went wrong')
+        throw new Error(formatMessage(translations.common.somethingWentWrong))
       }
 
       setResult({
         ...result,
         isCompleted: true,
         isSuccess: true,
-        message: 'Further instructions have been sent to your email'
+        message: formatMessage(translations.auth.registration.instructionsSent)
       })
     } catch (error) {
       setResult({
@@ -125,7 +128,7 @@ function Registration() {
         </div>
         <div className="sign-in-wrapper">
           <NavLink className="sign-in" link={page.login}>
-            Sign In
+            {formatMessage(translations.auth.signIn)}
           </NavLink>
         </div>
       </div>
@@ -142,13 +145,15 @@ function Registration() {
                 <StatusIcon isSuccess={result.isSuccess} />
               </div>
               <FormTitle className="status-text">
-                {result.isSuccess ? 'All done!' : 'Something went wrong'}
+                {result.isSuccess
+                  ? formatMessage(translations.auth.registration.allDone)
+                  : formatMessage(translations.common.somethingWentWrong)}
               </FormTitle>
               <FormDesc className="reason">{result.message}</FormDesc>
               {!result.isSuccess && (
                 <div className="result-action">
                   <FormButton className="retry-button" isActive onClick={prevStepHandler}>
-                    Try again
+                    {formatMessage(translations.common.tryAgain)}
                   </FormButton>
                 </div>
               )}
@@ -168,7 +173,7 @@ function Registration() {
                   isLoading={isLoading}
                   onClick={nextStepHandler}
                 >
-                  Continue
+                  {formatMessage(translations.common.continue)}
                 </FormButton>
               </div>
             </div>

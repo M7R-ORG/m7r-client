@@ -1,9 +1,12 @@
 import PropTypes from 'prop-types'
 import { useEffect, useState } from 'react'
+import { useIntl } from 'react-intl'
 import { SearchIcon } from '../../../common/Icon/_exports'
+import { translations } from '../../../../i18n'
 import './MessageSearch.scss'
 
 function MessageSearch({ className = '', setSearchMessage }) {
+  const { formatMessage } = useIntl()
   const [messageFilter, setMessageFilter] = useState('')
   const [hideInput, setHideInput] = useState(true)
 
@@ -25,7 +28,7 @@ function MessageSearch({ className = '', setSearchMessage }) {
 
       <input
         type="text"
-        placeholder="Search"
+        placeholder={formatMessage(translations.common.search)}
         value={messageFilter}
         onChange={(e) => setMessageFilter(e.target.value)}
       />

@@ -20,6 +20,26 @@ const theme = {
   light: 'light'
 }
 
+const accentColor = {
+  purple: 'purple',
+  blue: 'blue',
+  teal: 'teal',
+  green: 'green',
+  orange: 'orange',
+  pink: 'pink'
+}
+
+const chatBackground = {
+  none: 'none',
+  aurora: 'aurora',
+  dots: 'dots',
+  grid: 'grid',
+  stripes: 'stripes',
+  ocean: 'ocean',
+  sunset: 'sunset',
+  forest: 'forest'
+}
+
 const page = {
   error: '/error',
   login: '/login',
@@ -71,6 +91,8 @@ const searchFilter = {
 export {
   language,
   theme,
+  accentColor,
+  chatBackground,
   role,
   page,
   hub,

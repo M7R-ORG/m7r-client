@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
+import { useIntl } from 'react-intl'
 import Avatar from '../../../common/Avatar/Avatar'
+import { shortDateFormat, translations } from '../../../../i18n'
 import './Channel.scss'
 
 function Channel({ onClick = () => {}, isActive = false, className = '', data = null }) {
+  const { formatMessage, formatDate } = useIntl()
   const [counter, setCounter] = useState(0)
 
   const { imageId, lastMessage, name, lastActivity, unreadMessagesCount } = data
@@ -15,7 +18,7 @@ function Channel({ onClick = () => {}, isActive = false, className = '', data = 
 
   const formattedLastActivity = date.isSame(moment(), 'day')
     ? date.format('HH:mm')
-    : date.format('D MMM')
+    : formatDate(lastActivity, shortDateFormat)
 
 
   useEffect(() => {
@@ -34,7 +37,7 @@ function Channel({ onClick = () => {}, isActive = false, className = '', data = 
 
       <div className="channel-info">
         <div className="channel-info-top">
-          <div className="title">{name ?? 'none'}</div>
+          <div className="title">{name ?? formatMessage(translations.chat.noName)}</div>
           <div className="activity">{formattedLastActivity}</div>
         </div>
 
@@ -55,7 +58,7 @@ function Channel({ onClick = () => {}, isActive = false, className = '', data = 
               )}
             </>
           ) : (
-            <div className="message empty">No messages yet</div>
+            <div className="message empty">{formatMessage(translations.chat.noMessages)}</div>
           )}
         </div>
       </div>

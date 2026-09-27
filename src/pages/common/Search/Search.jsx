@@ -1,6 +1,8 @@
 import { useCallback, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useIntl } from 'react-intl'
 import { searchFilter, keyboardKey } from '../../../constants/system'
+import { translations } from '../../../i18n'
 import { useDebounce } from '../../../hooks/_exports'
 import {
   useSearchQueryParams,
@@ -21,12 +23,13 @@ const tabPageSize = 10
 const noop = () => {}
 
 const filterOptions = [
-  { value: searchFilter.all, label: 'All' },
-  { value: searchFilter.people, label: 'People' },
-  { value: searchFilter.channels, label: 'Channels' }
+  { value: searchFilter.all, label: translations.search.filter.all },
+  { value: searchFilter.people, label: translations.search.filter.people },
+  { value: searchFilter.channels, label: translations.search.filter.channels }
 ]
 
 function Search() {
+  const { formatMessage } = useIntl()
   const navigate = useNavigate()
   const bodyRef = useRef(null)
   const { query, filter, setQuery, setFilter } = useSearchQueryParams()
@@ -36,6 +39,11 @@ function Search() {
   const showChannels = filter === searchFilter.all || filter === searchFilter.channels
   const showHeaders = filter === searchFilter.all
   const pageSize = filter === searchFilter.all ? allPageSize : tabPageSize
+
+  const localizedFilterOptions = filterOptions.map((option) => ({
+    ...option,
+    label: formatMessage(option.label)
+  }))
 
   const { people, channels, isLoading } = useSearchResults({
     debouncedQuery,
@@ -97,14 +105,14 @@ function Search() {
         <div className="search-header">
           <SearchInput
             value={query}
-            placeholder="Search people, channels…"
-            ariaLabel="Search people and channels"
+            placeholder={formatMessage(translations.search.placeholder)}
+            ariaLabel={formatMessage(translations.search.ariaLabel)}
             autoFocus
             onChange={(event) => setQuery(event.target.value)}
             onClear={() => setQuery('')}
             onKeyDown={onSearchKeyDown}
           />
-          <SearchFilter value={filter} options={filterOptions} onChange={setFilter} />
+          <SearchFilter value={filter} options={localizedFilterOptions} onChange={setFilter} />
         </div>
 
         <div
@@ -115,7 +123,7 @@ function Search() {
           {isLoading && <div className="loading-bar" />}
 
           <SearchSection
-            title="People"
+            title={formatMessage(translations.search.sections.people)}
             items={people.items}
             showHeader={showHeaders}
             hasMore={people.hasMore}
@@ -125,7 +133,7 @@ function Search() {
           />
 
           <SearchSection
-            title="Public channels"
+            title={formatMessage(translations.search.sections.publicChannels)}
             items={channels.items}
             showHeader={showHeaders}
             hasMore={channels.hasMore}
@@ -137,8 +145,8 @@ function Search() {
           {isInitialEmpty && (
             <div className="status empty">
               {debouncedQuery
-                ? `No results for «${debouncedQuery}»`
-                : 'Nothing to show yet'}
+                ? formatMessage(translations.search.noResults, { query: debouncedQuery })
+                : formatMessage(translations.search.nothingToShow)}
             </div>
           )}
         </div>

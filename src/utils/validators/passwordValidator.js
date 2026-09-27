@@ -1,3 +1,5 @@
+import { intlFormatMessage, translations } from '../../i18n'
+
 const passwordMaxLength = 40
 const passwordMinLength = 8
 
@@ -8,11 +10,19 @@ function passwordValidator(password) {
   const errors = []
 
   if (!isValidMaxLength) {
-    errors.push('* The length of the entered password must be less than 40 characters')
+    errors.push(
+      intlFormatMessage(translations.auth.validation.passwordMaxLength, {
+        count: passwordMaxLength
+      })
+    )
   }
 
   if (!isValidMinLength) {
-    errors.push('* The length of the entered password must be more than 8 characters')
+    errors.push(
+      intlFormatMessage(translations.auth.validation.passwordMinLength, {
+        count: passwordMinLength
+      })
+    )
   }
 
   const valid = isValidMaxLength && isValidMinLength

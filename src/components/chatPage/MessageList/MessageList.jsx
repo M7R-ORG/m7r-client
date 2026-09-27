@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 import moment from 'moment'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { useIntl } from 'react-intl'
 import api from '../../../api/api'
+import { translations } from '../../../i18n'
 import { useDebounce, useKeyDown } from '../../../hooks/_exports'
 import { chatMethod } from '../../../socket/hubHandlers'
 import Loader1 from '../../common/Loader/Loader1/Loader1'
@@ -42,6 +44,7 @@ function MessageList({ className = '', chatId = null, searchMessage = '' }) {
   const chatHub = useSelector((state) => state.signalR.chatHub)
   const userId = useSelector((state) => state.auth.info.id)
   const debouncedSearchMessage = useDebounce(searchMessage, 500)
+  const { formatMessage } = useIntl()
 
   useMessagesReceiver({
     chatId,
@@ -258,7 +261,9 @@ function MessageList({ className = '', chatId = null, searchMessage = '' }) {
               const [groupDate, groups] = groupsInfo
 
               const date =
-                groupDate === moment(new Date()).format('DD.MM.YYYY') ? 'Today' : groupDate
+                groupDate === moment(new Date()).format('DD.MM.YYYY')
+                  ? formatMessage(translations.common.today)
+                  : groupDate
 
               return (
                 <div key={groupDate} className="group-date">

@@ -1,3 +1,5 @@
+import { intlFormatMessage, translations } from '../../i18n'
+
 const passwordMaxLength = 40
 const passwordMinLength = 8
 
@@ -9,15 +11,23 @@ function cPasswordValidator(password, cPassword) {
   const errors = []
 
   if (!isValidMaxLength) {
-    errors.push('* The length of the entered password must be less than 40 characters')
+    errors.push(
+      intlFormatMessage(translations.auth.validation.passwordMaxLength, {
+        count: passwordMaxLength
+      })
+    )
   }
 
   if (!isValidMinLength) {
-    errors.push('* The length of the entered password must be more than 8 characters')
+    errors.push(
+      intlFormatMessage(translations.auth.validation.passwordMinLength, {
+        count: passwordMinLength
+      })
+    )
   }
 
   if (!isMatchPasswords) {
-    errors.push('* Password mismatch')
+    errors.push(intlFormatMessage(translations.auth.validation.passwordMismatch))
   }
 
   const valid = isValidMaxLength && isValidMinLength && isMatchPasswords

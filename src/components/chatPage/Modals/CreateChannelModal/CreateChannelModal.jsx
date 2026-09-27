@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { CSSTransition } from 'react-transition-group'
+import { useIntl } from 'react-intl'
 import { SearchInput, FormInput, BaseModal, Brand, FormButton } from '../../../_exports'
 import { channelType as chatType } from '../../../../constants/chat'
 import api from '../../../../api/api'
 import UserItem from './UserItem/UserItem'
+import { translations } from '../../../../i18n'
 import { useDebounce } from '../../../../hooks/_exports'
 import ValidIcon from '../../../common/Input/FormInput/ValidIcon/ValidIcon'
 import channelNameValidator from '../../../../utils/validators/channelNameValidator'
@@ -26,6 +28,7 @@ function CreateChannelModal({
   setIsActive = () => {},
   onCreatedChannel = () => {}
 }) {
+  const { formatMessage } = useIntl()
   const [channelName, setChannelName] = useState('')
   const [channelType, setChannelType] = useState(chatType.public)
   const [userSearch, setUserSearch] = useState('')
@@ -45,7 +48,7 @@ function CreateChannelModal({
       setIsCreateChannelLoading(true)
 
       if (createChannelMapper[channelType] === undefined) {
-        throw new Error('Channel type is not correct')
+        throw new Error(formatMessage(translations.chat.errors.invalidChannelType))
       }
 
       channelNameValidator(channelName)
@@ -60,7 +63,7 @@ function CreateChannelModal({
       }
 
       if (!data || response?.data?.errors) {
-        throw new Error('Something went wrong')
+        throw new Error(formatMessage(translations.common.somethingWentWrong))
       }
 
       if (data.isSuccess) {
@@ -238,7 +241,7 @@ function CreateChannelModal({
               <FormInput
                 className="form-input"
                 type="text"
-                placeholder="Enter name"
+                placeholder={formatMessage(translations.chat.createChannel.namePlaceholder)}
                 onChange={onChangeNameHandler}
                 value={channelName}
                 pattern=".*"
@@ -260,7 +263,7 @@ function CreateChannelModal({
                 onClick={createChannelHandler}
                 isLoading={isCreateChannelLoading}
               >
-                Create
+                {formatMessage(translations.chat.createChannel.create)}
               </FormButton>
             </div>
           </div>

@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import { useIntl } from 'react-intl'
 import { DateInput, FormDesc, FormTitle } from '../../../_exports'
+import { translations } from '../../../../i18n'
 import './Step4.scss'
 
 function Step4({
@@ -9,6 +11,7 @@ function Step4({
   registrationData = null,
   setIsValid = () => {}
 }) {
+  const { formatMessage } = useIntl()
   const [value, setValue] = useState(null)
 
   const { birthday } = registrationData
@@ -24,10 +27,12 @@ function Step4({
 
   return (
     <div className={`c-registration-step ${className}`}>
-      <FormTitle className="birthday-title">Enter your birthday</FormTitle>
+      <FormTitle className="birthday-title">
+        {formatMessage(translations.auth.registration.birthday.title)}
+      </FormTitle>
 
       <FormDesc className="birthday-desc">
-        Your birthday will be used to log into your account
+        {formatMessage(translations.auth.registration.birthday.description)}
       </FormDesc>
 
       <div className="inputs">

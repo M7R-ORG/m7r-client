@@ -1,8 +1,12 @@
 import PropTypes from 'prop-types'
+import { useIntl } from 'react-intl'
 import { channelType } from '../../../../../constants/chat'
+import { translations } from '../../../../../i18n'
 import './ChannelTypeSwitcher.scss'
 
 function ChannelTypeSwitcher({ className = '', chatType, setChatType }) {
+  const { formatMessage } = useIntl()
+
   const onClickHandler = () => {
     setChatType((prevType) =>
       prevType === channelType.public ? channelType.private : channelType.public
@@ -15,7 +19,11 @@ function ChannelTypeSwitcher({ className = '', chatType, setChatType }) {
       onClick={onClickHandler}
       role="presentation"
     >
-      {chatType === channelType.public ? <p>Public</p> : <p>Private</p>}
+      {chatType === channelType.public ? (
+        <p>{formatMessage(translations.chat.channelType.public)}</p>
+      ) : (
+        <p>{formatMessage(translations.chat.channelType.private)}</p>
+      )}
     </div>
   )
 }

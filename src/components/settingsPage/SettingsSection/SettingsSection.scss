@@ -1,0 +1,33 @@
+.c-settings-section {
+  background: var(--background-color-1);
+  border: solid 1px var(--border-color);
+  border-radius: 20px;
+  padding: 24px 28px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+
+  .settings-section-header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    .settings-section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .settings-section-description {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      color: var(--common-color-1);
+    }
+  }
+
+  .settings-section-content {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+  }
+}

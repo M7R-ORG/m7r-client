@@ -1,5 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import { useIntl } from 'react-intl'
+import { translations } from '../../../i18n'
 import { useAuth } from '../../../hooks/_exports'
 import api from '../../../api/api'
 import { page, keyboardKey } from '../../../constants/system'
@@ -8,13 +10,12 @@ import ThemeToggle from '../../../components/common/ThemeToggle/ThemeToggle'
 import getValidationErrorMessage from '../../../utils/helpers/errorHelper'
 import './Login.scss'
 
-const defaultClientMessage = 'Enter your login details'
-
 function Login() {
   const navigate = useNavigate()
   const { logIn } = useAuth()
+  const { formatMessage } = useIntl()
   const [loginData, setLoginData] = useState({})
-  const [message, setMessage] = useState(defaultClientMessage)
+  const [message, setMessage] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [isActiveBtn, setIsActiveBtn] = useState(false)
 
@@ -23,7 +24,7 @@ function Login() {
   useEffect(() => {
     const isActive = loginData.email && loginData.password
 
-    setMessage(defaultClientMessage)
+    setMessage('')
     setIsActiveBtn(!!isActive)
   }, [loginData])
 
@@ -42,7 +43,7 @@ function Login() {
       }
 
       if (!data) {
-        throw new Error('Something went wrong')
+        throw new Error(formatMessage(translations.common.somethingWentWrong))
       }
 
       logIn(data)
@@ -73,7 +74,7 @@ function Login() {
         </div>
         <div className="sign-up-wrapper">
           <NavLink className="sign-up" link={page.registration}>
-            Sign Up
+            {formatMessage(translations.auth.signUp)}
           </NavLink>
         </div>
       </div>
@@ -84,16 +85,18 @@ function Login() {
             <Logo className="logo" />
           </div>
 
-          <div className="title">Sign in</div>
+          <div className="title">{formatMessage(translations.auth.login.title)}</div>
 
-          <div className="client-message">{message}</div>
+          <div className="client-message">
+            {message || formatMessage(translations.auth.login.description)}
+          </div>
 
           <form className="form" onSubmit={(e) => submitHandler(e)}>
             <div className="inputs-wrapper">
               <FormInput
                 className="email-input"
                 type="email"
-                placeholder="Email"
+                placeholder={formatMessage(translations.common.email)}
                 onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
                 value={email}
                 pattern=".+@.+\..+"
@@ -102,7 +105,7 @@ function Login() {
               <FormInput
                 className="password-input"
                 type="password"
-                placeholder="Password"
+                placeholder={formatMessage(translations.common.password)}
                 onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
                 value={password}
                 required
@@ -111,7 +114,7 @@ function Login() {
 
             <div className="reset-password">
               <Link to={page.initResetPassword} className="reset-password-link">
-                Forgot password?
+                {formatMessage(translations.auth.forgotPassword)}
               </Link>
             </div>
 
@@ -122,7 +125,7 @@ function Login() {
                 isLoading={isLoading}
                 onClick={loginHandler}
               >
-                Sign In
+                {formatMessage(translations.auth.signIn)}
               </FormButton>
             </div>
           </form>

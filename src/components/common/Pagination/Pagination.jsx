@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types'
+import { useIntl } from 'react-intl'
 import PaginationIcon from './PaginationIcon/PaginationIcon'
+import { translations } from '../../../i18n'
 import './Pagination.scss'
 
 function Pagination({
@@ -9,6 +11,7 @@ function Pagination({
   onNext = () => {},
   onPrev = () => {}
 }) {
+  const { formatMessage } = useIntl()
   const isPrevDisabled = pageNumber <= 0
   const isNextDisabled = pageNumber + 1 >= pagesCount
 
@@ -22,11 +25,14 @@ function Pagination({
         <span className="pagination-arrow">
           <PaginationIcon className="pagination-arrow-icon" />
         </span>
-        <span className="pagination-text">Prev</span>
+        <span className="pagination-text">
+          {formatMessage(translations.common.pagination.prev)}
+        </span>
       </div>
 
       <div className="pagination-info">
-        <span className="current-index">{pageNumber + 1}</span> of <span>{pagesCount}</span>
+        <span className="current-index">{pageNumber + 1}</span>{' '}
+        {formatMessage(translations.common.pagination.of)} <span>{pagesCount}</span>
       </div>
 
       <div
@@ -34,7 +40,9 @@ function Pagination({
         onClick={() => !isNextDisabled && onNext()}
         role="presentation"
       >
-        <span className="pagination-text">Next</span>
+        <span className="pagination-text">
+          {formatMessage(translations.common.pagination.next)}
+        </span>
         <span className="pagination-arrow">
           <PaginationIcon className="pagination-arrow-icon" />
         </span>

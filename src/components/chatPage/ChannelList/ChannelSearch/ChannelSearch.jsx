@@ -1,8 +1,12 @@
 import PropTypes from 'prop-types'
+import { useIntl } from 'react-intl'
 import { SearchIcon } from '../../../common/Icon/_exports'
+import { translations } from '../../../../i18n'
 import './ChannelSearch.scss'
 
 function ChannelSearch({ className = '', onChange = () => {} }) {
+  const { formatMessage } = useIntl()
+
   return (
     <div className={`c-channel-search ${className}`}>
       <div className="search-icon-container">
@@ -10,7 +14,11 @@ function ChannelSearch({ className = '', onChange = () => {} }) {
       </div>
 
       <div className="search-input-container">
-        <input type="text" placeholder="Search" onChange={onChange} />
+        <input
+          type="text"
+          placeholder={formatMessage(translations.common.search)}
+          onChange={onChange}
+        />
       </div>
     </div>
   )
