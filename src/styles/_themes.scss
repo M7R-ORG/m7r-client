@@ -8,6 +8,18 @@
   --font-color-primary-1: #{$black};        // primary text
   --font-color-primary-2: #{$white};        // inverse text
 
+  --brand:                #{$brand};
+  --on-brand-color:       #{$white};
+  --error-background:     #{$error-a14};
+
+  --logo-start:           #{$logo-start};
+  --logo-middle:          #{$logo-middle};
+  --logo-end:             #{$logo-end};
+
+  --neutral-shadow-lg:    #{$black-a25};
+  --neutral-shadow-xs:    #{$black-a12};
+  --neutral-shadow-xxs:   #{$black-a08};
+
   .c-brand {
     --font-color-1: #{$brand};
   }
@@ -121,21 +133,21 @@
   .c-message-list {
     --message-background-color:    #{$light-bg-surface};
     --my-message-background-color: #{$brand};
-    --my-message-gradient:         linear-gradient(135deg, #{$brand-dark} 0%, #{$brand-deep} 60%, #{darken($brand-deep, 5%)} 100%);
+    --my-message-gradient:         linear-gradient(135deg, #{$brand-dark} 0%, #{$brand-deep} 60%, #{$brand-deeper} 100%);
   }
 
   // New message
   .c-new-message {
-    --send-btn-background:       #{rgba($brand, 0.12)};
-    --send-btn-hover-background: #{rgba($brand, 0.22)};
+    --send-btn-background:       #{$brand-a12};
+    --send-btn-hover-background: #{$brand-a22};
   }
 
   // Shadows
-  --brand-shadow:     #{rgba($brand, 0.3)};
-  --brand-shadow-sm:  #{rgba($brand, 0.2)};
-  --brand-shadow-xs:  #{rgba($brand, 0.25)};
-  --neutral-shadow:   #{rgba($black, 0.2)};
-  --neutral-shadow-sm:#{rgba($black, 0.15)};
+  --brand-shadow:     #{$brand-a30};
+  --brand-shadow-sm:  #{$brand-a20};
+  --brand-shadow-xs:  #{$brand-a25};
+  --neutral-shadow:   #{$black-a20};
+  --neutral-shadow-sm:#{$black-a15};
 
 }
 
@@ -221,10 +233,10 @@
     --selected-font-color:       #{$white};
     --last-message-font-color:   #{$dark-text-secondary};
     --active-channel-background: #{$dark-bg-elevated};
-    --active-channel-gradient-start: rgba(148, 93, 218, 0.2);
-    --active-channel-gradient-end:   rgba(148, 93, 218, 0.06);
-    --active-channel-border-color:   rgba(148, 93, 218, 0.2);
-    --active-channel-shadow:     rgba(0, 0, 0, 0.1);
+    --active-channel-gradient-start: #{$brand-a20};
+    --active-channel-gradient-end:   #{$brand-a06};
+    --active-channel-border-color:   #{$brand-a20};
+    --active-channel-shadow:     #{$black-a10};
   }
 
   // Modals
@@ -249,15 +261,15 @@
 
   // New message
   .c-new-message {
-    --send-btn-background:       #{rgba($brand-light, 0.15)};
-    --send-btn-hover-background: #{rgba($brand-light, 0.28)};
+    --send-btn-background:       #{$brand-light-a15};
+    --send-btn-hover-background: #{$brand-light-a28};
   }
 
   // Shadows
-  --brand-shadow:     #{rgba($brand-light, 0.3)};
-  --brand-shadow-sm:  #{rgba($brand-light, 0.2)};
-  --brand-shadow-xs:  #{rgba($brand-light, 0.25)};
-  --neutral-shadow:   #{rgba($black, 0.2)};
-  --neutral-shadow-sm:#{rgba($black, 0.15)};
+  --brand-shadow:     #{$brand-light-a30};
+  --brand-shadow-sm:  #{$brand-light-a20};
+  --brand-shadow-xs:  #{$brand-light-a25};
+  --neutral-shadow:   #{$black-a20};
+  --neutral-shadow-sm:#{$black-a15};
 
 }
