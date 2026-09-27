@@ -30,6 +30,7 @@ import ProfileIcon from './ProfileIcon/ProfileIcon'
 import LogoutIcon from './LogoutIcon/LogoutIcon'
 import LockIcon from './LockIcon/LockIcon'
 import CalendarIcon from './CalendarIcon/CalendarIcon'
+import CheckIcon from './CheckIcon/CheckIcon'
 
 export {
   AIIcon,
@@ -63,5 +64,6 @@ export {
   ProfileIcon,
   LogoutIcon,
   LockIcon,
-  CalendarIcon
+  CalendarIcon,
+  CheckIcon
 }

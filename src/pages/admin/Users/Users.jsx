@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
+import { useIntl } from 'react-intl'
 import api from '../../../api/api'
+import { translations } from '../../../i18n'
 import { UserItem, PageHeader, Pagination } from '../../../components/_exports'
 import Loader1 from '../../../components/common/Loader/Loader1/Loader1'
 import { CreateIcon1 } from '../../../components/common/Icon/_exports'
@@ -9,6 +11,7 @@ import './Users.scss'
 const pageSize = 15
 
 function Users() {
+  const { formatMessage } = useIntl()
   const [isLoading, setIsLoading] = useState(false)
   const [users, setUsers] = useState([])
   const [pageNumber, setPageNumber] = useState(0)
@@ -78,7 +81,7 @@ function Users() {
         user={editableUser}
       />
 
-      <PageHeader className="users-header" text="Users">
+      <PageHeader className="users-header" text={formatMessage(translations.admin.users.title)}>
         <div
           className="header-item new-user-item"
           onClick={() => setIsActiveCreateUserModal(true)}
@@ -95,16 +98,20 @@ function Users() {
           <table className="users-table">
             <thead className="table-head">
               <tr>
-                <th width="8%" aria-label="image">
+                <th width="8%" aria-label={formatMessage(translations.admin.table.image)}>
                   {}
                 </th>
-                <th width="5%">Id</th>
-                <th className="email" width="20%">Email</th>
-                <th className="login" width="15%">Login</th>
-                <th width="5%">Birthday</th>
-                <th width="5%">Status</th>
-                <th width="5%">Banned</th>
-                <th width="5%" aria-label="tools">
+                <th width="5%">{formatMessage(translations.admin.table.id)}</th>
+                <th className="email" width="20%">
+                  {formatMessage(translations.common.email)}
+                </th>
+                <th className="login" width="15%">
+                  {formatMessage(translations.common.login)}
+                </th>
+                <th width="5%">{formatMessage(translations.common.birthday)}</th>
+                <th width="5%">{formatMessage(translations.admin.users.status)}</th>
+                <th width="5%">{formatMessage(translations.admin.users.banned)}</th>
+                <th width="5%" aria-label={formatMessage(translations.admin.table.tools)}>
                   {}
                 </th>
               </tr>

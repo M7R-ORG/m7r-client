@@ -1,13 +1,16 @@
 import PropTypes from 'prop-types'
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
+import { useIntl } from 'react-intl'
 import { page } from '../../../../constants/system'
 import SearchIcon from './SearchIcon/SearchIcon'
+import { translations } from '../../../../i18n'
 import './SidebarSearch.scss'
 
 function SidebarSearch({ className = '', isExpand = false }) {
   const navigate = useNavigate()
   const location = useLocation()
   const [searchParams] = useSearchParams()
+  const { formatMessage } = useIntl()
 
   const urlQuery = searchParams.get('q') || ''
   const isOnSearchPage = location.pathname === page.search
@@ -31,7 +34,7 @@ function SidebarSearch({ className = '', isExpand = false }) {
         type="button"
         className="search-icon-container"
         onClick={onIconClick}
-        aria-label="Open search"
+        aria-label={formatMessage(translations.common.sidebar.openSearch)}
       >
         <SearchIcon className="search-icon" />
       </button>
@@ -39,8 +42,8 @@ function SidebarSearch({ className = '', isExpand = false }) {
       <div className="search-input-container">
         <input
           type="text"
-          placeholder="Search"
-          aria-label="Search"
+          placeholder={formatMessage(translations.common.search)}
+          aria-label={formatMessage(translations.common.search)}
           value={urlQuery}
           onChange={onChange}
         />

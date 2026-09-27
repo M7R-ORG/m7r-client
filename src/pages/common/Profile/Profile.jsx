@@ -1,17 +1,20 @@
 import { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useIntl } from 'react-intl'
 import FormButton from '../../../components/common/Button/FormButton/FormButton'
 import Avatar from '../../../components/common/Avatar/Avatar'
-import {UploadIcon} from '../../../components/common/Icon/_exports'
+import { UploadIcon } from '../../../components/common/Icon/_exports'
 import api from '../../../api/api'
 import FileInput from '../../../components/chatPage/NewMessage/FileInput/FileInput'
 import { updateInfo } from '../../../redux/slices/userSlice'
+import { translations } from '../../../i18n'
 import Loader1 from '../../../components/common/Loader/Loader1/Loader1'
 import './Profile.scss'
 
 function Profile() {
   const { login, email, imageId, birthday } = useSelector((state) => state.user.info)
   const dispatch = useDispatch()
+  const { formatMessage } = useIntl()
   const fileInputRef = useRef(null)
   const [isLoading, setIsLoading] = useState(false)
 
@@ -71,7 +74,9 @@ function Profile() {
           </div>
         </div>
 
-        <FormButton className="edit-btn">Edit profile</FormButton>
+        <FormButton className="edit-btn">
+          {formatMessage(translations.profile.editProfile)}
+        </FormButton>
       </div>
     </div>
   )

@@ -1,14 +1,17 @@
 import { useDispatch, useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
+import { useIntl } from 'react-intl'
 import LightThemeIcon from './LightThemeIcon/LightThemeIcon'
 import DarkThemeIcon from './DarkThemeIcon/DarkThemeIcon'
 import { theme } from '../../../../constants/system'
 import { setTheme } from '../../../../redux/slices/systemSlice'
+import { translations } from '../../../../i18n'
 import './SidebarTheme.scss'
 
 function SidebarTheme({ className = '', isExpand = false }) {
   const systemTheme = useSelector((state) => state.system.theme)
   const dispatch = useDispatch()
+  const { formatMessage } = useIntl()
 
   const expandClass = isExpand ? 'expand' : ''
   const lightThemeActiveClass = systemTheme === theme.light ? 'active' : ''
@@ -23,7 +26,9 @@ function SidebarTheme({ className = '', isExpand = false }) {
           role="presentation"
         >
           <LightThemeIcon className="sidebar-theme-icon" />
-          <div className="sidebar-theme-title">Light</div>
+          <div className="sidebar-theme-title">
+            {formatMessage(translations.common.theme.light)}
+          </div>
         </div>
 
         <div
@@ -32,7 +37,7 @@ function SidebarTheme({ className = '', isExpand = false }) {
           role="presentation"
         >
           <DarkThemeIcon className="sidebar-theme-icon" />
-          <div className="sidebar-theme-title">Dark</div>
+          <div className="sidebar-theme-title">{formatMessage(translations.common.theme.dark)}</div>
         </div>
       </div>
     </div>

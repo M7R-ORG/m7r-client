@@ -9,6 +9,7 @@ import './App.scss'
 
 function App() {
   const theme = useSelector((state) => state.system.theme)
+  const accentColor = useSelector((state) => state.system.accentColor)
 
   useRefreshToken()
   useProfile()
@@ -17,7 +18,7 @@ function App() {
   useSignalRHub(hub.chat, setChatHub)
 
   return (
-    <div className="app" data-theme={theme}>
+    <div className="app" data-theme={theme} data-accent={accentColor}>
       <AppRouter />
     </div>
   )

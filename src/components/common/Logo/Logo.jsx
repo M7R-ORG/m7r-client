@@ -34,9 +34,9 @@ function Logo({ className = '' }) {
             y2="53"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stopColor="#c084fc" />
-            <stop offset="0.5" stopColor="#945dda" />
-            <stop offset="1" stopColor="#7c3aed" />
+            <stop style={{ stopColor: 'var(--logo-start)' }} />
+            <stop offset="0.5" style={{ stopColor: 'var(--logo-middle)' }} />
+            <stop offset="1" style={{ stopColor: 'var(--logo-end)' }} />
           </linearGradient>
         </defs>
       </svg>

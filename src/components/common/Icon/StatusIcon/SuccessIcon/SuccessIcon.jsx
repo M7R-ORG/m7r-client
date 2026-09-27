@@ -38,7 +38,7 @@ function SuccessIcon({ className = '' }) {
               strokeLinecap: 'butt',
               strokeLinejoin: 'miter',
               strokeMiterlimit: 10,
-              fill: '#945DDA',
+              fill: 'var(--brand)',
               fillRule: 'nonzero',
               opacity: 1
             }}
@@ -53,7 +53,7 @@ function SuccessIcon({ className = '' }) {
               strokeLinecap: 'butt',
               strokeLinejoin: 'miter',
               strokeMiterlimit: 10,
-              fill: 'rgb(255,255,255)',
+              fill: 'var(--on-brand-color)',
               fillRule: 'nonzero',
               opacity: 1
             }}

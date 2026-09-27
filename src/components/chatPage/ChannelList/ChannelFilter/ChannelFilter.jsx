@@ -1,31 +1,35 @@
 import PropTypes from 'prop-types'
+import { useIntl } from 'react-intl'
 import { channelType } from '../../../../constants/chat'
+import { translations } from '../../../../i18n'
 import './ChannelFilter.scss'
 
 const filtersInfo = [
   {
     key: 1,
-    title: 'All',
+    title: translations.chat.filter.all,
     type: null
   },
   {
     key: 2,
-    title: 'Public',
+    title: translations.chat.filter.public,
     type: channelType.public
   },
   {
     key: 3,
-    title: 'Private',
+    title: translations.chat.filter.private,
     type: channelType.private
   },
   {
     key: 4,
-    title: 'Direct',
+    title: translations.chat.filter.direct,
     type: channelType.direct
   },
 ]
 
 function ChannelFilter({ className = '', setType = () => {}, type = null }) {
+  const { formatMessage } = useIntl()
+
   return (
     <div className={`c-channel-filter ${className}`}>
       {filtersInfo.map((info) => (
@@ -35,7 +39,9 @@ function ChannelFilter({ className = '', setType = () => {}, type = null }) {
           onClick={() => setType(info.type)}
           role="presentation"
         >
-          <div className="title">{info.title}</div>
+          <div className="title" title={formatMessage(info.title)}>
+            {formatMessage(info.title)}
+          </div>
         </div>
       ))}
     </div>

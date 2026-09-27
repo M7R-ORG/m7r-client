@@ -1,0 +1,89 @@
+@use 'sass:color';
+@use 'sass:map';
+
+$accents: (
+  'purple': (
+    brand: #945dda,
+    brand-light: #a97cf8,
+    brand-vivid: #8c00ff,
+    brand-dark: #7b4fb8,
+    brand-deep: #552285,
+    logo-start: #c084fc,
+    logo-end: #7c3aed
+  ),
+  'blue': (
+    brand: #4a7ee8,
+    brand-light: #6fa0fb,
+    brand-vivid: #0062ff,
+    brand-dark: #3b67c4,
+    brand-deep: #1e3f8a,
+    logo-start: #93c5fd,
+    logo-end: #2563eb
+  ),
+  'teal': (
+    brand: #16898e,
+    brand-light: #3fd0d4,
+    brand-vivid: #00929c,
+    brand-dark: #15797e,
+    brand-deep: #0c4f55,
+    logo-start: #67e8f9,
+    logo-end: #0e7490
+  ),
+  'green': (
+    brand: #2b9a5e,
+    brand-light: #4cd58b,
+    brand-vivid: #00a650,
+    brand-dark: #227a4b,
+    brand-deep: #12502f,
+    logo-start: #86efac,
+    logo-end: #15803d
+  ),
+  'orange': (
+    brand: #d8641c,
+    brand-light: #fb9a55,
+    brand-vivid: #e25600,
+    brand-dark: #b85a20,
+    brand-deep: #7c3a12,
+    logo-start: #fdba74,
+    logo-end: #c2410c
+  ),
+  'pink': (
+    brand: #d64f93,
+    brand-light: #f47fbc,
+    brand-vivid: #f0007c,
+    brand-dark: #ae3f78,
+    brand-deep: #7a1f4f,
+    logo-start: #f9a8d4,
+    logo-end: #be185d
+  )
+);
+
+$default-accent: 'purple';
+
+@function rgb-channels($color) {
+  @return color.red($color), color.green($color), color.blue($color);
+}
+
+@mixin accent-vars($palette) {
+  --brand:             #{map.get($palette, brand)};
+  --brand-light:       #{map.get($palette, brand-light)};
+  --brand-vivid:       #{map.get($palette, brand-vivid)};
+  --brand-dark:        #{map.get($palette, brand-dark)};
+  --brand-deep:        #{map.get($palette, brand-deep)};
+  --brand-deep-darker: #{color.adjust(map.get($palette, brand-deep), $lightness: -5%)};
+  --brand-rgb:         #{rgb-channels(map.get($palette, brand))};
+  --brand-light-rgb:   #{rgb-channels(map.get($palette, brand-light))};
+  --logo-start:        #{map.get($palette, logo-start)};
+  --logo-middle:       #{map.get($palette, brand)};
+  --logo-end:          #{map.get($palette, logo-end)};
+}
+
+.app {
+  @include accent-vars(map.get($accents, $default-accent));
+}
+
+@each $name, $palette in $accents {
+  [data-accent='#{$name}'] {
+    @include accent-vars($palette);
+  }
+}

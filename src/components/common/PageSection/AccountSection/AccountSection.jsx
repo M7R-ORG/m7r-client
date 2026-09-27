@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
+import { useIntl } from 'react-intl'
 import { ArrowIcon, EmailIcon, FavoriteIcon, ProfileIcon, SendIcon } from '../../Icon/_exports'
+import { translations } from '../../../../i18n'
 import { usePageSection } from '../../../../hooks/_exports'
 import Avatar from '../../Avatar/Avatar'
 import Loader2 from '../../Loader/Loader2/Loader2'
@@ -11,16 +13,19 @@ import { activityStatus, page } from '../../../../constants/system'
 import formatLastOnlineAt from '../../../../utils/helpers/formatHelper'
 import './AccountSection.scss'
 
-const getActivityStatus = ({ status, lastOnlineAt }) => {
+const getActivityStatus = ({ status, lastOnlineAt, formatMessage }) => {
   const isOnline = status?.toLowerCase() === activityStatus.online
 
-  const result = isOnline ? 'Online now' : formatLastOnlineAt(lastOnlineAt)
+  const result = isOnline
+    ? formatMessage(translations.common.onlineNow)
+    : formatLastOnlineAt(lastOnlineAt)
 
   return result
 }
 
 function AccountSection({ data }) {
   const { accountSection } = usePageSection()
+  const { formatMessage } = useIntl()
   const [account, setAccount] = useState({})
   const [status, setStatus] = useState('')
   const [imageId, setImage] = useState(undefined)
@@ -42,11 +47,12 @@ function AccountSection({ data }) {
       setStatus(
         getActivityStatus({
           status: activityState,
-          lastOnlineAt
+          lastOnlineAt,
+          formatMessage
         })
       )
     }
-  }, [account])
+  }, [account, formatMessage])
 
   const onCloseClickHandler = () => {
     accountSection.close()
@@ -93,7 +99,7 @@ function AccountSection({ data }) {
         </div>
 
         <div className="title">
-          <p>Account Info</p>
+          <p>{formatMessage(translations.common.accountSection.title)}</p>
         </div>
       </div>
 

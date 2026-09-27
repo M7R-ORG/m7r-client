@@ -2,12 +2,14 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { useIntl } from 'react-intl'
 import Channel from './Channel/Channel'
 import ChannelFilter from './ChannelFilter/ChannelFilter'
 import { ToolTip1 } from '../../_exports'
 import ChannelSearch from './ChannelSearch/ChannelSearch'
 import ChannelListEmpty from './ChannelListEmpty/ChannelListEmpty'
 import api from '../../../api/api'
+import { translations } from '../../../i18n'
 import { useDebounce } from '../../../hooks/_exports'
 import { page } from '../../../constants/system'
 import { chatMethod } from '../../../socket/hubHandlers'
@@ -22,6 +24,7 @@ const defaultPageSize = 15
 
 function ChannelList({ className = '', selectedChannelId = null }) {
   const navigate = useNavigate()
+  const { formatMessage } = useIntl()
   const [isListLoading, setIsListLoading] = useState(true)
   const [isScrollLoading, setIsScrollLoading] = useState(false)
   const [channels, setChannels] = useState([])
@@ -168,12 +171,12 @@ function ChannelList({ className = '', selectedChannelId = null }) {
   const dropDownItems = [
     {
       icon: <CreateIcon />,
-      title: 'Create chat',
+      title: formatMessage(translations.chat.createChat),
       onClick: () => setIsActiveCreateChannelModal(true)
     },
     {
       icon: <AIIcon />,
-      title: 'AI chat',
+      title: formatMessage(translations.chat.aiChat),
       onClick: () => setIsActiveCreateAIChannelModal(true)
     }
   ]
@@ -200,7 +203,7 @@ function ChannelList({ className = '', selectedChannelId = null }) {
           </div>
           <div className="header-new-channel">
             <DropDown className="dropdown-wrapper" items={dropDownItems}>
-              <ToolTip1 text="New channel">
+              <ToolTip1 text={formatMessage(translations.chat.newChannel)}>
                 <CreateIcon1 className="new-channel-icon" />
               </ToolTip1>
             </DropDown>

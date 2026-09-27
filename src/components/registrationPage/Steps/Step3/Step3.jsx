@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
+import { useIntl } from 'react-intl'
 import { FormDesc, FormInput, FormTitle } from '../../../_exports'
 import { passwordValidator, cPasswordValidator } from '../../../../utils/validators/_exports'
+import { translations } from '../../../../i18n'
 import './Step3.scss'
 
 function Step3({
@@ -10,6 +12,7 @@ function Step3({
   registrationData = null,
   setIsValid = () => {}
 }) {
+  const { formatMessage } = useIntl()
   const [isValidPassword, setIsValidPassword] = useState(false)
   const [isValidCPassword, setIsValidCPassword] = useState(false)
 
@@ -21,17 +24,19 @@ function Step3({
 
   return (
     <div className={`c-registration-step ${className}`}>
-      <FormTitle className="password-title">Enter your password</FormTitle>
+      <FormTitle className="password-title">
+        {formatMessage(translations.auth.registration.password.title)}
+      </FormTitle>
 
       <FormDesc className="password-desc">
-        Your password will be used to log into your account
+        {formatMessage(translations.auth.registration.password.description)}
       </FormDesc>
 
       <div className="inputs">
         <FormInput
           className="password-input"
           type="password"
-          placeholder="Password"
+          placeholder={formatMessage(translations.common.password)}
           onChange={(e) =>
             setRegistrationData({
               ...registrationData,
@@ -48,7 +53,7 @@ function Step3({
         <FormInput
           className="confirmation-password-input"
           type="password"
-          placeholder="Confirmation password"
+          placeholder={formatMessage(translations.auth.registration.password.confirmation)}
           onChange={(e) =>
             setRegistrationData({
               ...registrationData,

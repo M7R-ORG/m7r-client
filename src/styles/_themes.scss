@@ -1,20 +1,33 @@
+@use 'sass:list';
 @use 'colors' as *;
+@use 'accents';
+
+@function chat-gradient($colors) {
+  @return linear-gradient(160deg, list.nth($colors, 1) 0%, list.nth($colors, 2) 50%, list.nth($colors, 3) 100%);
+}
 
 // ============================================
 // Base (shared across themes)
 // ============================================
 .app {
-  --font-color-primary-0: #{$brand};        // accent text
+  --font-color-primary-0: var(--brand);     // accent text
   --font-color-primary-1: #{$black};        // primary text
   --font-color-primary-2: #{$white};        // inverse text
 
+  --on-brand-color:       #{$white};
+  --error-background:     #{$error-a14};
+
+  --neutral-shadow-lg:    #{$black-a25};
+  --neutral-shadow-xs:    #{$black-a12};
+  --neutral-shadow-xxs:   #{$black-a08};
+
   .c-brand {
-    --font-color-1: #{$brand};
+    --font-color-1: var(--brand);
   }
 
   .c-form-btn {
     --font-color: #{$white};
-    --background-color: #{$brand};
+    --background-color: var(--brand);
   }
 }
 
@@ -27,20 +40,21 @@
   // Global
   --background-color:      #{$light-bg};
   --background-color-1:    #{$light-bg-surface};
-  --background-color-2:    #{$brand};
+  --background-color-2:    var(--brand);
   --background-color-3:    #{$black};
-  --common-color-0:        #{$brand-vivid};
+  --common-color-0:        var(--brand-vivid);
   --common-color-1:        #{$light-text-muted};
   --shadow-color:          #{$light-shadow};
+  --page-glow-color:       rgba(var(--brand-rgb), 0.08);
   --placeholder-color:     #{$light-text-placeholder};
   --border-color:          #{$light-border};
-  --border-color-1:        #{$brand};
+  --border-color-1:        var(--brand);
   --icon-background-color: #{$light-bg-surface};
   --error-color:           #{$error};
 
   // Login
   .p-login {
-    --reset-password-link-color: #{$brand-deep};
+    --reset-password-link-color: var(--brand-deep);
   }
 
   // Navigation
@@ -88,7 +102,7 @@
 
   // Pagination
   .c-pagination {
-    --current-index-color: #{$brand};
+    --current-index-color: var(--brand);
   }
 
   // Channel list
@@ -114,28 +128,46 @@
   // Checkbox
   .c-round-checkbox {
     --border-color:             #{$light-border};
-    --checked-background-color: #{$brand};
+    --checked-background-color: var(--brand);
   }
 
   // Messages
-  .c-message-list {
+  .c-message-list,
+  .c-chat-preview {
     --message-background-color:    #{$light-bg-surface};
-    --my-message-background-color: #{$brand};
-    --my-message-gradient:         linear-gradient(135deg, #{$brand-dark} 0%, #{$brand-deep} 60%, #{darken($brand-deep, 5%)} 100%);
+    --my-message-background-color: var(--brand);
+    --my-message-gradient:         linear-gradient(135deg, var(--brand-dark) 0%, var(--brand-deep) 60%, var(--brand-deep-darker) 100%);
+  }
+
+  // Chat background
+  .c-chat-background {
+    --chat-accent-rgb:      var(--brand-rgb);
+    --chat-pattern-color:   rgba(var(--brand-rgb), 0.16);
+    --chat-stripe-color:    rgba(var(--brand-rgb), 0.05);
+    --chat-ocean-gradient:  #{chat-gradient($light-chat-ocean)};
+    --chat-sunset-gradient: #{chat-gradient($light-chat-sunset)};
+    --chat-forest-gradient: #{chat-gradient($light-chat-forest)};
+
+    &:not([data-background='none']) {
+      .c-message-list,
+      .c-chat-preview {
+        --message-background-color: #{$white};
+      }
+    }
   }
 
   // New message
   .c-new-message {
-    --send-btn-background:       #{rgba($brand, 0.12)};
-    --send-btn-hover-background: #{rgba($brand, 0.22)};
+    --send-btn-background:       rgba(var(--brand-rgb), 0.12);
+    --send-btn-hover-background: rgba(var(--brand-rgb), 0.22);
   }
 
   // Shadows
-  --brand-shadow:     #{rgba($brand, 0.3)};
-  --brand-shadow-sm:  #{rgba($brand, 0.2)};
-  --brand-shadow-xs:  #{rgba($brand, 0.25)};
-  --neutral-shadow:   #{rgba($black, 0.2)};
-  --neutral-shadow-sm:#{rgba($black, 0.15)};
+  --brand-shadow:     rgba(var(--brand-rgb), 0.3);
+  --brand-shadow-sm:  rgba(var(--brand-rgb), 0.2);
+  --brand-shadow-xs:  rgba(var(--brand-rgb), 0.25);
+  --neutral-shadow:   #{$black-a20};
+  --neutral-shadow-sm:#{$black-a15};
 
 }
 
@@ -147,23 +179,24 @@
 
   --background-color:      #{$dark-bg};
   --background-color-1:    #{$dark-bg-subtle};
-  --background-color-2:    #{$brand-light};
+  --background-color-2:    var(--brand-light);
   --background-color-3:    #{$dark-bg-surface};
-  --common-color-0:        #{$brand-light};
+  --common-color-0:        var(--brand-light);
   --common-color-1:        #{$dark-text-muted};
   --shadow-color:          #{$dark-shadow};
+  --page-glow-color:       rgba(var(--brand-rgb), 0.15);
   --placeholder-color:     #{$dark-text-placeholder};
   --border-color:          #{$dark-border};
-  --border-color-1:        #{$brand-light};
+  --border-color-1:        var(--brand-light);
   --icon-background-color: #{$dark-bg-elevated};
   --error-color:           #{$error-light};
-  --font-color-primary-0:  #{$brand-light};
+  --font-color-primary-0:  var(--brand-light);
   --font-color-primary-1:  #{$dark-text};
   --font-color-primary-2:  #{$dark-text};
 
   // Login
   .p-login {
-    --reset-password-link-color: #{$brand-dark};
+    --reset-password-link-color: var(--brand-dark);
   }
 
   // Navigation
@@ -211,7 +244,7 @@
 
   // Pagination
   .c-pagination {
-    --current-index-color: #{$brand-light};
+    --current-index-color: var(--brand-light);
   }
 
   // Channel list
@@ -221,10 +254,10 @@
     --selected-font-color:       #{$white};
     --last-message-font-color:   #{$dark-text-secondary};
     --active-channel-background: #{$dark-bg-elevated};
-    --active-channel-gradient-start: rgba(148, 93, 218, 0.2);
-    --active-channel-gradient-end:   rgba(148, 93, 218, 0.06);
-    --active-channel-border-color:   rgba(148, 93, 218, 0.2);
-    --active-channel-shadow:     rgba(0, 0, 0, 0.1);
+    --active-channel-gradient-start: rgba(var(--brand-rgb), 0.2);
+    --active-channel-gradient-end:   rgba(var(--brand-rgb), 0.06);
+    --active-channel-border-color:   rgba(var(--brand-rgb), 0.2);
+    --active-channel-shadow:     #{$black-a10};
   }
 
   // Modals
@@ -237,27 +270,38 @@
   // Checkbox
   .c-round-checkbox {
     --border-color:             #{$dark-border};
-    --checked-background-color: #{$brand-light};
+    --checked-background-color: var(--brand-light);
   }
 
   // Messages
-  .c-message-list {
+  .c-message-list,
+  .c-chat-preview {
     --message-background-color:    #{$dark-bg-elevated};
-    --my-message-background-color: #{$brand-light};
-    --my-message-gradient:         linear-gradient(135deg, #{$brand} 0%, #{$brand-dark} 60%, #{$brand-deep} 100%);
+    --my-message-background-color: var(--brand-light);
+    --my-message-gradient:         linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 60%, var(--brand-deep) 100%);
+  }
+
+  // Chat background
+  .c-chat-background {
+    --chat-accent-rgb:      var(--brand-light-rgb);
+    --chat-pattern-color:   rgba(var(--brand-light-rgb), 0.08);
+    --chat-stripe-color:    rgba(var(--brand-light-rgb), 0.04);
+    --chat-ocean-gradient:  #{chat-gradient($dark-chat-ocean)};
+    --chat-sunset-gradient: #{chat-gradient($dark-chat-sunset)};
+    --chat-forest-gradient: #{chat-gradient($dark-chat-forest)};
   }
 
   // New message
   .c-new-message {
-    --send-btn-background:       #{rgba($brand-light, 0.15)};
-    --send-btn-hover-background: #{rgba($brand-light, 0.28)};
+    --send-btn-background:       rgba(var(--brand-light-rgb), 0.15);
+    --send-btn-hover-background: rgba(var(--brand-light-rgb), 0.28);
   }
 
   // Shadows
-  --brand-shadow:     #{rgba($brand-light, 0.3)};
-  --brand-shadow-sm:  #{rgba($brand-light, 0.2)};
-  --brand-shadow-xs:  #{rgba($brand-light, 0.25)};
-  --neutral-shadow:   #{rgba($black, 0.2)};
-  --neutral-shadow-sm:#{rgba($black, 0.15)};
+  --brand-shadow:     rgba(var(--brand-light-rgb), 0.3);
+  --brand-shadow-sm:  rgba(var(--brand-light-rgb), 0.2);
+  --brand-shadow-xs:  rgba(var(--brand-light-rgb), 0.25);
+  --neutral-shadow:   #{$black-a20};
+  --neutral-shadow-sm:#{$black-a15};
 
 }

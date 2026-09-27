@@ -1,0 +1,42 @@
+.c-chat-background {
+  background: var(--background-color);
+
+  &[data-background='aurora'] {
+    background:
+      radial-gradient(circle at 12% 18%, rgba(var(--chat-accent-rgb), 0.2), transparent 42%),
+      radial-gradient(circle at 88% 30%, rgba(var(--chat-accent-rgb), 0.14), transparent 38%),
+      radial-gradient(circle at 55% 95%, rgba(var(--chat-accent-rgb), 0.16), transparent 48%),
+      var(--background-color);
+  }
+
+  &[data-background='dots'] {
+    background:
+      radial-gradient(var(--chat-pattern-color) 1.4px, transparent 1.8px) 0 0 / 20px 20px,
+      var(--background-color);
+  }
+
+  &[data-background='grid'] {
+    background:
+      linear-gradient(var(--chat-pattern-color) 1px, transparent 1px) 0 0 / 26px 26px,
+      linear-gradient(90deg, var(--chat-pattern-color) 1px, transparent 1px) 0 0 / 26px 26px,
+      var(--background-color);
+  }
+
+  &[data-background='stripes'] {
+    background:
+      repeating-linear-gradient(-45deg, var(--chat-stripe-color) 0 12px, transparent 12px 24px),
+      var(--background-color);
+  }
+
+  &[data-background='ocean'] {
+    background: var(--chat-ocean-gradient);
+  }
+
+  &[data-background='sunset'] {
+    background: var(--chat-sunset-gradient);
+  }
+
+  &[data-background='forest'] {
+    background: var(--chat-forest-gradient);
+  }
+}

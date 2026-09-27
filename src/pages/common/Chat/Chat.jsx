@@ -7,6 +7,7 @@ import ChannelList from '../../../components/chatPage/ChannelList/ChannelList'
 import MessageList from '../../../components/chatPage/MessageList/MessageList'
 import NewMessage from '../../../components/chatPage/NewMessage/NewMessage'
 import NoChatSelected from '../../../components/chatPage/NoChatSelected/NoChatSelected'
+import ChatBackground from '../../../components/common/ChatBackground/ChatBackground'
 import useMessagesReceiverForCounter from '../../../components/chatPage/MessageList/hooks/useMessagesReceiverForCounter'
 import './Chat.scss'
 
@@ -52,7 +53,7 @@ function Chat() {
         setSelectedChannelId={setSelectedChannelId}
       />
 
-      <div className="chat-wrapper">
+      <ChatBackground className="chat-wrapper">
         {selectedChannelId ? (
           <div className="chat">
             <div className="chat-header-container">
@@ -78,7 +79,7 @@ function Chat() {
             <NoChatSelected />
           </div>
         )}
-      </div>
+      </ChatBackground>
     </div>
   )
 }

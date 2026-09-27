@@ -1,19 +1,38 @@
 // ============================================
-// Brand Colors
-// ============================================
-$brand:          #945dda;
-$brand-light:    #a97cf8;
-$brand-vivid:    #8c00ff;
-$brand-dark:     #7b4fb8;
-$brand-deep:     #552285;
-
-// ============================================
 // Common
 // ============================================
 $white:          #ffffff;
 $black:          #000000;
 $error:          #e53935;
 $error-light:    #ff6b6b;
+
+// ============================================
+// Alpha Variants
+// ============================================
+$black-a08:             rgba($black, 0.08);
+$black-a10:             rgba($black, 0.1);
+$black-a12:             rgba($black, 0.12);
+$black-a15:             rgba($black, 0.15);
+$black-a20:             rgba($black, 0.2);
+$black-a25:             rgba($black, 0.25);
+
+$error-a14:             rgba($error, 0.14);
+
+// ============================================
+// Avatar Gradients
+// ============================================
+$avatar-gradients: (
+  (#7c3aed, #a78bfa),
+  (#6d28d9, #c084fc),
+  (#4f46e5, #818cf8),
+  (#7e22ce, #d946ef),
+  (#2563eb, #60a5fa),
+  (#9333ea, #c084fc),
+  (#6366f1, #a5b4fc),
+  (#8b5cf6, #e879f9),
+  (#4338ca, #7c3aed),
+  (#5b21b6, #a78bfa)
+);
 
 // ============================================
 // Light Theme Palette
@@ -55,3 +74,14 @@ $dark-shadow:           #00000040;
 
 $dark-toggle-bg:        #3a3a50;
 $dark-toggle-stroke:    #888899;
+
+// ============================================
+// Chat Backgrounds
+// ============================================
+$light-chat-ocean:  #dff1fd, #e3e8ff, #d5f7ef;
+$light-chat-sunset: #fff0e3, #ffe3ec, #f1e6ff;
+$light-chat-forest: #e2f4e7, #eef6de, #d9eee8;
+
+$dark-chat-ocean:   #0a1d31, #111a3b, #07262a;
+$dark-chat-sunset:  #2a1714, #2a1326, #1c1433;
+$dark-chat-forest:  #0c1e16, #15241a, #0a1b1c;

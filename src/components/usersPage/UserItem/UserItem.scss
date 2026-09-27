@@ -35,7 +35,7 @@
 
     &.yes .banned-badge {
       border-color: transparent;
-      background: rgba(229, 57, 53, 0.14);
+      background: var(--error-background);
       color: var(--error-color);
     }
   }

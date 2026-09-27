@@ -1,11 +1,13 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useIntl } from 'react-intl'
 import Loader1 from '../../../components/common/Loader/Loader1/Loader1'
 import { Brand, FormButton, Logo, NavLink } from '../../../components/_exports'
 import { StatusIcon } from '../../../components/common/Icon/_exports'
 import ThemeToggle from '../../../components/common/ThemeToggle/ThemeToggle'
 import { page } from '../../../constants/system'
 import api from '../../../api/api'
+import { translations } from '../../../i18n'
 import { useAuth } from '../../../hooks/_exports'
 import getValidationErrorMessage from '../../../utils/helpers/errorHelper'
 import './ConfirmedRegistration.scss'
@@ -14,6 +16,7 @@ function ConfirmedRegistration() {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const { logIn } = useAuth()
+  const { formatMessage } = useIntl()
   const [message, setMessage] = useState('')
   const [authData, setAuthData] = useState(null)
   const [isSuccess, setIsSuccess] = useState(false)
@@ -26,7 +29,7 @@ function ConfirmedRegistration() {
       const code = searchParams.get('code')
 
       if (!code) {
-        throw new Error('Code is not exists')
+        throw new Error(formatMessage(translations.auth.confirmRegistration.codeNotExists))
       }
 
       const { data, response } = await api.user.confirmation({ confirmation: code })
@@ -40,19 +43,19 @@ function ConfirmedRegistration() {
       }
 
       if (!data?.accessToken || !data?.refreshToken) {
-        throw new Error('Something went wrong')
+        throw new Error(formatMessage(translations.common.somethingWentWrong))
       }
 
       setIsSuccess(true)
       setAuthData(data)
-      setMessage('Sign up successfully completed')
+      setMessage(formatMessage(translations.auth.confirmRegistration.completed))
     } catch (error) {
       setIsSuccess(false)
       setMessage(error.message)
     } finally {
       setIsLoading(false)
     }
-  }, [searchParams])
+  }, [searchParams, formatMessage])
 
   const continueHandler = () => {
     logIn(authData)
@@ -76,7 +79,7 @@ function ConfirmedRegistration() {
         </div>
         <div className="sign-in-wrapper">
           <NavLink className="sign-in" link={page.login}>
-            Sign In
+            {formatMessage(translations.auth.signIn)}
           </NavLink>
         </div>
       </div>
@@ -92,7 +95,11 @@ function ConfirmedRegistration() {
                 <StatusIcon className="status-badge" isSuccess={isSuccess} />
               </div>
 
-              <div className="title">{isSuccess ? 'Success' : 'Failed'}</div>
+              <div className="title">
+                {isSuccess
+                  ? formatMessage(translations.common.success)
+                  : formatMessage(translations.auth.confirmRegistration.failed)}
+              </div>
 
               <div className="message">{message}</div>
 
@@ -101,7 +108,9 @@ function ConfirmedRegistration() {
                   className="action-button"
                   onClick={isSuccess ? continueHandler : againHandler}
                 >
-                  {isSuccess ? 'Continue' : 'Try again'}
+                  {isSuccess
+                    ? formatMessage(translations.common.continue)
+                    : formatMessage(translations.common.tryAgain)}
                 </FormButton>
               </div>
             </>

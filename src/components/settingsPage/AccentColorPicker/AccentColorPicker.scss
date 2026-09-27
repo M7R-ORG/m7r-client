@@ -1,0 +1,65 @@
+.c-accent-color-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+
+  .accent-option {
+    width: 84px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    user-select: none;
+
+    .accent-swatch {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: linear-gradient(
+        135deg,
+        var(--logo-start) 0%,
+        var(--brand) 50%,
+        var(--logo-end) 100%
+      );
+      box-shadow: 0 2px 8px rgba(var(--brand-rgb), 0.35);
+      transition: all 0.25s ease;
+
+      .accent-check {
+        width: 20px;
+        height: 20px;
+        color: var(--font-color-primary-2);
+      }
+    }
+
+    .accent-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      color: var(--common-color-1);
+      transition: color 0.25s ease;
+    }
+
+    &:hover .accent-swatch {
+      transform: scale(1.08);
+    }
+
+    &.active {
+      .accent-swatch {
+        box-shadow:
+          0 0 0 3px var(--background-color-1),
+          0 0 0 5px var(--brand);
+      }
+
+      .accent-name {
+        color: var(--font-color-primary-0);
+        font-weight: 600;
+      }
+    }
+  }
+}

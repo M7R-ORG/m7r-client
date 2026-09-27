@@ -6,7 +6,8 @@
   flex-direction: column;
   justify-content: stretch;
   align-items: stretch;
-  background: var(--background-color);
+  background: radial-gradient(900px 760px at 50% 50%, var(--page-glow-color), transparent 70%),
+    var(--background-color);
   cursor: default;
   user-select: none;
 
@@ -35,20 +36,12 @@
       justify-content: stretch;
       align-items: stretch;
       border-radius: 25px;
+      background: var(--background-color);
       box-shadow: 0px 0 10px 6px var(--shadow-color);
-      padding: 36px 15px 27px;
-
-      &.error {
-        animation: login-panel-shake 0.42s ease;
-
-        .client-message {
-          color: var(--error-color);
-          font-weight: 500;
-        }
-      }
+      padding: 48px 15px 27px;
 
       .logo-wrapper {
-        flex: 0 0 100px;
+        flex: 0 0 80px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -127,34 +120,5 @@
         }
       }
     }
-  }
-}
-
-@keyframes login-panel-shake {
-  0%,
-  100% {
-    transform: none;
-  }
-
-  20% {
-    transform: translateX(-7px);
-  }
-
-  40% {
-    transform: translateX(6px);
-  }
-
-  60% {
-    transform: translateX(-4px);
-  }
-
-  80% {
-    transform: translateX(3px);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .p-login .login-content .login-panel.error {
-    animation: none;
   }
 }

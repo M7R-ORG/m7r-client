@@ -1,20 +1,24 @@
 import PropTypes from 'prop-types'
 import './PageHeader.scss'
 
-function PageHeader({ className = '', text = '', children }) {
+function PageHeader({ className = '', text = '', description = '', children = null }) {
   return (
-    <div className={`c-page-header ${className}`}>
-      <div className="page-header-text">{text}</div>
+    <header className={`c-page-header ${className}`}>
+      <div className="page-header-titles">
+        <h1 className="page-header-text">{text}</h1>
+        {description && <p className="page-header-description">{description}</p>}
+      </div>
 
-      <div className="page-header-options">{children}</div>
-    </div>
+      {children && <div className="page-header-options">{children}</div>}
+    </header>
   )
 }
 
 PageHeader.propTypes = {
   className: PropTypes.string,
   text: PropTypes.string,
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element])
+  description: PropTypes.string,
+  children: PropTypes.node
 }
 
 export default PageHeader

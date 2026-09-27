@@ -1,0 +1,41 @@
+.c-segmented-control {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 24px;
+  background: var(--background-color);
+  border: solid 1px var(--border-color);
+  user-select: none;
+
+  .segmented-option {
+    height: 36px;
+    min-width: 110px;
+    padding: 0 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    border-radius: 20px;
+    background: transparent;
+    color: inherit;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s ease;
+
+    &:hover:not(.active) {
+      background: var(--background-color-1);
+      color: var(--font-color-primary-0);
+    }
+
+    &.active {
+      background: var(--brand);
+      color: var(--font-color-primary-2);
+      box-shadow: 0 2px 8px var(--brand-shadow-sm);
+    }
+  }
+}

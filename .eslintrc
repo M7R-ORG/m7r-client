@@ -38,5 +38,13 @@
     ],
     "no-unused-vars": "warn",
     "no-plusplus": "off"
-  }
+  },
+  "overrides": [
+    {
+      "files": ["**/*.test.js", "**/*.test.jsx"],
+      "env": {
+        "jest": true
+      }
+    }
+  ]
 }

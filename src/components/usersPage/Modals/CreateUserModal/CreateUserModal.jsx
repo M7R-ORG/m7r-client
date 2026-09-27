@@ -1,8 +1,10 @@
 import { useCallback, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import { useIntl } from 'react-intl'
 import { BaseModal, Brand, FormButton, FormInput } from '../../../_exports'
 import api from '../../../../api/api'
 import { keyboardKey } from '../../../../constants/system'
+import { translations } from '../../../../i18n'
 import './CreateUserModal.scss'
 
 const toUserData = (user) => ({
@@ -13,6 +15,7 @@ const toUserData = (user) => ({
 })
 
 function CreateUserModal({ className = '', isActive = false, setIsActive, refreshUsers, user }) {
+  const { formatMessage } = useIntl()
   const [userInfo, setUserInfo] = useState(toUserData(user))
   const [isLoading, setIsLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
@@ -34,7 +37,7 @@ function CreateUserModal({ className = '', isActive = false, setIsActive, refres
       const { email, login, password, birthday } = userInfo
 
       if (!email || !login || (!user && !password)) {
-        throw new Error('Fill in all required fields')
+        throw new Error(formatMessage(translations.admin.users.requiredFields))
       }
 
       const payload = { email, login, birthday: birthday || null, password: password || null }
@@ -48,7 +51,7 @@ function CreateUserModal({ className = '', isActive = false, setIsActive, refres
       }
 
       if (!data || response?.data?.errors) {
-        throw new Error('Something went wrong')
+        throw new Error(formatMessage(translations.common.somethingWentWrong))
       }
 
       if (data.isSuccess) {
@@ -90,7 +93,7 @@ function CreateUserModal({ className = '', isActive = false, setIsActive, refres
             <FormInput
               className="form-input"
               type="email"
-              placeholder="Email"
+              placeholder={formatMessage(translations.common.email)}
               onChange={changeHandler('email')}
               value={userInfo.email}
               pattern=".*"
@@ -100,7 +103,7 @@ function CreateUserModal({ className = '', isActive = false, setIsActive, refres
             <FormInput
               className="form-input"
               type="text"
-              placeholder="Login"
+              placeholder={formatMessage(translations.common.login)}
               onChange={changeHandler('login')}
               value={userInfo.login}
               pattern=".*"
@@ -110,7 +113,11 @@ function CreateUserModal({ className = '', isActive = false, setIsActive, refres
             <FormInput
               className="form-input"
               type="password"
-              placeholder={user ? 'New password (leave empty to keep)' : 'Password'}
+              placeholder={
+                user
+                  ? formatMessage(translations.admin.users.newPassword)
+                  : formatMessage(translations.common.password)
+              }
               autoComplete="new-password"
               onChange={changeHandler('password')}
               value={userInfo.password}
@@ -122,7 +129,7 @@ function CreateUserModal({ className = '', isActive = false, setIsActive, refres
             <FormInput
               className="form-input"
               type="date"
-              placeholder="Birthday"
+              placeholder={formatMessage(translations.common.birthday)}
               onChange={changeHandler('birthday')}
               value={userInfo.birthday}
             />
@@ -133,7 +140,9 @@ function CreateUserModal({ className = '', isActive = false, setIsActive, refres
           <div className="footer">
             <div className="create-btn">
               <FormButton className="form-btn" onClick={submitHandler} isLoading={isLoading}>
-                {user ? 'Update' : 'Create'}
+                {user
+                  ? formatMessage(translations.admin.update)
+                  : formatMessage(translations.admin.create)}
               </FormButton>
             </div>
           </div>
